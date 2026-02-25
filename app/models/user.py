@@ -1,25 +1,31 @@
-import uuid
+from sqlalchemy import Boolean, Column, Date, DateTime, Integer, String, func
+from sqlalchemy.orm import relationship
 
-from sqlalchemy import UUID, Boolean, Column, Date, DateTime, Integer, String, func
-
-from app.db.base import Base
+from app.core.database import Base
 
 
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    # Primary Key
+    id = Column(Integer, primary_key=True, autoincrement=True)
+
+    # Required Fields
     email = Column(String(255), unique=True, index=True, nullable=False)
     password = Column(String(255), nullable=False)
-    first_name = Column(String(100), nullable=False)
-    last_name = Column(String(100), nullable=False)
-    date_of_birth = Column(Date, nullable=False)
-    gender = Column(String(20), nullable=False)
-    profile_complete = Column(Boolean, default=False, nullable=False)
-    has_logged_in = Column(Boolean, default=False, nullable=False)
     role = Column(String(50), default="user", nullable=False)
+
+    # Status Fields
+    is_verified = Column(Boolean, default=False)
+    is_active = Column(Boolean, default=True)
+
+    # Metadata
     created_at = Column(DateTime, default=func.now(), nullable=False)
     updated_at = Column(
         DateTime, default=func.now(), onupdate=func.now(), nullable=False
     )
-    is_verified = Column(Boolean, default=False)
+    deleted_at = Column(DateTime, nullable=True)
+
+    # Relationships
+    profile = relationship("Profile", uselist=False, back_populates="user")
+    trip_vacancies = relationship("TripVacancy", back_populates="requester")

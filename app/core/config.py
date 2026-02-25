@@ -7,20 +7,28 @@ class Settings(BaseSettings):
     DB_NAME: str = "dev_db"
     DB_USER: str = "dev"
     DB_PASSWORD: str = "dev"
-
+    APPLICATION_NAME: str = "TripMate"
     SECRET_KEY: str = "your_secret_key_here"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
-    EMAIL_ENABLED: bool = False
-    SMTP_HOST: str = "localhost"
-    SMTP_PORT: int = 25
-    SMTP_USERNAME: str | None = None
-    SMTP_PASSWORD: str | None = None
-    SMTP_FROM_EMAIL: str = "no-reply@tripmate.local"
-    SMTP_USE_TLS: bool = False
+    GOOGLE_CLIENT_ID: str  
+    MAIL_USERNAME: str 
+    MAIL_PASSWORD: str
 
-    FRONTEND_RESET_PASSWORD_URL: str | None = None
+    @property
+    def DATABASE_URL(self) -> str:
+        return (
+            f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}"
+            f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+        )
+
+    @property
+    def SYNC_DATABASE_URL(self) -> str:
+        return (
+            f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}"
+            f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+        )
 
     class Config:
         env_file = ".env"
