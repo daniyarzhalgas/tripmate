@@ -1,3 +1,195 @@
-from fastapi import APIRouter, Depends
-from app.core.config import config
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.database import get_db
+from app.core.config import config
+from app.services.auth_service import AuthService
+from app.schemas.auth import (
+    EmailVerificationRequest,
+    ResendVerificationRequest,
+    UserRegisterRequest,
+    UserLoginRequest,
+    PasswordResetRequest,
+    PasswordResetConfirm,
+    PasswordChange,
+    AuthResponse,
+    MessageResponse,
+    UserResponse,
+    TokenResponse,
+    RegisterResponse,
+)
+from app.api.dependencies import get_current_user
+from app.models.user import User
+
+router = APIRouter(prefix="/auth", tags=["Authentication"])
+
+@router.post("/register", response_model=RegisterResponse, status_code=status.HTTP_201_CREATED)
+async def register(
+    request: UserRegisterRequest,
+    db: AsyncSession = Depends(get_db),
+):
+    auth_service = AuthService(db)
+    success, user, _, error = await auth_service.register(
+        email=request.email,
+        password=request.password,
+        role=request.role,
+    )
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error,
+        )
+
+    # Return user with verification message
+    return {
+        "user": user,
+        "message": "Registration successful! Please check your email for verification code.",
+        # "verification_code": verification_code if config.DEBUG else None  # Only return in debug mode
+    }
+
+
+
+@router.post("/login", response_model=AuthResponse)
+async def login(
+    request: UserLoginRequest,
+    db: AsyncSession = Depends(get_db),
+):
+    auth_service = AuthService(db)
+    success, token, user, error = await auth_service.login(
+        email=request.email,
+        password=request.password,
+    )
+
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=error,
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "user": user,
+    }
+
+
+
+@router.post("/forgot-password", response_model=MessageResponse)
+async def forgot_password(
+    request: PasswordResetRequest,
+    db: AsyncSession = Depends(get_db),
+):
+    auth_service = AuthService(db)
+    success, reset_token, error = await auth_service.request_password_reset(request.email)
+
+    # Always return success to prevent email enumeration
+    return {
+        "message": "If the email exists, a password reset link has been sent"
+    }
+
+
+@router.post("/reset-password", response_model=MessageResponse)
+async def reset_password(
+    request: PasswordResetConfirm,
+    db: AsyncSession = Depends(get_db),
+):
+    auth_service = AuthService(db)
+    success, error = await auth_service.reset_password(
+        token=request.token,
+        new_password=request.new_password,
+    )
+
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error,
+        )
+
+    return {"message": "Password has been reset successfully"}
+
+
+
+@router.post("/change-password", response_model=MessageResponse)
+async def change_password(
+    request: PasswordChange,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    auth_service = AuthService(db)
+    success, error = await auth_service.change_password(
+        user_id=current_user.id,
+        current_password=request.current_password,
+        new_password=request.new_password,
+    )
+
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error,
+        )
+
+    return {"message": "Password changed successfully"}
+
+@router.get("/me", response_model=UserResponse)
+async def get_me(current_user: User = Depends(get_current_user)):
+    return current_user
+
+
+
+@router.post("/refresh", response_model=TokenResponse)
+async def refresh_token(current_user: User = Depends(get_current_user)):
+    from app.core.security import create_access_token
+    from datetime import timedelta
+    from app.core.config import config
+
+    access_token = create_access_token(
+        data={"sub": str(current_user.id), "email": current_user.email, "role": current_user.role},
+        expires_delta=timedelta(minutes=config.ACCESS_TOKEN_EXPIRE_MINUTES),
+    )
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+    }
+
+
+
+@router.post("/verify-email", response_model=MessageResponse)
+async def verify_email(
+    request: EmailVerificationRequest,
+    db: AsyncSession = Depends(get_db),
+):
+    auth_service = AuthService(db)
+    success, error = await auth_service.verify_email(
+        user_id=request.user_id,
+        verification_code=request.verification_code,
+    )
+
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error,
+        )
+
+    return {"message": "Email verified successfully"}
+
+
+@router.post("/resend-verification", response_model=MessageResponse)
+async def resend_verification_code(
+    request: ResendVerificationRequest,
+    db: AsyncSession = Depends(get_db),
+):
+    auth_service = AuthService(db)
+    success, verification_code, error = await auth_service.resend_verification_code(
+        user_id=request.user_id
+    )
+
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error,
+        )
+    return {
+        "message": "Verification code sent successfully"
+    }
