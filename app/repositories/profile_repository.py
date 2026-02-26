@@ -36,9 +36,7 @@ class ProfileRepository:
         result = await self.db.execute(query)
         return result.scalar_one_or_none()
 
-    async def get_with_relations(
-        self, profile_id: int
-    ) -> Optional[Profile]:
+    async def get_with_relations(self, profile_id: int) -> Optional[Profile]:
         """Get profile with languages, interests and travel styles eagerly loaded."""
         query = (
             select(Profile)
@@ -46,11 +44,13 @@ class ProfileRepository:
             .options(
                 joinedload(Profile.languages).joinedload(UserLanguage.language),
                 joinedload(Profile.interests).joinedload(UserInterest.interest),
-                joinedload(Profile.travel_styles).joinedload(UserTravelStyle.travel_style),
+                joinedload(Profile.travel_styles).joinedload(
+                    UserTravelStyle.travel_style
+                ),
             )
         )
         result = await self.db.execute(query)
-        return result.scalar_one_or_none()
+        return result.unique().scalar_one_or_none()
 
     async def get_by_user_id_with_relations(self, user_id: int) -> Optional[Profile]:
         """Get profile by user ID with languages, interests and travel styles."""
@@ -60,11 +60,13 @@ class ProfileRepository:
             .options(
                 joinedload(Profile.languages).joinedload(UserLanguage.language),
                 joinedload(Profile.interests).joinedload(UserInterest.interest),
-                joinedload(Profile.travel_styles).joinedload(UserTravelStyle.travel_style),
+                joinedload(Profile.travel_styles).joinedload(
+                    UserTravelStyle.travel_style
+                ),
             )
         )
         result = await self.db.execute(query)
-        return result.scalar_one_or_none()
+        return result.unique().scalar_one_or_none()
 
     async def get_all(
         self,
@@ -295,9 +297,7 @@ class ProfileRepository:
         await self.db.commit()
         return True
 
-    async def get_profile_travel_styles(
-        self, profile_id: int
-    ) -> List[UserTravelStyle]:
+    async def get_profile_travel_styles(self, profile_id: int) -> List[UserTravelStyle]:
         """Get all travel styles for a profile."""
         query = (
             select(UserTravelStyle)
@@ -312,9 +312,7 @@ class ProfileRepository:
     ) -> bool:
         """Replace all travel styles for a profile."""
         # Remove existing travel styles
-        query = select(UserTravelStyle).filter(
-            UserTravelStyle.profile_id == profile_id
-        )
+        query = select(UserTravelStyle).filter(UserTravelStyle.profile_id == profile_id)
         result = await self.db.execute(query)
         existing = result.scalars().all()
 
