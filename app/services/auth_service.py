@@ -6,13 +6,11 @@ from typing import Optional, Tuple
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import config
-from app.core.security import (create_access_token, get_password_hash,
-                               verify_password)
+from app.core.security import create_access_token, get_password_hash, verify_password
 from app.models.user import User
 from app.repositories.user_repository import UserRepository
 from app.services.email_service import email_service
 from app.core.redis_client import get_redis_client
-
 
 
 class AuthService:
@@ -36,7 +34,9 @@ class AuthService:
                 email=email, password=hashed_password, role=role
             )
 
-            verification_code = await self._generate_verification_code(user.id, user.email)
+            verification_code = await self._generate_verification_code(
+                user.id, user.email
+            )
 
             await self._send_verification_email(user.id, user.email, verification_code)
             return True, user, verification_code, None
@@ -77,7 +77,7 @@ class AuthService:
         await self.redis.set(
             f"reset_token:{reset_token}",
             {"user_id": user.id, "email": email},
-            expire=3600
+            expire=3600,
         )
 
         # Send password reset email
@@ -127,7 +127,7 @@ class AuthService:
                 "attempts": 0,
                 "max_attempts": 5,
             },
-            expire=3600  # 60 minutes
+            expire=3600,  # 60 minutes
         )
         return code
 
@@ -170,7 +170,7 @@ class AuthService:
     async def verify_email(
         self, user_id: int, verification_code: str
     ) -> Tuple[bool, Optional[str]]:
-        
+
         # Get verification data from Redis
         verification_data = await self.redis.get(f"verification_code:{user_id}")
 
@@ -194,9 +194,7 @@ class AuthService:
         if verification_data["code"] != verification_code:
             # Update attempts in Redis
             await self.redis.set(
-                f"verification_code:{user_id}",
-                verification_data,
-                expire=3600
+                f"verification_code:{user_id}", verification_data, expire=3600
             )
             remaining_attempts = (
                 verification_data["max_attempts"] - verification_data["attempts"]
@@ -245,3 +243,53 @@ class AuthService:
 
     async def get_current_user(self, user_id: int) -> Optional[User]:
         return await self.user_repo.get_by_id(user_id)
+
+    async def logout(self, token: str) -> Tuple[bool, Optional[str]]:
+        """Logout user by blacklisting the token in Redis.
+
+        Args:
+            token: JWT access token to blacklist
+
+        Returns:
+            Tuple of (success, error_message)
+        """
+        from app.core.security import decode_access_token
+
+        # Decode token to get expiration
+        payload = decode_access_token(token)
+        if not payload:
+            return False, "Invalid token"
+
+        # Get token expiration time
+        exp = payload.get("exp")
+        if not exp:
+            return False, "Token has no expiration"
+
+        # Calculate remaining TTL
+        now = datetime.utcnow().timestamp()
+        ttl = int(exp - now)
+
+        if ttl <= 0:
+            # Token already expired, no need to blacklist
+            return True, None
+
+        # Blacklist the token in Redis
+        await self.redis.set(
+            f"blacklist:{token}",
+            {"logged_out_at": datetime.utcnow().isoformat()},
+            expire=ttl,
+        )
+
+        return True, None
+
+    async def is_token_blacklisted(self, token: str) -> bool:
+        """Check if a token is blacklisted.
+
+        Args:
+            token: JWT access token to check
+
+        Returns:
+            True if token is blacklisted, False otherwise
+        """
+        result = await self.redis.get(f"blacklist:{token}")
+        return result is not None

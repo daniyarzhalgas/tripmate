@@ -34,9 +34,6 @@ class Profile(Base):
     # Profile Details
     bio = Column(Text, nullable=True)
     profile_photo_url = Column(Text, nullable=True)
-    travel_style = Column(
-        String(50), nullable=True
-    )  # e.g., "Budget", "Luxury", "Adventure"
 
     # Relationships
     user = relationship("User", back_populates="profile")
@@ -45,4 +42,7 @@ class Profile(Base):
     )
     interests = relationship(
         "UserInterest", back_populates="profile", cascade="all, delete-orphan"
+    )
+    travel_styles = relationship(
+        "UserTravelStyle", back_populates="profile", cascade="all, delete-orphan"
     )

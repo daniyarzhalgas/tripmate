@@ -16,6 +16,16 @@ async def get_current_user(
     db: AsyncSession = Depends(get_db),
 ) -> User:
     token = credentials.credentials
+    
+    # Check if token is blacklisted
+    auth_service = AuthService(db)
+    if await auth_service.is_token_blacklisted(token):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token has been revoked",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
     is_valid, payload = verify_access_token(token)
 
     if not is_valid or not payload:
@@ -33,7 +43,6 @@ async def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    auth_service = AuthService(db)
     user = await auth_service.get_current_user(int(user_id))
 
     if user is None:

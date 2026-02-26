@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db
@@ -18,7 +19,7 @@ from app.schemas.auth import (
     TokenResponse,
     RegisterResponse,
 )
-from app.api.dependencies import get_current_user
+from app.api.dependencies import get_current_user, security
 from app.models.user import User
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -72,6 +73,26 @@ async def login(
         "token_type": "bearer",
         "user": user,
     }
+
+
+@router.post("/logout", response_model=MessageResponse)
+async def logout(
+    current_user: User = Depends(get_current_user),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: AsyncSession = Depends(get_db),
+):
+    """Logout user by blacklisting their current token."""
+    token = credentials.credentials
+    auth_service = AuthService(db)
+    success, error = await auth_service.logout(token)
+    
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error,
+        )
+    
+    return {"message": "Logged out successfully"}
 
 
 

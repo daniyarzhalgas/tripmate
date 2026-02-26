@@ -1,3 +1,12 @@
 .venv
 .env
 .cursor
+.idea
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.db   
+tripmate.db
+*.log
+*.bak   
