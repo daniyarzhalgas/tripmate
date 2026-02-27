@@ -79,7 +79,11 @@ class TripVacancyService:
         start_date_from: Optional[date] = None,
         start_date_to: Optional[date] = None,
     ) -> List[TripVacancy]:
-        """Get all trip vacancies with optional filters."""
+        """Get all trip vacancies with optional filters. Defaults to showing only 'open' vacancies."""
+        # Default to showing only 'open' vacancies if no status filter is provided
+        if status is None:
+            status = "open"
+        
         return await self.trip_vacancy_repo.get_all(
             skip=skip,
             limit=limit,

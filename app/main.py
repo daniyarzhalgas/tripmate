@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import auth, profile, trip_vacancy
+from app.api import auth, profile, trip_vacancy, offer
 from app.api.dependencies import get_current_user
 from app.models.user import User
 from app.core.config import config
@@ -38,6 +38,7 @@ app.add_middleware(
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(profile.router, prefix="/api/v1")
 app.include_router(trip_vacancy.router, prefix="/api/v1")
+app.include_router(offer.router, prefix="/api/v1")
 
 
 @app.get("/api/v1/protected")

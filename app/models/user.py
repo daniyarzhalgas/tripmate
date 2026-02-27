@@ -29,3 +29,4 @@ class User(Base):
     # Relationships
     profile = relationship("Profile", uselist=False, back_populates="user")
     trip_vacancies = relationship("TripVacancy", back_populates="requester")
+    offers = relationship("Offer", back_populates="offerer")

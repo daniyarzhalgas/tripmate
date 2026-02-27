@@ -54,6 +54,7 @@ class TripVacancyResponse(BaseModel):
     min_budget: Optional[Decimal] = None
     max_budget: Optional[Decimal] = None
     people_needed: int
+    people_joined: int
     description: Optional[str] = None
     planned_activities: Optional[str] = None
     planned_destinations: Optional[str] = None

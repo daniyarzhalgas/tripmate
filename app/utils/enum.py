@@ -4,12 +4,10 @@ class GenderEnum(str, enum.Enum):
     male = "male"
     female = "female"
 
-class TravelStyleEnum(str, enum.Enum):
-    solo = "solo"
-    group = "group"
-    adventure = "adventure"
-    luxury = "luxury"
-    historical = "historical"
-
+class OfferStatus(str, enum.Enum):
+    PENDING = "pending"
+    ACCEPTED = "accepted"
+    REJECTED = "rejected"
+    CANCELLED = "cancelled"
 
     
