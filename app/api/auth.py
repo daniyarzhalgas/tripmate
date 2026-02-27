@@ -181,12 +181,14 @@ async def verify_email(
     request: EmailVerificationRequest,
     db: AsyncSession = Depends(get_db),
 ):
+    print(f"Verifying email for user_id={request.user_id}, code={request.verification_code}")
     auth_service = AuthService(db)
     success, error = await auth_service.verify_email(
         user_id=request.user_id,
         verification_code=request.verification_code,
     )
-
+    
+    print(f"Verification result: success={success}, error={error}")
     if not success:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,

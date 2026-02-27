@@ -115,7 +115,7 @@ class AuthService:
     async def _generate_verification_code(self, user_id: int, email: str) -> str:
         """Generate a 4-digit verification code."""
         # code = str(random.randint(1000, 9999))
-        code = 1111
+        code = "1111"
 
         # Store verification code in Redis with 60 minutes expiration
         await self.redis.set(
@@ -174,6 +174,9 @@ class AuthService:
 
         # Get verification data from Redis
         verification_data = await self.redis.get(f"verification_code:{user_id}")
+        
+        print(f"DEBUG: user_id={user_id}, verification_code={verification_code!r}")
+        print(f"DEBUG: verification_data={verification_data}")
 
         if not verification_data:
             return False, "No verification code found. Please request a new one"
@@ -192,6 +195,8 @@ class AuthService:
 
         verification_data["attempts"] += 1
 
+        print(f"DEBUG: Comparing codes: stored={verification_data['code']!r} (type={type(verification_data['code'])}), received={verification_code!r} (type={type(verification_code)})")
+        
         if verification_data["code"] != verification_code:
             # Update attempts in Redis
             await self.redis.set(

@@ -13,12 +13,13 @@ Note: Run this after running database migrations (alembic upgrade head)
 """
 
 import asyncio
-from sqlalchemy.ext.asyncio import AsyncSession
+
 from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import AsyncSessionLocal
-from app.models.language import Language
 from app.models.interest import Interest
+from app.models.language import Language
 from app.models.travel_style import TravelStyle
 
 
@@ -41,11 +42,11 @@ async def populate_languages():
             {"name": "Russian"},
             {"name": "Turkish"},
             {"name": "Arabic"},
-                {"name": "Chinese"},
-                {"name": "French"},
-                {"name": "German"},
-                {"name": "Spanish"},
-                {"name": "Japanese"},
+            {"name": "Chinese"},
+            {"name": "French"},
+            {"name": "German"},
+            {"name": "Spanish"},
+            {"name": "Japanese"},
         ]
 
         for lang_data in languages:
@@ -109,7 +110,6 @@ async def populate_travel_styles():
             {"name": "Adventure"},
             {"name": "Cultural"},
             {"name": "Family-Friendly"},
-
         ]
 
         for style_data in travel_styles:
