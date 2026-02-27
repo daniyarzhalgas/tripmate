@@ -1,0 +1,74 @@
+# Python
+
+**pycache**/
+_.py[cod]
+_$py.class
+_.so
+.Python
+_.egg-info/
+dist/
+build/
+\*.egg
+
+# Virtual Environment
+
+.venv/
+venv/
+ENV/
+env/
+
+# IDEs
+
+.vscode/
+.idea/
+_.swp
+_.swo
+\*~
+
+# Git
+
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+
+Dockerfile
+docker-compose\*.yml
+.dockerignore
+
+# Documentation
+
+README.md
+\*.md
+
+# Database
+
+_.db
+_.sqlite
+\*.sqlite3
+
+# Environment variables
+
+.env
+.env.\*
+
+# Testing
+
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# OS
+
+.DS_Store
+Thumbs.db
+
+# Logs
+
+\*.log
+
+# Skills
+
+skills-lock.json
