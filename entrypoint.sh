@@ -13,5 +13,9 @@ set -e
 echo "Running database migrations..."
 alembic upgrade head
 
+# Populate database with initial data
+echo "Populating database with initial data..."
+python populate_db.py
+
 # Execute the main command (passed as arguments)
 exec "$@"

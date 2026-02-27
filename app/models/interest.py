@@ -20,7 +20,7 @@ class Interest(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
 
     # Fields
-    name = Column(String(100), nullable=False)
+    name = Column(String(100), nullable=False, unique=True)
 
     # Relationships
     user_interests = relationship("UserInterest", back_populates="interest")

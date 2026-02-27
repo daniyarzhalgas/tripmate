@@ -39,6 +39,13 @@ async def populate_languages():
             {"name": "Kazakh"},
             {"name": "English"},
             {"name": "Russian"},
+            {"name": "Turkish"},
+            {"name": "Arabic"},
+                {"name": "Chinese"},
+                {"name": "French"},
+                {"name": "German"},
+                {"name": "Spanish"},
+                {"name": "Japanese"},
         ]
 
         for lang_data in languages:
@@ -63,24 +70,16 @@ async def populate_interests():
             return
 
         interests = [
-            {"name": "Adventure"},
-            {"name": "Culture"},
-            {"name": "Food & Dining"},
-            {"name": "Photography"},
-            {"name": "Nature & Wildlife"},
-            {"name": "History"},
-            {"name": "Shopping"},
-            {"name": "Nightlife"},
-            {"name": "Sports & Fitness"},
-            {"name": "Art & Museums"},
-            {"name": "Beach & Relaxation"},
-            {"name": "Music & Festivals"},
-            {"name": "Hiking & Trekking"},
-            {"name": "Water Sports"},
-            {"name": "Camping"},
-            {"name": "City Tours"},
-            {"name": "Local Experiences"},
-            {"name": "Wellness & Spa"},
+            {"name": "Adventure & Outdoor Activities"},
+            {"name": "Food & Culinary Exploration"},
+            {"name": "History & Culture"},
+            {"name": "Nature & Scenic Landscapes"},
+            {"name": "Photography & Content Creation"},
+            {"name": "Festivals & Events"},
+            {"name": "Relaxation & Beach Time"},
+            {"name": "Road Trips & Exploration"},
+            {"name": "Shopping & Local Crafts"},
+            {"name": "Wellness & Self-Improvement"},
         ]
 
         for interest_data in interests:
@@ -107,16 +106,10 @@ async def populate_travel_styles():
         travel_styles = [
             {"name": "Budget"},
             {"name": "Luxury"},
-            {"name": "Backpacker"},
             {"name": "Adventure"},
-            {"name": "Relaxation"},
             {"name": "Cultural"},
-            {"name": "Business"},
             {"name": "Family-Friendly"},
-            {"name": "Solo"},
-            {"name": "Group"},
-            {"name": "Eco-Tourism"},
-            {"name": "Road Trip"},
+
         ]
 
         for style_data in travel_styles:
