@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   # PostgreSQL Database (Commented out - using SQLite)
   # db:
@@ -25,8 +23,9 @@ services:
     image: redis:7-alpine
     container_name: tripmate_redis
     restart: unless-stopped
-    ports:
-      - "6379:6379"
+    # Expose port only if needed for external access
+    # ports:
+    #   - "6379:6379"
     volumes:
       - redis_data:/data
     healthcheck:
@@ -44,6 +43,7 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    # Alternative: If .env doesn't exist, defaults will be used from config.py
     environment:
       # DB_HOST: db  # Commented out - using SQLite
       # DB_PORT: 5432
@@ -57,7 +57,7 @@ services:
     volumes:
       - ./app:/app/app
       - ./alembic:/app/alembic
-      - ./tripmate.db:/app/tripmate.db # SQLite database file
+      - sqlite_data:/app # SQLite database stored in Docker volume
     depends_on:
       # db:  # Commented out - using SQLite
       #   condition: service_healthy
@@ -68,3 +68,4 @@ services:
 volumes:
   # postgres_data:  # Commented out - using SQLite
   redis_data:
+  sqlite_data: # Persistent storage for SQLite database
