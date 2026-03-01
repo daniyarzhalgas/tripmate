@@ -11,7 +11,6 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
-    # postgresql-client \  # Commented out - not needed for SQLite
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
@@ -24,8 +23,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copy project files
 COPY . .
 
-# Make entrypoint script executable
-RUN chmod +x /app/entrypoint.sh
+# Fix CRLF line endings and make entrypoint executable
+RUN sed -i 's/\r$//' /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh
 
 # Expose the application port
 EXPOSE 8000
