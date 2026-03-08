@@ -9,6 +9,10 @@ set -e
 # done
 # echo "PostgreSQL is up - executing command"
 
+# Create SQLite database directory if it doesn't exist
+echo "Creating database directory..."
+mkdir -p /app/volumes/sqlite_data
+
 # Run database migrations
 echo "Running database migrations..."
 alembic upgrade head

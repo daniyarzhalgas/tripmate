@@ -57,7 +57,7 @@ services:
     volumes:
       - ./app:/app/app
       - ./alembic:/app/alembic
-      - sqlite_data:/app # SQLite database stored in Docker volume
+      - sqlite_data:/app/volumes/sqlite_data # SQLite database directory
     depends_on:
       # db:  # Commented out - using SQLite
       #   condition: service_healthy
