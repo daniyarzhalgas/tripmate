@@ -1,8 +1,17 @@
-
 from datetime import date
 from decimal import Decimal
 
-from sqlalchemy import Numeric, Column, Date, DateTime, ForeignKey, Integer, String, Text, func
+from sqlalchemy import (
+    Numeric,
+    Column,
+    Date,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+    Text,
+    func,
+)
 from sqlalchemy.orm import relationship
 
 from app.core.database import Base
@@ -32,7 +41,7 @@ class TripVacancy(Base):
     # Trip Details
     people_needed = Column(Integer, nullable=False)
     people_joined = Column(Integer, default=0, nullable=False)
-    
+
     description = Column(Text, nullable=True)
     planned_activities = Column(
         Text, nullable=True
@@ -64,16 +73,18 @@ class TripVacancy(Base):
     updated_at = Column(
         DateTime, default=func.now(), onupdate=func.now(), nullable=False
     )
-    offers = relationship("Offer", back_populates="vacancy", cascade="all, delete-orphan")
+    offers = relationship(
+        "Offer", back_populates="vacancy", cascade="all, delete-orphan"
+    )
 
-    
     @property
     def is_accepting_offers(self) -> bool:
         return (
-            self.status == "active" and 
-            self.people_joined < self.people_needed and
-            self.end_date >= date.today()
+            self.status == "active"
+            and self.people_joined < self.people_needed
+            and self.end_date >= date.today()
         )
 
     # Relationships
     requester = relationship("User", back_populates="trip_vacancies")
+    chat_group = relationship("ChatGroup", uselist=False, back_populates="trip_vacancy", cascade="all, delete-orphan")

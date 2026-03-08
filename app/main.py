@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import auth, profile, trip_vacancy, offer
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
+from app.api import auth, profile, trip_vacancy, offer, chat
 from app.api.dependencies import get_current_user
 from app.models.user import User
 from app.core.config import config
@@ -39,6 +41,12 @@ app.include_router(auth.router, prefix="/api/v1")
 app.include_router(profile.router, prefix="/api/v1")
 app.include_router(trip_vacancy.router, prefix="/api/v1")
 app.include_router(offer.router, prefix="/api/v1")
+app.include_router(chat.router, prefix="/api/v1")
+
+# Mount uploads directory for serving uploaded files
+uploads_dir = Path("uploads")
+uploads_dir.mkdir(exist_ok=True)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 
 @app.get("/api/v1/protected")

@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     @property
     def DATABASE_URL(self) -> str:
         # SQLite (for local development)
-        return "sqlite+aiosqlite:///./tripmate.db"
+        return "sqlite+aiosqlite:///./volumes/sqlite_data/tripmate.db"
 
         # PostgreSQL (for Docker and production - uncomment if needed)
         # return (
@@ -41,7 +41,7 @@ class Settings(BaseSettings):
     @property
     def SYNC_DATABASE_URL(self) -> str:
         # SQLite (for Alembic migrations)
-        return "sqlite:///./tripmate.db"
+        return "sqlite:///./volumes/sqlite_data/tripmate.db"
 
         # PostgreSQL (for Alembic migrations - uncomment if needed)
         # return (

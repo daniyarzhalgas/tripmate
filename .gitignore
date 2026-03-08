@@ -9,4 +9,6 @@ __pycache__
 *.db   
 tripmate.db
 *.log
-*.bak   
+*.bak
+uploads/
+volumes/

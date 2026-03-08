@@ -88,6 +88,13 @@ async def get_all_trip_vacancies(
     status_filter: Optional[str] = Query(None, alias="status"),
     start_date_from: Optional[date] = None,
     start_date_to: Optional[date] = None,
+    min_age: Optional[int] = Query(None, ge=0, le=150),
+    max_age: Optional[int] = Query(None, ge=0, le=150),
+    min_budget: Optional[float] = Query(None, ge=0),
+    max_budget: Optional[float] = Query(None, ge=0),
+    gender_preference: Optional[str] = Query(None, regex="^(male|female|any)$"),
+    from_city: Optional[str] = None,
+    from_country: Optional[str] = None,
     db: AsyncSession = Depends(get_db),
 ):
     """Get all trip vacancies with optional filters."""
@@ -101,6 +108,13 @@ async def get_all_trip_vacancies(
         status=status_filter,
         start_date_from=start_date_from,
         start_date_to=start_date_to,
+        min_age=min_age,
+        max_age=max_age,
+        min_budget=min_budget,
+        max_budget=max_budget,
+        gender_preference=gender_preference,
+        from_city=from_city,
+        from_country=from_country,
     )
 
     return trip_vacancies

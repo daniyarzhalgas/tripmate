@@ -27,6 +27,7 @@ pydantic-core==2.41.5
 pydantic-settings==2.13.1
 python-dotenv==1.2.1
 python-jose==3.5.0
+python-multipart==0.0.18
 redis==7.2.0
 rsa==4.9.1
 six==1.17.0
@@ -35,3 +36,4 @@ starlette==0.52.1
 typing-extensions==4.15.0
 typing-inspection==0.4.2
 uvicorn==0.41.0
+websockets==14.1

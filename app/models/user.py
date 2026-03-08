@@ -30,3 +30,5 @@ class User(Base):
     profile = relationship("Profile", uselist=False, back_populates="user")
     trip_vacancies = relationship("TripVacancy", back_populates="requester")
     offers = relationship("Offer", back_populates="offerer")
+    chat_memberships = relationship("ChatMember", back_populates="user", cascade="all, delete-orphan")
+    messages = relationship("Message", back_populates="sender", cascade="all, delete-orphan")

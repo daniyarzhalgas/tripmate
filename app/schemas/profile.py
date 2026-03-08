@@ -17,7 +17,7 @@ class ProfileCreateRequest(BaseModel):
     instagram_handle: Optional[str] = Field(None, max_length=100)
     telegram_handle: Optional[str] = Field(None, max_length=100)
     bio: Optional[str] = None
-    profile_photo_url: Optional[str] = None
+    profile_photo: Optional[str] = None
 
 
 class ProfileUpdateRequest(BaseModel):
@@ -32,7 +32,7 @@ class ProfileUpdateRequest(BaseModel):
     instagram_handle: Optional[str] = Field(None, max_length=100)
     telegram_handle: Optional[str] = Field(None, max_length=100)
     bio: Optional[str] = None
-    profile_photo_url: Optional[str] = None
+    profile_photo: Optional[str] = None
 
 
 class LanguageBase(BaseModel):
@@ -113,7 +113,7 @@ class ProfileResponse(BaseModel):
     instagram_handle: Optional[str] = None
     telegram_handle: Optional[str] = None
     bio: Optional[str] = None
-    profile_photo_url: Optional[str] = None
+    profile_photo: Optional[str] = None
 
     class Config:
         from_attributes = True

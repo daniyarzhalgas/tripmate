@@ -5,12 +5,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.trip_vacancy import TripVacancy
 from app.repositories.trip_vacancy_repository import TripVacancyRepository
+from app.repositories.chat_group_repository import ChatGroupRepository
+from app.repositories.chat_member_repository import ChatMemberRepository
 
 
 class TripVacancyService:
     def __init__(self, db: AsyncSession):
         self.db = db
         self.trip_vacancy_repo = TripVacancyRepository(db)
+        self.chat_group_repo = ChatGroupRepository(db)
+        self.chat_member_repo = ChatMemberRepository(db)
 
     # ============= CREATE =============
     async def create_trip_vacancy(
@@ -50,6 +54,17 @@ class TripVacancyService:
             trip_vacancy = await self.trip_vacancy_repo.create(
                 requester_id=requester_id, **trip_vacancy_data
             )
+
+            # Create chat group for the trip vacancy
+            destination_city = trip_vacancy_data.get("destination_city", "Trip")
+            chat_group_name = f"Trip to {destination_city}"
+            chat_group = await self.chat_group_repo.create(
+                trip_vacancy.id, chat_group_name
+            )
+
+            # Add the requester as the first member
+            await self.chat_member_repo.create(chat_group.id, requester_id)
+
             return True, trip_vacancy, None
         except Exception as e:
             return False, None, f"Failed to create trip vacancy: {str(e)}"
@@ -78,12 +93,19 @@ class TripVacancyService:
         status: Optional[str] = None,
         start_date_from: Optional[date] = None,
         start_date_to: Optional[date] = None,
+        min_age: Optional[int] = None,
+        max_age: Optional[int] = None,
+        min_budget: Optional[float] = None,
+        max_budget: Optional[float] = None,
+        gender_preference: Optional[str] = None,
+        from_city: Optional[str] = None,
+        from_country: Optional[str] = None,
     ) -> List[TripVacancy]:
         """Get all trip vacancies with optional filters. Defaults to showing only 'open' vacancies."""
         # Default to showing only 'open' vacancies if no status filter is provided
         if status is None:
             status = "open"
-        
+
         return await self.trip_vacancy_repo.get_all(
             skip=skip,
             limit=limit,
@@ -92,6 +114,13 @@ class TripVacancyService:
             status=status,
             start_date_from=start_date_from,
             start_date_to=start_date_to,
+            min_age=min_age,
+            max_age=max_age,
+            min_budget=min_budget,
+            max_budget=max_budget,
+            gender_preference=gender_preference,
+            from_city=from_city,
+            from_country=from_country,
         )
 
     # ============= UPDATE =============

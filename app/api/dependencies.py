@@ -1,5 +1,5 @@
 from typing import Optional
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, WebSocket
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -16,7 +16,7 @@ async def get_current_user(
     db: AsyncSession = Depends(get_db),
 ) -> User:
     token = credentials.credentials
-    
+
     # Check if token is blacklisted
     auth_service = AuthService(db)
     if await auth_service.is_token_blacklisted(token):
@@ -25,7 +25,7 @@ async def get_current_user(
             detail="Token has been revoked",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     is_valid, payload = verify_access_token(token)
 
     if not is_valid or not payload:
@@ -91,4 +91,35 @@ def require_role(required_role: str):
                 detail=f"Requires {required_role} role",
             )
         return current_user
+
     return role_checker
+
+
+async def get_user_from_websocket_token(
+    token: str,
+    db: AsyncSession,
+) -> Optional[User]:
+    """Authenticate user from WebSocket token."""
+    try:
+        # Check if token is blacklisted
+        auth_service = AuthService(db)
+        if await auth_service.is_token_blacklisted(token):
+            return None
+
+        is_valid, payload = verify_access_token(token)
+
+        if not is_valid or not payload:
+            return None
+
+        user_id = payload.get("sub")
+        if user_id is None:
+            return None
+
+        user = await auth_service.get_current_user(int(user_id))
+
+        if user is None or not user.is_active:
+            return None
+
+        return user
+    except Exception:
+        return None

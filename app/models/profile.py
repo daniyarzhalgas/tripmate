@@ -33,7 +33,7 @@ class Profile(Base):
 
     # Profile Details
     bio = Column(Text, nullable=True)
-    profile_photo_url = Column(Text, nullable=True)
+    profile_photo = Column(String(500), nullable=True)  # Stores file path
 
     # Relationships
     user = relationship("User", back_populates="profile")

@@ -6,6 +6,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.offer import Offer
 from app.repositories.offer_repository import OfferRepository
 from app.repositories.trip_vacancy_repository import TripVacancyRepository
+from app.repositories.chat_group_repository import ChatGroupRepository
+from app.repositories.chat_member_repository import ChatMemberRepository
 
 
 class OfferService:
@@ -13,6 +15,8 @@ class OfferService:
         self.db = db
         self.offer_repo = OfferRepository(db)
         self.trip_vacancy_repo = TripVacancyRepository(db)
+        self.chat_group_repo = ChatGroupRepository(db)
+        self.chat_member_repo = ChatMemberRepository(db)
 
     # ============= CREATE =============
     async def create_offer(
@@ -173,7 +177,7 @@ class OfferService:
             if new_status not in ["accepted", "rejected"]:
                 return False, None, "Invalid status. Use 'accepted' or 'rejected'"
 
-            # If accepting offer, update trip vacancy
+            # If accepting offer, update trip vacancy and add user to chat
             if new_status == "accepted":
                 # Check if vacancy is full
                 if trip_vacancy.people_joined >= trip_vacancy.people_needed:
@@ -193,6 +197,20 @@ class OfferService:
                     people_joined=new_people_joined,
                     status=new_vacancy_status
                 )
+
+                # Add the offerer to the chat group
+                chat_group = await self.chat_group_repo.get_by_trip_vacancy_id(
+                    trip_vacancy.id
+                )
+                if chat_group:
+                    # Check if user is not already a member
+                    is_member = await self.chat_member_repo.is_member(
+                        chat_group.id, offer.offerer_id
+                    )
+                    if not is_member:
+                        await self.chat_member_repo.create(
+                            chat_group.id, offer.offerer_id
+                        )
 
             # Update offer status
             updated_offer = await self.offer_repo.update_status(
