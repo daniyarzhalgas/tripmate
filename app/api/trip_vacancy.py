@@ -8,6 +8,7 @@ from app.api.dependencies import get_current_user
 from app.core.database import get_db
 from app.models.user import User
 from app.schemas.trip_vacancy import (
+    GeneratePlanResponse,
     MessageResponse,
     TripVacancyCreateRequest,
     TripVacancyResponse,
@@ -190,3 +191,29 @@ async def delete_trip_vacancy(
         )
 
     return {"message": "Trip vacancy deleted successfully"}
+
+
+@router.post("/{trip_vacancy_id}/generate-plan", response_model=GeneratePlanResponse)
+async def generate_plan(
+    trip_vacancy_id: int,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Generate a travel plan for a trip vacancy using AI.
+    
+    The trip vacancy must be full (all needed people have joined) before a plan can be generated.
+    Only the requester or accepted participants can generate a plan.
+    """
+    trip_vacancy_service = TripVacancyService(db)
+
+    success, plan, error = await trip_vacancy_service.generate_plan(
+        trip_vacancy_id=trip_vacancy_id, user_id=current_user.id
+    )
+
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error,
+        )
+
+    return {"trip_vacancy_id": trip_vacancy_id, "generated_plan": plan}

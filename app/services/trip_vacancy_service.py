@@ -2,11 +2,15 @@ from datetime import date
 from typing import List, Optional, Tuple
 
 from sqlalchemy.ext.asyncio import AsyncSession
+import google.generativeai as genai
 
 from app.models.trip_vacancy import TripVacancy
 from app.repositories.trip_vacancy_repository import TripVacancyRepository
 from app.repositories.chat_group_repository import ChatGroupRepository
 from app.repositories.chat_member_repository import ChatMemberRepository
+from app.repositories.offer_repository import OfferRepository
+from app.repositories.profile_repository import ProfileRepository
+from app.core.config import config
 
 
 class TripVacancyService:
@@ -15,6 +19,8 @@ class TripVacancyService:
         self.trip_vacancy_repo = TripVacancyRepository(db)
         self.chat_group_repo = ChatGroupRepository(db)
         self.chat_member_repo = ChatMemberRepository(db)
+        self.offer_repo = OfferRepository(db)
+        self.profile_repo = ProfileRepository(db)
 
     # ============= CREATE =============
     async def create_trip_vacancy(
@@ -239,3 +245,161 @@ class TripVacancyService:
             return True, None
         except Exception as e:
             return False, f"Failed to delete trip vacancy: {str(e)}"
+
+    # ============= GENERATE PLAN =============
+    async def generate_plan(
+        self, trip_vacancy_id: int, user_id: int
+    ) -> Tuple[bool, Optional[str], Optional[str]]:
+        """Generate a travel plan using Gemini AI for a trip vacancy that is full."""
+        try:
+            # Get trip vacancy
+            trip_vacancy = await self.trip_vacancy_repo.get_by_id(trip_vacancy_id)
+            if not trip_vacancy:
+                return False, None, "Trip vacancy not found"
+
+            # Check if user has access (must be requester or accepted offerer)
+            if trip_vacancy.requester_id != user_id:
+                # Check if user is an accepted offerer
+                offer = await self.offer_repo.check_existing_offer(
+                    trip_vacancy_id, user_id
+                )
+                if not offer or offer.status != "accepted":
+                    return (
+                        False,
+                        None,
+                        "You don't have permission to generate plan for this trip",
+                    )
+
+            # Check if trip vacancy is full
+            if trip_vacancy.people_joined < trip_vacancy.people_needed:
+                return (
+                    False,
+                    None,
+                    f"Trip vacancy is not full yet. Currently {trip_vacancy.people_joined}/{trip_vacancy.people_needed} people joined",
+                )
+
+            # Get all accepted offers for this trip
+            accepted_offers = await self.offer_repo.get_offers_by_status(
+                trip_vacancy_id, "accepted", skip=0, limit=100
+            )
+
+            # Get requester profile with relations
+            requester_profile = await self.profile_repo.get_by_user_id_with_relations(
+                trip_vacancy.requester_id
+            )
+
+            # Collect all user data
+            users_data = []
+
+            # Add requester as user-1
+            if requester_profile:
+                users_data.append(
+                    {
+                        "user_label": "user-1",
+                        "age": self._calculate_age(requester_profile.date_of_birth),
+                        "gender": requester_profile.gender,
+                        "interests": [
+                            ui.interest.name for ui in requester_profile.interests
+                        ],
+                        "travel_styles": [
+                            ts.travel_style.name
+                            for ts in requester_profile.travel_styles
+                        ],
+                    }
+                )
+
+            # Add accepted offerers as user-2, user-3, etc.
+            for idx, offer in enumerate(accepted_offers, start=2):
+                offerer_profile = await self.profile_repo.get_by_user_id_with_relations(
+                    offer.offerer_id
+                )
+                if offerer_profile:
+                    users_data.append(
+                        {
+                            "user_label": f"user-{idx}",
+                            "age": self._calculate_age(offerer_profile.date_of_birth),
+                            "gender": offerer_profile.gender,
+                            "interests": [
+                                ui.interest.name for ui in offerer_profile.interests
+                            ],
+                            "travel_styles": [
+                                ts.travel_style.name
+                                for ts in offerer_profile.travel_styles
+                            ],
+                        }
+                    )
+
+            # Generate plan using Gemini AI
+            plan = await self._generate_plan_with_gemini(trip_vacancy, users_data)
+
+            return True, plan, None
+
+        except Exception as e:
+            return False, None, f"Failed to generate plan: {str(e)}"
+
+    def _calculate_age(self, date_of_birth: date) -> int:
+        """Calculate age from date of birth."""
+        from datetime import date as dt_date
+
+        today = dt_date.today()
+        return (
+            today.year
+            - date_of_birth.year
+            - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
+        )
+
+    async def _generate_plan_with_gemini(
+        self, trip_vacancy: TripVacancy, users_data: List[dict]
+    ) -> str:
+        """Call Gemini AI to generate a travel plan."""
+        # Configure Gemini
+        genai.configure(api_key=config.GEMINI_API_KEY)
+        model = genai.GenerativeModel("gemini-1.5-flash")
+
+        # Format trip information
+        trip_info = f"""
+Trip Details:
+- Destination: {trip_vacancy.destination_city}, {trip_vacancy.destination_country}
+- Start Date: {trip_vacancy.start_date.strftime('%Y-%m-%d')}
+- End Date: {trip_vacancy.end_date.strftime('%Y-%m-%d')}
+- Duration: {(trip_vacancy.end_date - trip_vacancy.start_date).days} days
+- Total People: {len(users_data)}
+- Budget Range: ${trip_vacancy.min_budget or 'N/A'} - ${trip_vacancy.max_budget or 'N/A'}
+- Description: {trip_vacancy.description or 'N/A'}
+- Planned Activities: {trip_vacancy.planned_activities or 'N/A'}
+- Planned Destinations: {trip_vacancy.planned_destinations or 'N/A'}
+- Transportation Preference: {trip_vacancy.transportation_preference or 'N/A'}
+- Accommodation Preference: {trip_vacancy.accommodation_preference or 'N/A'}
+
+Tripmates Information:
+"""
+
+        # Add user information
+        for user_data in users_data:
+            trip_info += f"""
+{user_data['user_label'].upper()}:
+- Age: {user_data['age']}
+- Gender: {user_data['gender']}
+- Interests: {', '.join(user_data['interests']) if user_data['interests'] else 'None specified'}
+- Travel Styles: {', '.join(user_data['travel_styles']) if user_data['travel_styles'] else 'None specified'}
+"""
+
+        prompt = f"""You are a travel planning assistant. Based on the following trip information and tripmates' preferences, generate a detailed day-by-day travel plan.
+
+{trip_info}
+
+Please create a comprehensive travel plan that:
+1. Includes a day-by-day itinerary
+2. Considers all tripmates' interests and travel styles
+3. Balances activities to accommodate everyone's preferences
+4. Suggests specific places, activities, and experiences
+5. Includes practical information like meal suggestions and transportation
+6. Stays within the budget range if specified
+7. Considers accommodation preferences
+8. Makes the trip enjoyable for all participants
+
+Generate a well-structured travel plan:"""
+
+        # Generate content
+        response = model.generate_content(prompt)
+        return response.text

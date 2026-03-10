@@ -73,3 +73,11 @@ class TripVacancyResponse(BaseModel):
 
 class MessageResponse(BaseModel):
     message: str
+
+
+class GeneratePlanResponse(BaseModel):
+    trip_vacancy_id: int
+    generated_plan: str
+    
+    class Config:
+        from_attributes = True
