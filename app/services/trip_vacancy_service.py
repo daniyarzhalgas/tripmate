@@ -1,8 +1,9 @@
 from datetime import date
+import json
+from pathlib import Path
 from typing import List, Optional, Tuple
 
 from sqlalchemy.ext.asyncio import AsyncSession
-import google.generativeai as genai
 
 from app.models.trip_vacancy import TripVacancy
 from app.repositories.trip_vacancy_repository import TripVacancyRepository
@@ -10,7 +11,6 @@ from app.repositories.chat_group_repository import ChatGroupRepository
 from app.repositories.chat_member_repository import ChatMemberRepository
 from app.repositories.offer_repository import OfferRepository
 from app.repositories.profile_repository import ProfileRepository
-from app.core.config import config
 
 
 class TripVacancyService:
@@ -250,7 +250,7 @@ class TripVacancyService:
     async def generate_plan(
         self, trip_vacancy_id: int, user_id: int
     ) -> Tuple[bool, Optional[str], Optional[str]]:
-        """Generate a travel plan using Gemini AI for a trip vacancy that is full."""
+        """Collect tripmates data and save it to a local JSON file."""
         try:
             # Get trip vacancy
             trip_vacancy = await self.trip_vacancy_repo.get_by_id(trip_vacancy_id)
@@ -283,19 +283,24 @@ class TripVacancyService:
                 trip_vacancy_id, "accepted", skip=0, limit=100
             )
 
-            # Get requester profile with relations
-            requester_profile = await self.profile_repo.get_by_user_id_with_relations(
-                trip_vacancy.requester_id
+            # Fetch all related profiles in one query to avoid N+1 selects
+            profile_user_ids = [trip_vacancy.requester_id] + [
+                offer.offerer_id for offer in accepted_offers
+            ]
+            profiles = await self.profile_repo.get_by_user_ids_with_relations(
+                profile_user_ids
             )
+            profiles_by_user_id = {profile.user_id: profile for profile in profiles}
 
             # Collect all user data
             users_data = []
 
             # Add requester as user-1
+            requester_profile = profiles_by_user_id.get(trip_vacancy.requester_id)
             if requester_profile:
                 users_data.append(
                     {
-                        "user_label": "user-1",
+                        "user_label": requester_profile.first_name + " " + requester_profile.last_name,
                         "age": self._calculate_age(requester_profile.date_of_birth),
                         "gender": requester_profile.gender,
                         "interests": [
@@ -310,13 +315,11 @@ class TripVacancyService:
 
             # Add accepted offerers as user-2, user-3, etc.
             for idx, offer in enumerate(accepted_offers, start=2):
-                offerer_profile = await self.profile_repo.get_by_user_id_with_relations(
-                    offer.offerer_id
-                )
+                offerer_profile = profiles_by_user_id.get(offer.offerer_id)
                 if offerer_profile:
                     users_data.append(
                         {
-                            "user_label": f"user-{idx}",
+                            "user_label": offerer_profile.first_name + " " + offerer_profile.last_name,
                             "age": self._calculate_age(offerer_profile.date_of_birth),
                             "gender": offerer_profile.gender,
                             "interests": [
@@ -329,10 +332,9 @@ class TripVacancyService:
                         }
                     )
 
-            # Generate plan using Gemini AI
-            plan = await self._generate_plan_with_gemini(trip_vacancy, users_data)
+            output_file = await self._save_users_data_to_json(trip_vacancy, users_data)
 
-            return True, plan, None
+            return True, f"User information saved to {output_file}", None
 
         except Exception as e:
             return False, None, f"Failed to generate plan: {str(e)}"
@@ -348,58 +350,29 @@ class TripVacancyService:
             - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
         )
 
-    async def _generate_plan_with_gemini(
+    async def _save_users_data_to_json(
         self, trip_vacancy: TripVacancy, users_data: List[dict]
     ) -> str:
-        """Call Gemini AI to generate a travel plan."""
-        # Configure Gemini
-        genai.configure(api_key=config.GEMINI_API_KEY)
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        """Save tripmates information to a local JSON file without external calls."""
+        payload = {
+            "trip_vacancy_id": trip_vacancy.id,
+            "destination_city": trip_vacancy.destination_city,
+            "destination_country": trip_vacancy.destination_country,
+            "start_date": trip_vacancy.start_date.isoformat()
+            if trip_vacancy.start_date
+            else None,
+            "end_date": trip_vacancy.end_date.isoformat()
+            if trip_vacancy.end_date
+            else None,
+            "users": users_data,
+        }
 
-        # Format trip information
-        trip_info = f"""
-Trip Details:
-- Destination: {trip_vacancy.destination_city}, {trip_vacancy.destination_country}
-- Start Date: {trip_vacancy.start_date.strftime('%Y-%m-%d')}
-- End Date: {trip_vacancy.end_date.strftime('%Y-%m-%d')}
-- Duration: {(trip_vacancy.end_date - trip_vacancy.start_date).days} days
-- Total People: {len(users_data)}
-- Budget Range: ${trip_vacancy.min_budget or 'N/A'} - ${trip_vacancy.max_budget or 'N/A'}
-- Description: {trip_vacancy.description or 'N/A'}
-- Planned Activities: {trip_vacancy.planned_activities or 'N/A'}
-- Planned Destinations: {trip_vacancy.planned_destinations or 'N/A'}
-- Transportation Preference: {trip_vacancy.transportation_preference or 'N/A'}
-- Accommodation Preference: {trip_vacancy.accommodation_preference or 'N/A'}
+        project_root = Path(__file__).resolve().parents[2]
+        output_dir = project_root / "generated_plans"
+        output_dir.mkdir(parents=True, exist_ok=True)
 
-Tripmates Information:
-"""
+        output_file = output_dir / f"trip_{trip_vacancy.id}_users.json"
+        with output_file.open("w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
 
-        # Add user information
-        for user_data in users_data:
-            trip_info += f"""
-{user_data['user_label'].upper()}:
-- Age: {user_data['age']}
-- Gender: {user_data['gender']}
-- Interests: {', '.join(user_data['interests']) if user_data['interests'] else 'None specified'}
-- Travel Styles: {', '.join(user_data['travel_styles']) if user_data['travel_styles'] else 'None specified'}
-"""
-
-        prompt = f"""You are a travel planning assistant. Based on the following trip information and tripmates' preferences, generate a detailed day-by-day travel plan.
-
-{trip_info}
-
-Please create a comprehensive travel plan that:
-1. Includes a day-by-day itinerary
-2. Considers all tripmates' interests and travel styles
-3. Balances activities to accommodate everyone's preferences
-4. Suggests specific places, activities, and experiences
-5. Includes practical information like meal suggestions and transportation
-6. Stays within the budget range if specified
-7. Considers accommodation preferences
-8. Makes the trip enjoyable for all participants
-
-Generate a well-structured travel plan:"""
-
-        # Generate content
-        response = model.generate_content(prompt)
-        return response.text
+        return str(output_file)

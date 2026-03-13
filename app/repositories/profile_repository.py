@@ -68,6 +68,25 @@ class ProfileRepository:
         result = await self.db.execute(query)
         return result.unique().scalar_one_or_none()
 
+    async def get_by_user_ids_with_relations(self, user_ids: List[int]) -> List[Profile]:
+        """Get profiles by user IDs with languages, interests and travel styles."""
+        if not user_ids:
+            return []
+
+        query = (
+            select(Profile)
+            .filter(Profile.user_id.in_(user_ids))
+            .options(
+                joinedload(Profile.languages).joinedload(UserLanguage.language),
+                joinedload(Profile.interests).joinedload(UserInterest.interest),
+                joinedload(Profile.travel_styles).joinedload(
+                    UserTravelStyle.travel_style
+                ),
+            )
+        )
+        result = await self.db.execute(query)
+        return list(result.unique().scalars().all())
+
     async def get_all(
         self,
         skip: int = 0,
