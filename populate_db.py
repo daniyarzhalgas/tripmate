@@ -71,16 +71,16 @@ async def populate_interests():
             return
 
         interests = [
-            {"name": "Adventure & Outdoor Activities"},
-            {"name": "Food & Culinary Exploration"},
-            {"name": "History & Culture"},
-            {"name": "Nature & Scenic Landscapes"},
-            {"name": "Photography & Content Creation"},
-            {"name": "Festivals & Events"},
-            {"name": "Relaxation & Beach Time"},
-            {"name": "Road Trips & Exploration"},
-            {"name": "Shopping & Local Crafts"},
-            {"name": "Wellness & Self-Improvement"},
+            {"name": "Food & Dining"},
+            {"name": "Adventure & Sports"},
+            {"name": "Culture & History"},
+            {"name": "Nature & Outdoors"},
+            {"name": "Arts & Entertainment"},
+            {"name": "Shopping"},
+            {"name": "Wellness & Relaxation"},
+            {"name": "Photography"},
+            {"name": "Nightlife"},
+            {"name": "Local Experiences"},
         ]
 
         for interest_data in interests:
@@ -105,11 +105,11 @@ async def populate_travel_styles():
             return
 
         travel_styles = [
-            {"name": "Budget"},
             {"name": "Luxury"},
+            {"name": "Budget-Friendly"},
             {"name": "Adventure"},
-            {"name": "Cultural"},
-            {"name": "Family-Friendly"},
+            {"name": "Cultural Immersion"},
+            {"name": "Relaxation"},
         ]
 
         for style_data in travel_styles:

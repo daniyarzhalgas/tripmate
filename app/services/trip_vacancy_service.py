@@ -295,42 +295,39 @@ class TripVacancyService:
             # Collect all user data
             users_data = []
 
+            def _profile_dict(profile) -> dict:
+                return {
+                    "name": profile.first_name + " " + profile.last_name,
+                    "age": self._calculate_age(profile.date_of_birth),
+                    "gender": profile.gender,
+                    "from_city": profile.city,
+                    "from_country": profile.country,
+                    "bio": profile.bio,
+                    "languages": [
+                        ul.language.name for ul in profile.languages
+                    ],
+                    "interests": [
+                        ui.interest.name for ui in profile.interests
+                    ],
+                    "travel_styles": [
+                        ts.travel_style.name for ts in profile.travel_styles
+                    ],
+                }
+
             # Add requester as user-1
             requester_profile = profiles_by_user_id.get(trip_vacancy.requester_id)
             if requester_profile:
-                users_data.append(
-                    {
-                        "user_label": requester_profile.first_name + " " + requester_profile.last_name,
-                        "age": self._calculate_age(requester_profile.date_of_birth),
-                        "gender": requester_profile.gender,
-                        "interests": [
-                            ui.interest.name for ui in requester_profile.interests
-                        ],
-                        "travel_styles": [
-                            ts.travel_style.name
-                            for ts in requester_profile.travel_styles
-                        ],
-                    }
-                )
+                entry = _profile_dict(requester_profile)
+                entry["user_label"] = "user-1"
+                users_data.append(entry)
 
             # Add accepted offerers as user-2, user-3, etc.
             for idx, offer in enumerate(accepted_offers, start=2):
                 offerer_profile = profiles_by_user_id.get(offer.offerer_id)
                 if offerer_profile:
-                    users_data.append(
-                        {
-                            "user_label": offerer_profile.first_name + " " + offerer_profile.last_name,
-                            "age": self._calculate_age(offerer_profile.date_of_birth),
-                            "gender": offerer_profile.gender,
-                            "interests": [
-                                ui.interest.name for ui in offerer_profile.interests
-                            ],
-                            "travel_styles": [
-                                ts.travel_style.name
-                                for ts in offerer_profile.travel_styles
-                            ],
-                        }
-                    )
+                    entry = _profile_dict(offerer_profile)
+                    entry["user_label"] = f"user-{idx}"
+                    users_data.append(entry)
 
             output_file = await self._save_users_data_to_json(trip_vacancy, users_data)
 
@@ -363,6 +360,17 @@ class TripVacancyService:
             else None,
             "end_date": trip_vacancy.end_date.isoformat()
             if trip_vacancy.end_date
+            else None,
+            "description": trip_vacancy.description,
+            "planned_activities": trip_vacancy.planned_activities,
+            "planned_destinations": trip_vacancy.planned_destinations,
+            "transportation_preference": trip_vacancy.transportation_preference,
+            "accommodation_preference": trip_vacancy.accommodation_preference,
+            "min_budget": float(trip_vacancy.min_budget)
+            if trip_vacancy.min_budget is not None
+            else None,
+            "max_budget": float(trip_vacancy.max_budget)
+            if trip_vacancy.max_budget is not None
             else None,
             "users": users_data,
         }

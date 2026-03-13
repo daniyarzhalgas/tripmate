@@ -1,0 +1,644 @@
+{
+  "destination_overview": {
+    "city": "Almaty",
+    "country": "Kazakhstan",
+    "best_time_to_visit": "Early April is a beautiful transition period in Almaty. The city begins to bloom with tulips and apple blossoms, while the mountains still retain enough snow for spring skiing and stunning photography. Temperatures range from 5°C to 18°C.",
+    "estimated_daily_budget": {
+      "min": 1000,
+      "max": 5000,
+      "currency": "USD"
+    }
+  },
+  "recommended_places": [
+    {
+      "id": 1,
+      "name": "The Ritz-Carlton, Almaty",
+      "category": "accommodation",
+      "address": "Esentai Tower, Al-Farabi Avenue 77/7, Almaty 050040",
+      "coordinates": {
+        "latitude": 43.2185,
+        "longitude": 76.9276
+      },
+      "estimated_cost": {
+        "amount": 600,
+        "currency": "USD",
+        "cost_type": "per_person"
+      },
+      "description": "The pinnacle of luxury in Almaty located in the Esentai Tower, offering breathtaking views of the Trans-Ili Alatau mountains.",
+      "best_for": [
+        "Relaxation & Beach Time",
+        "Wellness & Self-Improvement"
+      ],
+      "opening_hours": "24/7",
+      "recommended_duration": "10 days",
+      "why_recommended": "Matches the luxury travel style and provides world-class wellness facilities and photography opportunities from the high floors.",
+      "tips": [
+        "Request a mountain-facing room",
+        "Visit the Club Lounge for exclusive services"
+      ],
+      "best_time_to_visit": "Full stay"
+    },
+    {
+      "id": 2,
+      "name": "Almaty Zoo (Snow Leopard Enclosure)",
+      "category": "attraction",
+      "address": "Esenberlin St 166, Almaty 050007",
+      "coordinates": {
+        "latitude": 43.2625,
+        "longitude": 76.9658
+      },
+      "estimated_cost": {
+        "amount": 5,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "One of the oldest zoos in Kazakhstan, currently involved in the conservation and breeding of the 'Barys' (Snow Leopard).",
+      "best_for": [
+        "Photography & Content Creation",
+        "Culture"
+      ],
+      "opening_hours": "09:00 - 18:00",
+      "recommended_duration": "2-3 hours",
+      "why_recommended": "Specifically satisfies the user's request to 'see barys'.",
+      "tips": [
+        "Check the feeding schedule to see the leopards active",
+        "The zoo is near Gorky Park"
+      ],
+      "best_time_to_visit": "Morning when animals are most active"
+    },
+    {
+      "id": 3,
+      "name": "Zhenis Judo Club / National Judo Academy",
+      "category": "activity",
+      "address": "Abay Ave 44, Almaty (Central Stadium area)",
+      "coordinates": {
+        "latitude": 43.2384,
+        "longitude": 76.9241
+      },
+      "estimated_cost": {
+        "amount": 50,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "A premier facility for judo in Kazakhstan, often hosting national athletes and international training camps.",
+      "best_for": [
+        "Wellness & Self-Improvement",
+        "Culture"
+      ],
+      "opening_hours": "08:00 - 21:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Directly addresses the interest in 'biggest judo training halls'.",
+      "tips": [
+        "Contact in advance for a private tour or session",
+        "Watch the elite team practices"
+      ],
+      "best_time_to_visit": "Weekday evenings"
+    },
+    {
+      "id": 4,
+      "name": "Shymbulak Mountain Resort",
+      "category": "nature",
+      "address": "Gornaya St 640, Almaty 050020",
+      "coordinates": {
+        "latitude": 43.1287,
+        "longitude": 77.0801
+      },
+      "estimated_cost": {
+        "amount": 100,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "The most famous mountain resort in Central Asia, perfect for luxury dining and spring snow activities.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Going to mountain"
+      ],
+      "opening_hours": "09:00 - 18:00",
+      "recommended_duration": "Half day",
+      "why_recommended": "Matches the 'going to mountain' activity and offers luxury mountain experiences.",
+      "tips": [
+        "Take the cable car to Talgar Pass for the best photos",
+        "Dine at the S.N.e.G restaurant at the top"
+      ],
+      "best_time_to_visit": "Morning for clear skies"
+    },
+    {
+      "id": 5,
+      "name": "Arasan Wellness & Spa",
+      "category": "wellness",
+      "address": "Tulebayev St 38, Almaty 050000",
+      "coordinates": {
+        "latitude": 43.2608,
+        "longitude": 76.9475
+      },
+      "estimated_cost": {
+        "amount": 150,
+        "currency": "USD",
+        "cost_type": "per_person"
+      },
+      "description": "A Soviet-era architectural masterpiece offering luxury Turkish, Finnish, and Russian baths.",
+      "best_for": [
+        "Wellness & Self-Improvement",
+        "Relaxation & Beach Time"
+      ],
+      "opening_hours": "07:00 - 23:30",
+      "recommended_duration": "3-4 hours",
+      "why_recommended": "Offers a unique cultural wellness experience with private luxury suites.",
+      "tips": [
+        "Book a private VVIP suite for total privacy",
+        "Try the traditional birch branch massage (Paring)"
+      ],
+      "best_time_to_visit": "Afternoon"
+    },
+    {
+      "id": 6,
+      "name": "Qazaq Republic (Restaurant)",
+      "category": "restaurant",
+      "address": "Dostyk Ave 48, Almaty",
+      "coordinates": {
+        "latitude": 43.2452,
+        "longitude": 76.9565
+      },
+      "estimated_cost": {
+        "amount": 80,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "Modern fine dining that reimagines traditional Kazakh cuisine in a luxury setting.",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Culture"
+      ],
+      "opening_hours": "12:00 - 00:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Perfect for the 'eating kazakh meals' activity with a luxury twist.",
+      "tips": [
+        "Try the modernized Beshbarmak",
+        "Reservations are highly recommended"
+      ],
+      "best_time_to_visit": "Dinner"
+    },
+    {
+      "id": 7,
+      "name": "Auyl Restaurant",
+      "category": "restaurant",
+      "address": "Gornaya St 586, (Near Medeu)",
+      "coordinates": {
+        "latitude": 43.1583,
+        "longitude": 77.0592
+      },
+      "estimated_cost": {
+        "amount": 120,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "An experimental project located in the mountains, focusing on neo-nomadic cuisine and stunning design.",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "13:00 - 23:00",
+      "recommended_duration": "2-3 hours",
+      "why_recommended": "Combines mountain atmosphere with high-end cultural dining.",
+      "tips": [
+        "The interior design is award-winning, perfect for content creators",
+        "Try the fermented camel milk (Shubat) based cocktails"
+      ],
+      "best_time_to_visit": "Golden hour/Sunset"
+    },
+    {
+      "id": 8,
+      "name": "Eight Lakes Park Resort",
+      "category": "activity",
+      "address": "Kamenka village, Almaty Region",
+      "coordinates": {
+        "latitude": 43.4333,
+        "longitude": 77.2667
+      },
+      "estimated_cost": {
+        "amount": 300,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "A luxury eco-resort with thermal pools and man-made beaches, ideal for relaxation.",
+      "best_for": [
+        "Relaxation & Beach Time",
+        "Wellness & Self-Improvement"
+      ],
+      "opening_hours": "24/7",
+      "recommended_duration": "Full day",
+      "why_recommended": "Best place near Almaty for 'Beach Time' and luxury relaxation.",
+      "tips": [
+        "Rent a private villa for the day",
+        "Visit the thermal springs"
+      ],
+      "best_time_to_visit": "Weekend day trip"
+    },
+    {
+      "id": 9,
+      "name": "Big Almaty Lake (BAO) via Helicopter",
+      "category": "nature",
+      "address": "Ile-Alatau National Park",
+      "coordinates": {
+        "latitude": 43.0506,
+        "longitude": 76.9849
+      },
+      "estimated_cost": {
+        "amount": 2500,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "A stunning turquoise lake. Given the budget, a private helicopter tour provides the ultimate luxury view.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Going to mountain"
+      ],
+      "opening_hours": "Daylight hours",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Fits high-budget luxury travel and provides world-class photography content.",
+      "tips": [
+        "Road access is often restricted; helicopter is the true luxury way to see it",
+        "April ice-melt creates unique colors"
+      ],
+      "best_time_to_visit": "Clear morning"
+    },
+    {
+      "id": 10,
+      "name": "Almaty Arena",
+      "category": "entertainment",
+      "address": "Momyshuly St, Almaty 050000",
+      "coordinates": {
+        "latitude": 43.2755,
+        "longitude": 76.8158
+      },
+      "estimated_cost": {
+        "amount": 100,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "One of the largest sports complexes in Kazakhstan, frequently hosting massive judo and combat sports events.",
+      "best_for": [
+        "Festivals & Events",
+        "Culture"
+      ],
+      "opening_hours": "Varies by event",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Matches interest in massive judo venues and sporting events.",
+      "tips": [
+        "Check the April event calendar for judo championships",
+        "VIP boxes are available for purchase"
+      ],
+      "best_time_to_visit": "During a scheduled event"
+    },
+    {
+      "id": 11,
+      "name": "Zenkov (Ascension) Cathedral",
+      "category": "cultural",
+      "address": "Gogol St 40, Almaty 050000",
+      "coordinates": {
+        "latitude": 43.2594,
+        "longitude": 76.9534
+      },
+      "estimated_cost": {
+        "amount": 0,
+        "currency": "USD",
+        "cost_type": "free"
+      },
+      "description": "One of the world's tallest wooden buildings, located in Panfilov Park. Extremely photogenic.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Culture"
+      ],
+      "opening_hours": "08:00 - 19:00",
+      "recommended_duration": "1 hour",
+      "why_recommended": "Essential cultural site for photography and history.",
+      "tips": [
+        "Respect the dress code inside (headscarves for women)",
+        "The surrounding park is great for people-watching"
+      ],
+      "best_time_to_visit": "Morning light"
+    },
+    {
+      "id": 12,
+      "name": "Esentai Mall",
+      "category": "shopping",
+      "address": "Al-Farabi Avenue 77/8, Almaty",
+      "coordinates": {
+        "latitude": 43.2178,
+        "longitude": 76.9288
+      },
+      "estimated_cost": {
+        "amount": 1000,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "The most luxurious shopping destination in Central Asia with brands like LV, Gucci, and Dior.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Luxury"
+      ],
+      "opening_hours": "10:00 - 22:00",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Matches the students' luxury travel style and interest in content creation.",
+      "tips": [
+        "Visit the rooftop terrace for a mountain view",
+        "The food court has high-end options like Paul"
+      ],
+      "best_time_to_visit": "Afternoon"
+    },
+    {
+      "id": 13,
+      "name": "Abay Restaurant",
+      "category": "restaurant",
+      "address": "Kok Tobe Hill, Almaty",
+      "coordinates": {
+        "latitude": 43.2323,
+        "longitude": 76.9765
+      },
+      "estimated_cost": {
+        "amount": 90,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "Fine dining restaurant on Kok-Tobe hill offering panoramic views of the city and Kazakh delicacies.",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "11:00 - 00:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Iconic location for a luxury Kazakh dinner with a view.",
+      "tips": [
+        "Take the cable car up from Dostyk Ave",
+        "Book a table by the window"
+      ],
+      "best_time_to_visit": "Evening"
+    },
+    {
+      "id": 14,
+      "name": "Medeu High-Mountain Skating Rink",
+      "category": "attraction",
+      "address": "Gornaya St 465, Almaty",
+      "coordinates": {
+        "latitude": 43.1575,
+        "longitude": 77.0592
+      },
+      "estimated_cost": {
+        "amount": 10,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "The highest ice rink in the world, surrounded by majestic peaks.",
+      "best_for": [
+        "Going to mountain",
+        "Culture"
+      ],
+      "opening_hours": "10:00 - 23:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "A legendary mountain landmark that is a must-see for any Kazakh traveler.",
+      "tips": [
+        "Climb the 'Stairway to Heaven' (842 steps) for a workout and view",
+        "Check if the ice season is still open in early April"
+      ],
+      "best_time_to_visit": "Weekend morning"
+    },
+    {
+      "id": 15,
+      "name": "Green Bazaar (Kok Bazar)",
+      "category": "shopping",
+      "address": "Zenkov St 53, Almaty",
+      "coordinates": {
+        "latitude": 43.2635,
+        "longitude": 76.9547
+      },
+      "estimated_cost": {
+        "amount": 50,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "The heart of Almaty’s food culture. You can find high-quality horse meat, kazy, and local fruits.",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Culture"
+      ],
+      "opening_hours": "09:00 - 18:00 (Closed Mondays)",
+      "recommended_duration": "1.5 hours",
+      "why_recommended": "Authentic 'eating kazakh meals' starts here with tasting local produce.",
+      "tips": [
+        "Go to the meat section for premium Kazy",
+        "Hire a private guide for the best tasting experience"
+      ],
+      "best_time_to_visit": "Morning"
+    },
+    {
+      "id": 16,
+      "name": "Six Senses Spa at Esentai",
+      "category": "wellness",
+      "address": "Al-Farabi Avenue 77/7 (Inside Ritz-Carlton)",
+      "coordinates": {
+        "latitude": 43.2185,
+        "longitude": 76.9276
+      },
+      "estimated_cost": {
+        "amount": 400,
+        "currency": "USD",
+        "cost_type": "per_person"
+      },
+      "description": "High-end spa offering specialized treatments, hammams, and a pool with mountain views.",
+      "best_for": [
+        "Wellness & Self-Improvement",
+        "Relaxation & Beach Time"
+      ],
+      "opening_hours": "09:00 - 22:00",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Matches the luxury interest and wellness focus.",
+      "tips": [
+        "Try the 'Signature Hammam' treatment",
+        "Use the relaxation pod after your massage"
+      ],
+      "best_time_to_visit": "Evening"
+    },
+    {
+      "id": 17,
+      "name": "Charyn Canyon (Private VIP Tour)",
+      "category": "nature",
+      "address": "Charyn National Park",
+      "coordinates": {
+        "latitude": 43.3507,
+        "longitude": 79.0779
+      },
+      "estimated_cost": {
+        "amount": 800,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "Known as the Grand Canyon’s little brother. Massive red rock formations perfect for content creation.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Culture"
+      ],
+      "opening_hours": "24/7",
+      "recommended_duration": "Full day",
+      "why_recommended": "Spectacular photography location. VIP transport (Land Cruiser) is a must for the 3-hour drive.",
+      "tips": [
+        "Bring a drone for incredible aerial shots",
+        "Wear comfortable luxury sneakers for walking"
+      ],
+      "best_time_to_visit": "Sunset"
+    },
+    {
+      "id": 18,
+      "name": "First President's Park",
+      "category": "nature",
+      "address": "Navoi St, Almaty",
+      "coordinates": {
+        "latitude": 43.1889,
+        "longitude": 76.8839
+      },
+      "estimated_cost": {
+        "amount": 0,
+        "currency": "USD",
+        "cost_type": "free"
+      },
+      "description": "Large park with a monumental entrance, perfect for walking and photography with mountains in the background.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Relaxation & Beach Time"
+      ],
+      "opening_hours": "08:00 - 22:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Very popular for 'aesthetic' content creation and peaceful relaxation.",
+      "tips": [
+        "The observation deck offers a great view of the colonnade",
+        "Visit in the late afternoon"
+      ],
+      "best_time_to_visit": "Afternoon"
+    },
+    {
+      "id": 19,
+      "name": "Navat (Authentic Kazakh Cuisine)",
+      "category": "restaurant",
+      "address": "Dostyk Ave 48, Almaty",
+      "coordinates": {
+        "latitude": 43.2452,
+        "longitude": 76.9565
+      },
+      "estimated_cost": {
+        "amount": 40,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "Richly decorated restaurant offering traditional Central Asian and Kazakh hospitality.",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Culture"
+      ],
+      "opening_hours": "11:00 - 01:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "High-quality traditional Kazakh meals (Beshbarmak, Kuyrdak) in a visually stunning environment.",
+      "tips": [
+        "The interior is very 'Instagrammable'",
+        "Great for larger groups or a feast"
+      ],
+      "best_time_to_visit": "Lunch"
+    },
+    {
+      "id": 20,
+      "name": "Kasteev State Museum of Arts",
+      "category": "cultural",
+      "address": "Satpayev St 30a, Almaty",
+      "coordinates": {
+        "latitude": 43.2354,
+        "longitude": 76.9189
+      },
+      "estimated_cost": {
+        "amount": 5,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "The largest art museum in Kazakhstan, featuring traditional Kazakh crafts, jewelry, and modern art.",
+      "best_for": [
+        "Culture",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "10:00 - 18:00 (Closed Mondays)",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Deepens cultural understanding and offers beautiful artistic backdrops.",
+      "tips": [
+        "Look for the traditional Kazakh felt carpets (Syrmak)",
+        "Check for temporary modern art exhibitions"
+      ],
+      "best_time_to_visit": "Midday"
+    }
+  ],
+  "recommendations_by_category": {
+    "must_see_attractions": [
+      {
+        "name": "Almaty Zoo (Barys)",
+        "estimated_cost": 5,
+        "priority": "high"
+      },
+      {
+        "name": "Shymbulak Mountain Resort",
+        "estimated_cost": 100,
+        "priority": "high"
+      },
+      {
+        "name": "Judo Academy",
+        "estimated_cost": 50,
+        "priority": "high"
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Qazaq Republic",
+        "cuisine_type": "Modern Kazakh",
+        "price_range": "luxury",
+        "estimated_cost": 80,
+        "specialty_dish": "Modernized Beshbarmak"
+      },
+      {
+        "name": "Auyl",
+        "cuisine_type": "Neo-Nomadic",
+        "price_range": "expensive",
+        "estimated_cost": 120,
+        "specialty_dish": "Smoked Horse Meat with Mountain Herbs"
+      }
+    ],
+    "activities": [
+      {
+        "name": "Helicopter Tour of Big Almaty Lake",
+        "activity_type": "Adventure",
+        "estimated_cost": 2500,
+        "booking_required": true
+      },
+      {
+        "name": "Private VVIP Spa at Arasan",
+        "activity_type": "Wellness",
+        "estimated_cost": 300,
+        "booking_required": true
+      }
+    ],
+    "hidden_gems": [
+      {
+        "name": "S.N.e.G Hotel & Restaurant",
+        "why_special": "Located on the mountain with only 6 rooms, offering absolute mountain serenity.",
+        "estimated_cost": 200
+      }
+    ]
+  },
+  "practical_information": {
+    "getting_around": "With a luxury budget, use 'Yandex Go' (Business or Premier class) or hire a private driver for the entire duration. For mountains, use 4x4 premium SUVs.",
+    "local_currency": "Kazakhstani Tenge (KZT). 1 USD is approx 450 KZT.",
+    "language_tips": [
+      "Salemetsiz be (Hello)",
+      "Rahmet (Thank you)",
+      "As bolsyn (Bon appetit)"
+    ],
+    "cultural_notes": [
+      "Respect elders during meals",
+      "Remove shoes when entering a local home or some traditional zones",
+      "Kazakh hospitality is generous—expect large portions."
+    ]
+  }
+}

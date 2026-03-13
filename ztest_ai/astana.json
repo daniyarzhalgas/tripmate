@@ -1,0 +1,664 @@
+{
+  "destination_overview": {
+    "city": "Astana",
+    "country": "Kazakhstan",
+    "best_time_to_visit": "Early April is the transition from winter to spring. While the snow begins to melt, the 'Astana Wind' is still prevalent. It is a great time for indoor luxury experiences, KHL hockey playoffs, and cultural events.",
+    "estimated_daily_budget": {
+      "min": 1000,
+      "max": 5000,
+      "currency": "USD"
+    }
+  },
+  "recommended_places": [
+    {
+      "id": 1,
+      "name": "Barys Arena",
+      "image_url": "https://hcbarys.kz/storage/arenas/August2023/1.jpg",
+      "category": "entertainment",
+      "address": "Turan Ave 57, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1092,
+        "longitude": 71.3988
+      },
+      "estimated_cost": {
+        "amount": 150,
+        "currency": "USD",
+        "cost_type": "per_person"
+      },
+      "description": "The home of the Barys Astana KHL hockey team. A world-class multi-purpose indoor arena.",
+      "best_for": [
+        "Sports Fans",
+        "Photography"
+      ],
+      "opening_hours": "Varies by match schedule",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Directly matches the user's request to 'see barys'. April is typically KHL playoff season.",
+      "tips": [
+        "Book VIP lounge tickets for a luxury experience",
+        "Visit the official fan shop for authentic jerseys"
+      ],
+      "best_time_to_visit": "Game nights (check KHL schedule)"
+    },
+    {
+      "id": 2,
+      "name": "Zhaksylyk Ushkempirov Martial Arts Palace",
+      "image_url": "https://visitnursultan.kz/storage/app/uploads/public/5f3/276/345/5f32763456860161491746.jpg",
+      "category": "attraction",
+      "address": "Kabanbay Batyr Ave 43, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1051,
+        "longitude": 71.4082
+      },
+      "estimated_cost": {
+        "amount": 20,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "The premier venue for martial arts in Kazakhstan, including elite judo training facilities.",
+      "best_for": [
+        "Judo Enthusiasts",
+        "Wellness & Self-Improvement"
+      ],
+      "opening_hours": "09:00 - 21:00",
+      "recommended_duration": "1.5 hours",
+      "why_recommended": "Matches the request to see the 'biggest judo training halls'. It is the hub for combat sports in the capital.",
+      "tips": [
+        "Check for national judo team training times",
+        "The architecture is stunning for photography"
+      ],
+      "best_time_to_visit": "Weekday mornings"
+    },
+    {
+      "id": 3,
+      "name": "Qazaq Gourmet",
+      "image_url": "https://qazaqgourmet.kz/wp-content/uploads/2021/05/logo.png",
+      "category": "restaurant",
+      "address": "Mangilik El. Ave 29, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1182,
+        "longitude": 71.4285
+      },
+      "estimated_cost": {
+        "amount": 100,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "High-end restaurant specializing in refined, modern interpretations of traditional Kazakh cuisine.",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Luxury"
+      ],
+      "opening_hours": "12:00 - 00:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "The best place to eat Kazakh meals in a luxury setting, perfect for students of SDU who appreciate their culture.",
+      "tips": [
+        "Try the Beshbarmak with horse meat",
+        "The interior is museum-quality, great for content creation"
+      ],
+      "best_time_to_visit": "Dinner"
+    },
+    {
+      "id": 4,
+      "name": "Burabay National Park (Mountains)",
+      "image_url": "https://kazakhstan.travel/storage/app/media/Burabay_nature.jpg",
+      "category": "nature",
+      "address": "Burabay, Akmola Region (2.5 hours from Astana)",
+      "coordinates": {
+        "latitude": 53.0853,
+        "longitude": 70.3013
+      },
+      "estimated_cost": {
+        "amount": 800,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "Known as the 'Pearl of Kazakhstan', this park features mountains, pine forests, and lakes.",
+      "best_for": [
+        "Going to mountain",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "24/7",
+      "recommended_duration": "1-2 days",
+      "why_recommended": "The nearest 'mountain' experience to Astana. A luxury trip requires a private transfer here.",
+      "tips": [
+        "Hire a private guide for the 'Bolektau' hike",
+        "Stay at Rixos Borovoe for ultimate luxury"
+      ],
+      "best_time_to_visit": "Morning for clear mountain views"
+    },
+    {
+      "id": 5,
+      "name": "Sky Beach Club (Khan Shatyr)",
+      "image_url": "https://khanshatyr.com/wp-content/uploads/2014/11/sky-beach-01.jpg",
+      "category": "activity",
+      "address": "Turan Ave 37, Khan Shatyr Entertainment Center",
+      "coordinates": {
+        "latitude": 51.1325,
+        "longitude": 71.4038
+      },
+      "estimated_cost": {
+        "amount": 50,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "An indoor tropical beach with sand from the Maldives and a constant 35°C temperature.",
+      "best_for": [
+        "Relaxation & Beach Time",
+        "Photography"
+      ],
+      "opening_hours": "10:00 - 21:00",
+      "recommended_duration": "Half day",
+      "why_recommended": "Provides 'Beach Time' in Astana's April climate inside an architectural marvel designed by Norman Foster.",
+      "tips": [
+        "Rent a private cabana",
+        "Go on a weekday to avoid crowds"
+      ],
+      "best_time_to_visit": "Afternoon"
+    },
+    {
+      "id": 6,
+      "name": "The Ritz-Carlton Spa, Astana",
+      "image_url": "https://www.ritzcarlton.com/content/dam/the-ritz-carlton/hotels/europe/kazakhstan/astana/spa/astana-spa-pool.jpg",
+      "category": "wellness",
+      "address": "Dostyk St 16, Talan Towers",
+      "coordinates": {
+        "latitude": 51.1278,
+        "longitude": 71.4245
+      },
+      "estimated_cost": {
+        "amount": 250,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "Ultimate luxury spa offering panoramic city views and high-end wellness treatments.",
+      "best_for": [
+        "Wellness & Self-Improvement",
+        "Relaxation"
+      ],
+      "opening_hours": "09:00 - 22:00",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Matches the luxury travel style and interest in wellness perfectly.",
+      "tips": [
+        "Try the signature salt scrub",
+        "The relaxation room overlooks the Baiterek Tower"
+      ],
+      "best_time_to_visit": "Late afternoon"
+    },
+    {
+      "id": 7,
+      "name": "Baiterek Tower",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Baiterek_Tower_Astana.jpg",
+      "category": "cultural",
+      "address": "Nurzhol Blvd, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1283,
+        "longitude": 71.4305
+      },
+      "estimated_cost": {
+        "amount": 5,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "An iconic monument symbolizing the golden egg of the mythical Samruk bird.",
+      "best_for": [
+        "Cultural",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "10:00 - 21:00",
+      "recommended_duration": "1 hour",
+      "why_recommended": "Must-see attraction for any first-time or returning visitor to the capital.",
+      "tips": [
+        "Place your hand in the president's golden handprint",
+        "Go at sunset for the best lighting"
+      ],
+      "best_time_to_visit": "Sunset"
+    },
+    {
+      "id": 8,
+      "name": "Astana Opera",
+      "image_url": "https://astanaopera.kz/images/logo-white.png",
+      "category": "cultural",
+      "address": "Dinmukhamed Qonayev St 1, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1356,
+        "longitude": 71.4101
+      },
+      "estimated_cost": {
+        "amount": 80,
+        "currency": "USD",
+        "cost_type": "per_person"
+      },
+      "description": "One of the most beautiful opera houses in the world with neoclassical architecture.",
+      "best_for": [
+        "Cultural",
+        "Luxury"
+      ],
+      "opening_hours": "Varies by performance",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Represents the pinnacle of culture and luxury in the city.",
+      "tips": [
+        "Dress formally to match the local elite",
+        "Book a private box for the best experience"
+      ],
+      "best_time_to_visit": "Evening performance"
+    },
+    {
+      "id": 9,
+      "name": "Tary Coffee & Traditional Snacks",
+      "image_url": "https://tary.kz/images/logo.png",
+      "category": "restaurant",
+      "address": "Saryarka Ave 3, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1642,
+        "longitude": 71.4155
+      },
+      "estimated_cost": {
+        "amount": 25,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "A stylish cafe focused on forgotten Kazakh national snacks and grains (Tary/Zhent).",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Photography"
+      ],
+      "opening_hours": "08:00 - 23:00",
+      "recommended_duration": "1 hour",
+      "why_recommended": "Offers a cultural yet modern culinary experience that is highly 'Instagrammable'.",
+      "tips": [
+        "Try the coffee with zhent",
+        "Buy packaged traditional snacks as souvenirs"
+      ],
+      "best_time_to_visit": "Breakfast or Tea time"
+    },
+    {
+      "id": 10,
+      "name": "Nur Alem Future Energy Museum (Sphere)",
+      "image_url": "https://qazexpocongress.kz/storage/app/media/nuralem.jpg",
+      "category": "attraction",
+      "address": "Mangilik El Ave. 55, Astana 010000",
+      "coordinates": {
+        "latitude": 51.0883,
+        "longitude": 71.4145
+      },
+      "estimated_cost": {
+        "amount": 10,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "The largest spherical building in the world, legacy of EXPO-2017.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Wellness & Self-Improvement"
+      ],
+      "opening_hours": "10:00 - 20:00",
+      "recommended_duration": "2-3 hours",
+      "why_recommended": "Unique architecture and educational exhibits on future wellness and energy.",
+      "tips": [
+        "The glass walkway on the top floor is a must-do",
+        "The surrounding park is great for evening walks"
+      ],
+      "best_time_to_visit": "Late afternoon"
+    },
+    {
+      "id": 11,
+      "name": "National Museum of the Republic of Kazakhstan",
+      "image_url": "https://nationalmuseum.kz/images/logo.png",
+      "category": "cultural",
+      "address": "Tauelsizdik Ave 54, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1215,
+        "longitude": 71.4721
+      },
+      "estimated_cost": {
+        "amount": 15,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "The largest museum in Central Asia, housing the 'Golden Man'.",
+      "best_for": [
+        "Cultural",
+        "Photography"
+      ],
+      "opening_hours": "10:00 - 18:00 (Closed Mondays)",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Essential for understanding the nomadic history and culture of Kazakhstan.",
+      "tips": [
+        "Don't miss the Hall of Gold",
+        "The flying eagle light show in the lobby happens every hour"
+      ],
+      "best_time_to_visit": "Morning"
+    },
+    {
+      "id": 12,
+      "name": "Selfie Restaurant Astana",
+      "image_url": "https://selfie-astana.kz/images/gallery/1.jpg",
+      "category": "restaurant",
+      "address": "Dostyk St 16, Talan Towers, 18th Floor",
+      "coordinates": {
+        "latitude": 51.1278,
+        "longitude": 71.4245
+      },
+      "estimated_cost": {
+        "amount": 120,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "A high-end restaurant from the White Rabbit Family, offering incredible views of the city.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Luxury"
+      ],
+      "opening_hours": "12:00 - 01:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Combines luxury dining with the best photographic angles of Astana's skyline.",
+      "tips": [
+        "Request a window seat in advance",
+        "The cocktail menu is inventive and highly visual"
+      ],
+      "best_time_to_visit": "Night"
+    },
+    {
+      "id": 13,
+      "name": "Hazrat Sultan Mosque",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Hazrat_Sultan_Mosque_-_Astana.jpg",
+      "category": "cultural",
+      "address": "Koshkarbayev Ave 95, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1256,
+        "longitude": 71.4715
+      },
+      "estimated_cost": {
+        "amount": 0,
+        "currency": "USD",
+        "cost_type": "free"
+      },
+      "description": "The second largest mosque in Central Asia, an architectural masterpiece.",
+      "best_for": [
+        "Cultural",
+        "Photography"
+      ],
+      "opening_hours": "24/7",
+      "recommended_duration": "1 hour",
+      "why_recommended": "A stunning cultural site that offers a peaceful atmosphere for relaxation/reflection.",
+      "tips": [
+        "Dress modestly (robes provided at entrance)",
+        "Visit at night when it is beautifully illuminated"
+      ],
+      "best_time_to_visit": "Evening"
+    },
+    {
+      "id": 14,
+      "name": "Ailand (Duman) Aquarium",
+      "image_url": "https://ailand.kz/images/aqua.jpg",
+      "category": "attraction",
+      "address": "Korgalzhyn Hwy 2, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1444,
+        "longitude": 71.4144
+      },
+      "estimated_cost": {
+        "amount": 20,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "The only aquarium in the world located over 3000km from the ocean.",
+      "best_for": [
+        "Relaxation",
+        "Photography"
+      ],
+      "opening_hours": "10:30 - 20:00",
+      "recommended_duration": "1.5 hours",
+      "why_recommended": "Unique 'ocean' experience in the heart of the steppe.",
+      "tips": [
+        "Walk through the underwater tunnel",
+        "Check the schedule for shark feeding"
+      ],
+      "best_time_to_visit": "Weekday afternoon"
+    },
+    {
+      "id": 15,
+      "name": "Satti Restaurant",
+      "image_url": "https://satti.kz/images/main.jpg",
+      "category": "restaurant",
+      "address": "Kabanbay Batyr Ave 32, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1298,
+        "longitude": 71.4255
+      },
+      "estimated_cost": {
+        "amount": 70,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "Traditional Kazakh food served in a grand, regal atmosphere.",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Cultural"
+      ],
+      "opening_hours": "12:00 - 00:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Authentic Kazakh dining experience near the Baiterek tower.",
+      "tips": [
+        "Try the 'Kuyrdak'",
+        "Perfect for group dinners with traditional music"
+      ],
+      "best_time_to_visit": "Dinner"
+    },
+    {
+      "id": 16,
+      "name": "Central Park (Stolichny Park)",
+      "image_url": "https://visitnursultan.kz/storage/app/uploads/public/5f3/276/345/5f32763456860161491746.jpg",
+      "category": "nature",
+      "address": "Turan Ave, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1511,
+        "longitude": 71.4152
+      },
+      "estimated_cost": {
+        "amount": 0,
+        "currency": "USD",
+        "cost_type": "free"
+      },
+      "description": "The main city park, great for leisure and seeing the Ishim River.",
+      "best_for": [
+        "Relaxation",
+        "Photography"
+      ],
+      "opening_hours": "24/7",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Ideal for a slow luxury pace and fresh air between museum visits.",
+      "tips": [
+        "Rent a bike or electric scooter",
+        "The embankment is perfect for sunset photos"
+      ],
+      "best_time_to_visit": "Evening"
+    },
+    {
+      "id": 17,
+      "name": "Iridium Spa at St. Regis",
+      "image_url": "https://www.marriott.com/en-us/hotels/tsexr-the-st-regis-astana/overview/",
+      "category": "wellness",
+      "address": "Kabanbay Batyr Ave 1, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1492,
+        "longitude": 71.4191
+      },
+      "estimated_cost": {
+        "amount": 200,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "Exclusive spa featuring a luxury pool, hammam, and bespoke treatments.",
+      "best_for": [
+        "Wellness & Self-Improvement",
+        "Relaxation"
+      ],
+      "opening_hours": "08:00 - 22:00",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Fits the luxury lifestyle of the travelers and provides world-class relaxation.",
+      "tips": [
+        "Book the 'Iridium Journey' treatment",
+        "Use the heated indoor pool"
+      ],
+      "best_time_to_visit": "Morning"
+    },
+    {
+      "id": 18,
+      "name": "Keruen City Shopping Mall",
+      "image_url": "https://keruencity.kz/images/logo.png",
+      "category": "shopping",
+      "address": "Korgalzhyn Hwy 1, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1465,
+        "longitude": 71.4132
+      },
+      "estimated_cost": {
+        "amount": 500,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "One of the premier luxury shopping destinations in the city.",
+      "best_for": [
+        "Luxury",
+        "Photography"
+      ],
+      "opening_hours": "10:00 - 22:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Ideal for purchasing luxury brands and seeing modern Kazakh retail culture.",
+      "tips": [
+        "The food court has high-end options",
+        "Excellent Wi-Fi for posting content"
+      ],
+      "best_time_to_visit": "Afternoon"
+    },
+    {
+      "id": 19,
+      "name": "Presidential Center of Culture",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Presidential_Cultural_Center.jpg",
+      "category": "cultural",
+      "address": "Bokeikhan St 1, Astana 010000",
+      "coordinates": {
+        "latitude": 51.1555,
+        "longitude": 71.4255
+      },
+      "estimated_cost": {
+        "amount": 5,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "A yurt-shaped building containing historical artifacts and cultural exhibits.",
+      "best_for": [
+        "Cultural",
+        "Photography"
+      ],
+      "opening_hours": "10:00 - 18:00",
+      "recommended_duration": "1.5 hours",
+      "why_recommended": "Unique architecture and deep cultural insights for the teacher and student travelers.",
+      "tips": [
+        "Great for architecture photography from the outside",
+        "Often hosts temporary art exhibitions"
+      ],
+      "best_time_to_visit": "Morning"
+    },
+    {
+      "id": 20,
+      "name": "Mokki Restaurant",
+      "image_url": "https://www.ritzcarlton.com/en/hotels/tseast-the-ritz-carlton-astana/dining/mokki/",
+      "category": "restaurant",
+      "address": "Dostyk St 16, Talan Towers, 3rd Floor",
+      "coordinates": {
+        "latitude": 51.1278,
+        "longitude": 71.4245
+      },
+      "estimated_cost": {
+        "amount": 60,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "A modern 'market-style' luxury dining experience with various live cooking stations.",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Luxury"
+      ],
+      "opening_hours": "06:30 - 23:00",
+      "recommended_duration": "1.5 hours",
+      "why_recommended": "High-quality international and local food in a chic setting.",
+      "tips": [
+        "The Sunday Brunch is the best in the city",
+        "Great for business-casual meetings"
+      ],
+      "best_time_to_visit": "Breakfast or Lunch"
+    }
+  ],
+  "recommendations_by_category": {
+    "must_see_attractions": [
+      {
+        "name": "Barys Arena",
+        "estimated_cost": 150,
+        "priority": "high"
+      },
+      {
+        "name": "Zhaksylyk Ushkempirov Martial Arts Palace",
+        "estimated_cost": 20,
+        "priority": "high"
+      },
+      {
+        "name": "Baiterek Tower",
+        "estimated_cost": 5,
+        "priority": "high"
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Qazaq Gourmet",
+        "cuisine_type": "Modern Kazakh",
+        "price_range": "luxury",
+        "estimated_cost": 100,
+        "specialty_dish": "Smoked Horse Meat Platter"
+      },
+      {
+        "name": "Selfie",
+        "cuisine_type": "International/Russian",
+        "price_range": "luxury",
+        "estimated_cost": 120,
+        "specialty_dish": "King Crab with Truffle"
+      }
+    ],
+    "activities": [
+      {
+        "name": "Private Trip to Burabay Mountains",
+        "activity_type": "Nature/Excursion",
+        "estimated_cost": 800,
+        "booking_required": true
+      },
+      {
+        "name": "Luxury Spa Day at Ritz-Carlton",
+        "activity_type": "Wellness",
+        "estimated_cost": 250,
+        "booking_required": true
+      }
+    ],
+    "hidden_gems": [
+      {
+        "name": "Tary Cafe",
+        "why_special": "Modernizes traditional nomadic grains into trendy coffee and snacks",
+        "estimated_cost": 20
+      }
+    ]
+  },
+  "practical_information": {
+    "getting_around": "With a luxury budget, hire a private Chauffeur/Car Service (e.g., Executive Class Mercedes). Taxis via the Yandex Go app (Comfort+ or Business class) are also very reliable.",
+    "local_currency": "Kazakhstani Tenge (KZT). Credit cards are accepted everywhere in Astana.",
+    "language_tips": [
+      "Salem (Hello in Kazakh)",
+      "Rahmet (Thank you in Kazakh)",
+      "How much does this cost? (Bul qansha turady?)"
+    ],
+    "cultural_notes": [
+      "Respect the elders; it's a core part of Kazakh culture.",
+      "Take off your shoes when entering a home or certain traditional areas.",
+      "Astana is very safe, but dress warmly as April weather is unpredictable."
+    ]
+  }
+}

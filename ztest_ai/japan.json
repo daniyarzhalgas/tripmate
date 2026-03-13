@@ -1,0 +1,660 @@
+{
+  "destination_overview": {
+    "city": "Tokyo",
+    "country": "Japan",
+    "best_time_to_visit": "Your dates (April 1–10) are the absolute peak for the 'Somei Yoshino' Sakura bloom in Tokyo. This is the most prestigious and beautiful time to visit, coinciding with major spring festivals.",
+    "estimated_daily_budget": {
+      "min": 1000,
+      "max": 5000,
+      "currency": "USD"
+    }
+  },
+  "recommended_places": [
+    {
+      "id": 1,
+      "name": "Kodokan Judo Institute",
+      "category": "cultural",
+      "address": "1-16-30 Kasuga, Bunkyo City, Tokyo 112-8567",
+      "coordinates": {
+        "latitude": 35.7078,
+        "longitude": 139.7538
+      },
+      "estimated_cost": {
+        "amount": 10,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "The headquarters of the worldwide Judo community, founded by Kano Jigoro. It features 8 massive dojos, including the main hall with 420 mats.",
+      "best_for": [
+        "Judo Training Halls",
+        "Cultural"
+      ],
+      "opening_hours": "09:00 - 20:00 (Check for practice times)",
+      "recommended_duration": "2 hours",
+      "why_recommended": "This is the 'Mecca' of Judo. As you requested the biggest training halls, this is the most significant site globally.",
+      "tips": [
+        "Visitors can watch practice from the 8th-floor spectator gallery.",
+        "Check their calendar for high-ranking dan grading events."
+      ],
+      "best_time_to_visit": "Late afternoon to see active training."
+    },
+    {
+      "id": 2,
+      "name": "Nippon Budokan",
+      "category": "attraction",
+      "address": "2-3 Kitanomarukoen, Chiyoda City, Tokyo 102-8321",
+      "coordinates": {
+        "latitude": 35.6933,
+        "longitude": 139.7497
+      },
+      "estimated_cost": {
+        "amount": 0,
+        "currency": "USD",
+        "cost_type": "free"
+      },
+      "description": "An indoor arena originally built for the 1964 Olympics judo competition. It is the spiritual home of Japanese martial arts.",
+      "best_for": [
+        "Judo Training Halls",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "Varies by event",
+      "recommended_duration": "1 hour",
+      "why_recommended": "It is an architectural icon and the primary venue for major martial arts championships.",
+      "tips": [
+        "It's located inside Kitanomaru Park, which is also a top Sakura spot.",
+        "The octagonal roof is designed to resemble Mt. Fuji."
+      ],
+      "best_time_to_visit": "Morning"
+    },
+    {
+      "id": 3,
+      "name": "Chidorigafuchi Moat",
+      "category": "nature",
+      "address": "1-2 Kojimachi, Chiyoda City, Tokyo 102-0082",
+      "coordinates": {
+        "latitude": 35.6905,
+        "longitude": 139.7508
+      },
+      "estimated_cost": {
+        "amount": 15,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "One of Tokyo's most famous cherry blossom spots where hundreds of trees line the Imperial Palace moats.",
+      "best_for": [
+        "Sakura",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "24/7",
+      "recommended_duration": "2 hours",
+      "why_recommended": "The most picturesque Sakura spot in Tokyo. Renting a boat here is a quintessential luxury experience during your dates.",
+      "tips": [
+        "Expect long lines for boats; arrive 30 mins before opening.",
+        "The night illumination is spectacular."
+      ],
+      "best_time_to_visit": "Sunset for blue-hour photography."
+    },
+    {
+      "id": 4,
+      "name": "Mount Takao (Takao-san)",
+      "category": "nature",
+      "address": "Takaomachi, Hachioji, Tokyo 193-0844",
+      "coordinates": {
+        "latitude": 35.6251,
+        "longitude": 139.2437
+      },
+      "estimated_cost": {
+        "amount": 10,
+        "currency": "USD",
+        "cost_type": "per_person"
+      },
+      "description": "A sacred mountain offering beautiful hiking trails, a temple, and views of Mt. Fuji on clear days.",
+      "best_for": [
+        "Going to mountain",
+        "Wellness & Self-Improvement"
+      ],
+      "opening_hours": "24/7",
+      "recommended_duration": "half day",
+      "why_recommended": "Matches your request for a mountain activity near Tokyo. It offers a blend of nature and Shinto culture.",
+      "tips": [
+        "Take the cable car to the halfway point to save time.",
+        "Eat 'Soba' noodles at the base; it's a local specialty."
+      ],
+      "best_time_to_visit": "Early morning to avoid crowds."
+    },
+    {
+      "id": 5,
+      "name": "Shinjuku Gyoen National Garden",
+      "category": "nature",
+      "address": "11 Naitomachi, Shinjuku City, Tokyo 160-0014",
+      "coordinates": {
+        "latitude": 35.6852,
+        "longitude": 139.7101
+      },
+      "estimated_cost": {
+        "amount": 5,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "A massive park featuring Japanese, English, and French gardens with over 1,000 cherry trees.",
+      "best_for": [
+        "Sakura",
+        "Relaxation & Beach Time"
+      ],
+      "opening_hours": "09:00 - 16:30",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Perfect for a luxury picnic under the Sakura. It's spacious and offers a more relaxed pace than other spots.",
+      "tips": [
+        "Alcohol is prohibited, keeping the vibe peaceful and sophisticated.",
+        "Advance reservations are often required during Sakura peak."
+      ],
+      "best_time_to_visit": "Morning"
+    },
+    {
+      "id": 6,
+      "name": "Narizawa",
+      "category": "restaurant",
+      "address": "2-6-15 Minamiaoyama, Minato City, Tokyo 107-0062",
+      "coordinates": {
+        "latitude": 35.6715,
+        "longitude": 139.7239
+      },
+      "estimated_cost": {
+        "amount": 350,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "A world-renowned 2-Michelin-starred restaurant focusing on 'Satoyama' cuisine (nature-to-plate).",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Luxury"
+      ],
+      "opening_hours": "12:00 - 21:00",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Fits your luxury travel style and interest in top-tier Japanese meals. It's a culinary journey through Japan's forests.",
+      "tips": [
+        "Book at least 2 months in advance.",
+        "The 'Bread of the Forest' dish is a must-see for photography."
+      ],
+      "best_time_to_visit": "Dinner"
+    },
+    {
+      "id": 7,
+      "name": "Aman Spa Tokyo",
+      "category": "wellness",
+      "address": "1-5-6 Otemachi, Chiyoda City, Tokyo 100-0004",
+      "coordinates": {
+        "latitude": 35.6847,
+        "longitude": 139.765
+      },
+      "estimated_cost": {
+        "amount": 400,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "The ultimate luxury wellness sanctuary in Tokyo, featuring a 30-meter pool overlooking the city.",
+      "best_for": [
+        "Relaxation & Beach Time",
+        "Wellness & Self-Improvement"
+      ],
+      "opening_hours": "10:00 - 22:00",
+      "recommended_duration": "3-4 hours",
+      "why_recommended": "High-end relaxation for User 1. It provides a 'beach-like' serenity with its massive pool and panoramic views.",
+      "tips": [
+        "Try the 'Misogi' purification ritual.",
+        "Non-hotel guests can book spa treatments to access the facilities."
+      ],
+      "best_time_to_visit": "Late afternoon"
+    },
+    {
+      "id": 8,
+      "name": "Meguro River Cherry Blossoms",
+      "category": "nature",
+      "address": "Nakameguro, Meguro City, Tokyo 153-0051",
+      "coordinates": {
+        "latitude": 35.6457,
+        "longitude": 139.7024
+      },
+      "estimated_cost": {
+        "amount": 0,
+        "currency": "USD",
+        "cost_type": "free"
+      },
+      "description": "Nearly 800 cherry trees line the river, forming a pink tunnel over the water.",
+      "best_for": [
+        "Sakura",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "24/7",
+      "recommended_duration": "2 hours",
+      "why_recommended": "The most 'Instagrammable' spot for User 2. The pink lanterns and champagne stalls create a festive luxury atmosphere.",
+      "tips": [
+        "Visit the Starbucks Reserve Roastery nearby for a luxury coffee experience with a view.",
+        "Go at night to see the lanterns lit up."
+      ],
+      "best_time_to_visit": "Evening"
+    },
+    {
+      "id": 9,
+      "name": "Sukiyabashi Jiro Roppongi Hills",
+      "category": "restaurant",
+      "address": "6-10-1 Roppongi, Minato City, Tokyo 106-0032",
+      "coordinates": {
+        "latitude": 35.6595,
+        "longitude": 139.7289
+      },
+      "estimated_cost": {
+        "amount": 300,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "Managed by the son of Jiro Ono, this sushi destination offers world-class Edomae sushi in a more accessible setting than the Ginza original.",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Luxury"
+      ],
+      "opening_hours": "11:30 - 14:00, 17:30 - 21:00",
+      "recommended_duration": "1.5 hours",
+      "why_recommended": "Essential Japanese meal experience for high-budget travelers.",
+      "tips": [
+        "Reservations are mandatory and can be made through luxury hotel concierges.",
+        "Dress code is smart casual."
+      ],
+      "best_time_to_visit": "Lunch"
+    },
+    {
+      "id": 10,
+      "name": "TeamLab Borderless (Azabudai Hills)",
+      "category": "entertainment",
+      "address": "1-2-4 Azabudai, Minato City, Tokyo 106-0041",
+      "coordinates": {
+        "latitude": 35.6628,
+        "longitude": 139.7394
+      },
+      "estimated_cost": {
+        "amount": 35,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "A world of artworks without boundaries, a museum where art moves and interacts with other works.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Festivals & Events"
+      ],
+      "opening_hours": "10:00 - 21:00",
+      "recommended_duration": "3 hours",
+      "why_recommended": "Perfect for high-quality content creation and a modern cultural experience.",
+      "tips": [
+        "Wear white clothing for the best photos as the light projects onto you.",
+        "Buy tickets weeks in advance."
+      ],
+      "best_time_to_visit": "Weekday morning"
+    },
+    {
+      "id": 11,
+      "name": "Hoshinoya Tokyo Onsen",
+      "category": "wellness",
+      "address": "1-9-1 Otemachi, Chiyoda City, Tokyo 100-0004",
+      "coordinates": {
+        "latitude": 35.6865,
+        "longitude": 139.7658
+      },
+      "estimated_cost": {
+        "amount": 200,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "A luxury Ryokan in the heart of the city with a rooftop open-air hot spring bath fed by waters from 1,500m below ground.",
+      "best_for": [
+        "Wellness & Self-Improvement",
+        "Relaxation & Beach Time"
+      ],
+      "opening_hours": "24/7 (for guests)",
+      "recommended_duration": "2 hours",
+      "why_recommended": "Offers traditional Japanese wellness in a hyper-luxury setting.",
+      "tips": [
+        "The bath is open to the sky, allowing you to watch the clouds while soaking.",
+        "Consider staying here for the full experience."
+      ],
+      "best_time_to_visit": "Late night"
+    },
+    {
+      "id": 12,
+      "name": "Shibuya Sky",
+      "category": "attraction",
+      "address": "2-24-12 Shibuya, Shibuya City, Tokyo 150-0002",
+      "coordinates": {
+        "latitude": 35.6585,
+        "longitude": 139.7013
+      },
+      "estimated_cost": {
+        "amount": 20,
+        "currency": "USD",
+        "cost_type": "entrance_fee"
+      },
+      "description": "A 229m tall open-air observation deck providing 360-degree views of Tokyo, including the Shibuya Crossing.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Luxury"
+      ],
+      "opening_hours": "10:00 - 22:30",
+      "recommended_duration": "1.5 hours",
+      "why_recommended": "The most popular photography spot in Tokyo currently.",
+      "tips": [
+        "Book the 'Paradise Lounge' for a luxury drink with a view.",
+        "The 'Sky Edge' corner is the best for photos."
+      ],
+      "best_time_to_visit": "45 minutes before sunset."
+    },
+    {
+      "id": 13,
+      "name": "Zaimokuza Beach (Kamakura)",
+      "category": "nature",
+      "address": "Zaimokuza, Kamakura, Kanagawa 248-0013",
+      "coordinates": {
+        "latitude": 35.3055,
+        "longitude": 139.5528
+      },
+      "estimated_cost": {
+        "amount": 50,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "A long sandy beach near the historic city of Kamakura, perfect for a luxury day trip from Tokyo.",
+      "best_for": [
+        "Relaxation & Beach Time",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "24/7",
+      "recommended_duration": "half day",
+      "why_recommended": "Since User 1 wants 'Beach Time', this is the most sophisticated coastal area within reach of Tokyo.",
+      "tips": [
+        "Visit 'Zaimokuza Terrace' for high-end dining by the sea.",
+        "Combine with a visit to the Great Buddha of Kamakura."
+      ],
+      "best_time_to_visit": "Afternoon"
+    },
+    {
+      "id": 14,
+      "name": "Ginza Kojyu",
+      "category": "restaurant",
+      "address": "5-4-8 Ginza, Chuo City, Tokyo 104-0061",
+      "coordinates": {
+        "latitude": 35.6713,
+        "longitude": 139.7635
+      },
+      "estimated_cost": {
+        "amount": 450,
+        "currency": "USD",
+        "cost_type": "average_meal"
+      },
+      "description": "A 3-Michelin-starred Kaiseki restaurant that serves seasonal masterpieces.",
+      "best_for": [
+        "Food & Culinary Exploration",
+        "Cultural"
+      ],
+      "opening_hours": "12:00 - 13:00, 18:00 - 21:30",
+      "recommended_duration": "3 hours",
+      "why_recommended": "The pinnacle of Japanese 'Kaiseki' dining, perfect for your luxury budget.",
+      "tips": [
+        "Ask to sit at the counter to watch the chef work.",
+        "Very strict punctuality is expected."
+      ],
+      "best_time_to_visit": "Dinner"
+    },
+    {
+      "id": 15,
+      "name": "Senso-ji Temple",
+      "category": "cultural",
+      "address": "2-3-1 Asakusa, Taito City, Tokyo 111-0032",
+      "coordinates": {
+        "latitude": 35.7148,
+        "longitude": 139.7967
+      },
+      "estimated_cost": {
+        "amount": 0,
+        "currency": "USD",
+        "cost_type": "free"
+      },
+      "description": "Tokyo's oldest temple, famous for its massive red lantern and vibrant Nakamise shopping street.",
+      "best_for": [
+        "Cultural",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "06:00 - 17:00 (Grounds open 24/7)",
+      "recommended_duration": "2 hours",
+      "why_recommended": "The center of Japanese tradition in Tokyo. Great for cultural immersion.",
+      "tips": [
+        "Rent a high-end Kimono for a photo shoot here.",
+        "Explore the side streets for high-quality Japanese knives and crafts."
+      ],
+      "best_time_to_visit": "Early morning (07:00) to avoid huge crowds."
+    },
+    {
+      "id": 16,
+      "name": "Hakone Private Onsen (Gora Kadan)",
+      "category": "wellness",
+      "address": "1300 Gora, Hakone, Ashigarashimo District, Kanagawa 250-0408",
+      "coordinates": {
+        "latitude": 35.2475,
+        "longitude": 139.0486
+      },
+      "estimated_cost": {
+        "amount": 800,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "Located in a mountain setting, this is one of Japan's most exclusive Ryokans, formerly a retreat for the Imperial family.",
+      "best_for": [
+        "Going to mountain",
+        "Wellness & Self-Improvement"
+      ],
+      "opening_hours": "Varies",
+      "recommended_duration": "Full day",
+      "why_recommended": "Combines 'Going to Mountain' with 'Luxury Wellness'. It's the ultimate relaxation experience.",
+      "tips": [
+        "Book a 'Day Plan' if not staying overnight.",
+        "The train journey via the 'Romancecar' from Shinjuku is part of the experience."
+      ],
+      "best_time_to_visit": "Spring for Sakura in the mountains."
+    },
+    {
+      "id": 17,
+      "name": "Meiji Jingu Shrine",
+      "category": "cultural",
+      "address": "1-1 Yoyogikamizonocho, Shibuya City, Tokyo 151-8557",
+      "coordinates": {
+        "latitude": 35.6764,
+        "longitude": 139.6993
+      },
+      "estimated_cost": {
+        "amount": 0,
+        "currency": "USD",
+        "cost_type": "free"
+      },
+      "description": "A Shinto shrine dedicated to Emperor Meiji, surrounded by a lush forest of 100,000 trees.",
+      "best_for": [
+        "Cultural",
+        "Wellness & Self-Improvement"
+      ],
+      "opening_hours": "Sunrise to Sunset",
+      "recommended_duration": "1.5 hours",
+      "why_recommended": "Offers a meditative escape in the center of Tokyo. High cultural value.",
+      "tips": [
+        "Look for traditional wedding processions on weekends.",
+        "Visit the Inner Garden (Gyoen) for the famous iris pond."
+      ],
+      "best_time_to_visit": "Morning"
+    },
+    {
+      "id": 18,
+      "name": "Imperial Palace Private Guided Tour",
+      "category": "cultural",
+      "address": "1-1 Chiyoda, Chiyoda City, Tokyo 100-8111",
+      "coordinates": {
+        "latitude": 35.6852,
+        "longitude": 139.7528
+      },
+      "estimated_cost": {
+        "amount": 150,
+        "currency": "USD",
+        "cost_type": "per_person"
+      },
+      "description": "The primary residence of the Emperor of Japan, built on the site of the old Edo Castle.",
+      "best_for": [
+        "Cultural",
+        "Photography & Content Creation"
+      ],
+      "opening_hours": "09:00 - 17:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "A luxury private tour allows for deeper historical understanding and better photo access.",
+      "tips": [
+        "The East Garden is free and excellent for Sakura.",
+        "Book official tours through the Imperial Household Agency website."
+      ],
+      "best_time_to_visit": "10:00"
+    },
+    {
+      "id": 19,
+      "name": "Suntory Hall",
+      "category": "entertainment",
+      "address": "1-13-1 Akasaka, Minato City, Tokyo 107-0052",
+      "coordinates": {
+        "latitude": 35.6672,
+        "longitude": 139.7411
+      },
+      "estimated_cost": {
+        "amount": 200,
+        "currency": "USD",
+        "cost_type": "varies"
+      },
+      "description": "Tokyo's premier concert hall for classical music, known for its superb acoustics.",
+      "best_for": [
+        "Festivals & Events",
+        "Luxury"
+      ],
+      "opening_hours": "Varies by performance",
+      "recommended_duration": "3 hours",
+      "why_recommended": "A sophisticated evening activity matching the luxury lifestyle and interest in events.",
+      "tips": [
+        "Check for the Spring Festival schedule.",
+        "Formal attire is recommended."
+      ],
+      "best_time_to_visit": "Evening"
+    },
+    {
+      "id": 20,
+      "name": "Omotesando Hills",
+      "category": "shopping",
+      "address": "4-12-10 Jingumae, Shibuya City, Tokyo 150-0001",
+      "coordinates": {
+        "latitude": 35.6672,
+        "longitude": 139.7088
+      },
+      "estimated_cost": {
+        "amount": 0,
+        "currency": "USD",
+        "cost_type": "free"
+      },
+      "description": "A high-end shopping complex designed by Tadao Ando, representing the 'Champs-Élysées' of Tokyo.",
+      "best_for": [
+        "Photography & Content Creation",
+        "Luxury"
+      ],
+      "opening_hours": "11:00 - 20:00",
+      "recommended_duration": "2 hours",
+      "why_recommended": "The center of luxury fashion and architectural photography in Tokyo.",
+      "tips": [
+        "The ramped interior is a marvel of design.",
+        "Visit the many high-end cafes in the backstreets (Ura-Hara)."
+      ],
+      "best_time_to_visit": "Afternoon"
+    }
+  ],
+  "recommendations_by_category": {
+    "must_see_attractions": [
+      {
+        "name": "Kodokan Judo Institute",
+        "estimated_cost": 10,
+        "priority": "high"
+      },
+      {
+        "name": "Chidorigafuchi Moat (Sakura)",
+        "estimated_cost": 15,
+        "priority": "high"
+      },
+      {
+        "name": "Shibuya Sky",
+        "estimated_cost": 20,
+        "priority": "medium"
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Narisawa",
+        "cuisine_type": "Innovative Satoyama",
+        "price_range": "luxury",
+        "estimated_cost": 350,
+        "specialty_dish": "Bread of the Forest"
+      },
+      {
+        "name": "Sukiyabashi Jiro Roppongi",
+        "cuisine_type": "Sushi",
+        "price_range": "luxury",
+        "estimated_cost": 300,
+        "specialty_dish": "Omakase Course"
+      },
+      {
+        "name": "Ittetsu (Wagyu)",
+        "cuisine_type": "Teppanyaki",
+        "price_range": "expensive",
+        "estimated_cost": 200,
+        "specialty_dish": "A5 Miyazaki Wagyu"
+      }
+    ],
+    "activities": [
+      {
+        "name": "Private Judo Lesson at Kodokan",
+        "activity_type": "Sport/Culture",
+        "estimated_cost": 200,
+        "booking_required": true
+      },
+      {
+        "name": "Helicopter Tour of Tokyo",
+        "activity_type": "Luxury Experience",
+        "estimated_cost": 800,
+        "booking_required": true
+      },
+      {
+        "name": "Sumida River Sakura Private Cruise",
+        "activity_type": "Leisure",
+        "estimated_cost": 500,
+        "booking_required": true
+      }
+    ],
+    "hidden_gems": [
+      {
+        "name": "Gotokuji Temple",
+        "why_special": "Thousands of Beckoning Cat statues (Maneki-neko).",
+        "estimated_cost": 0
+      },
+      {
+        "name": "Nezu Museum Garden",
+        "why_special": "Private luxury garden with ancient tea houses and Sakura.",
+        "estimated_cost": 15
+      }
+    ]
+  },
+  "practical_information": {
+    "getting_around": "With your budget, use a private chauffeur service for city travel or the 'Gran Class' on Shinkansen for day trips. Taxis are also very reliable but expensive.",
+    "local_currency": "Japanese Yen (JPY). Though card acceptance is growing, carry cash for shrines and traditional shops.",
+    "language_tips": [
+      "Ichi-go ichi-e (One time, one meeting - Cherish the moment)",
+      "Sakura wa kirei desu ne (The cherry blossoms are beautiful, aren't they?)"
+    ],
+    "cultural_notes": [
+      "In dojos (like Kodokan), always bow when entering or leaving the mat area.",
+      "Sakura viewing (Hanami) is often accompanied by 'O-bentos' (luxury lunch boxes). Buy these at Takashimaya or Mitsukoshi Depachikas."
+    ]
+  }
+}
