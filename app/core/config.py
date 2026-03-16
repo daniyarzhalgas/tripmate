@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     REDIS_PORT: int = 6379
     REDIS_DB: int = 0
     GEMINI_API_KEY: str = ""
+    PLAN_SERVICE_URL: str = "http://localhost:8001/generate"
+    UNPLASH_ACCESS_KEY: str = ""
+    UNPLASH_SECRET_KEY: str = ""
 
     @property
     def REDIS_URL(self) -> str:
@@ -31,7 +34,7 @@ class Settings(BaseSettings):
     @property
     def DATABASE_URL(self) -> str:
         # SQLite (for local development)
-        return "sqlite+aiosqlite:///./volumes/sqlite_data/tripmate.db"
+        return "sqlite+aiosqlite:///./tripmate.db"
 
         # PostgreSQL (for Docker and production - uncomment if needed)
         # return (
@@ -42,7 +45,7 @@ class Settings(BaseSettings):
     @property
     def SYNC_DATABASE_URL(self) -> str:
         # SQLite (for Alembic migrations)
-        return "sqlite:///./volumes/sqlite_data/tripmate.db"
+        return "sqlite:///./tripmate.db"
 
         # PostgreSQL (for Alembic migrations - uncomment if needed)
         # return (

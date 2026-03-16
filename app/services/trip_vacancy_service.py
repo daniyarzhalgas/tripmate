@@ -1,19 +1,27 @@
-from datetime import date
-import json
-from pathlib import Path
-from typing import List, Optional, Tuple
+import logging
+from datetime import date, datetime, timedelta
+from typing import Any, Dict, List, Optional, Tuple
 
+import httpx
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import config
+from app.models.generated_trip_plan import GeneratedTripPlan
 from app.models.trip_vacancy import TripVacancy
 from app.repositories.trip_vacancy_repository import TripVacancyRepository
 from app.repositories.chat_group_repository import ChatGroupRepository
 from app.repositories.chat_member_repository import ChatMemberRepository
 from app.repositories.offer_repository import OfferRepository
 from app.repositories.profile_repository import ProfileRepository
+from app.repositories.generated_trip_plan_repository import GeneratedTripPlanRepository
+from app.services.image_recommendation import enrich_with_unsplash_images
+
+logger = logging.getLogger(__name__)
 
 
 class TripVacancyService:
+    PLAN_GENERATION_WAIT_MINUTES = 10
+
     def __init__(self, db: AsyncSession):
         self.db = db
         self.trip_vacancy_repo = TripVacancyRepository(db)
@@ -21,6 +29,7 @@ class TripVacancyService:
         self.chat_member_repo = ChatMemberRepository(db)
         self.offer_repo = OfferRepository(db)
         self.profile_repo = ProfileRepository(db)
+        self.generated_plan_repo = GeneratedTripPlanRepository(db)
 
     # ============= CREATE =============
     async def create_trip_vacancy(
@@ -249,29 +258,71 @@ class TripVacancyService:
     # ============= GENERATE PLAN =============
     async def generate_plan(
         self, trip_vacancy_id: int, user_id: int
-    ) -> Tuple[bool, Optional[str], Optional[str]]:
-        """Collect tripmates data and save it to a local JSON file."""
+    ) -> Tuple[bool, Optional[Dict[str, Any]], Optional[str]]:
+        """Collect tripmates data, send it to planner service, and return planner response."""
         try:
+            logger.info(
+                "Generate plan started in service: trip_vacancy_id=%s user_id=%s",
+                trip_vacancy_id,
+                user_id,
+            )
+
             # Get trip vacancy
             trip_vacancy = await self.trip_vacancy_repo.get_by_id(trip_vacancy_id)
             if not trip_vacancy:
+                logger.warning(
+                    "Generate plan aborted: trip_vacancy not found, trip_vacancy_id=%s user_id=%s",
+                    trip_vacancy_id,
+                    user_id,
+                )
                 return False, None, "Trip vacancy not found"
 
             # Check if user has access (must be requester or accepted offerer)
-            if trip_vacancy.requester_id != user_id:
-                # Check if user is an accepted offerer
-                offer = await self.offer_repo.check_existing_offer(
-                    trip_vacancy_id, user_id
+            if not await self._is_user_trip_member(trip_vacancy, user_id):
+                logger.warning(
+                    "Generate plan denied: non-member access, trip_vacancy_id=%s user_id=%s",
+                    trip_vacancy_id,
+                    user_id,
                 )
-                if not offer or offer.status != "accepted":
-                    return (
-                        False,
-                        None,
-                        "You don't have permission to generate plan for this trip",
+                return (
+                    False,
+                    None,
+                    "You don't have permission to generate plan for this trip",
+                )
+
+            existing_plan = await self.generated_plan_repo.get_by_trip_vacancy_id(
+                trip_vacancy_id
+            )
+            if existing_plan:
+                if existing_plan.generated_at:
+                    logger.info(
+                        "Generate plan skipped: already generated, trip_vacancy_id=%s user_id=%s",
+                        trip_vacancy_id,
+                        user_id,
                     )
+                    return False, None, "Trip plan has already been generated"
+
+                if (
+                    existing_plan.generation_requested_at
+                    and datetime.utcnow() - existing_plan.generation_requested_at
+                    < timedelta(minutes=self.PLAN_GENERATION_WAIT_MINUTES)
+                ):
+                    logger.info(
+                        "Generate plan throttled: generation in progress, trip_vacancy_id=%s user_id=%s",
+                        trip_vacancy_id,
+                        user_id,
+                    )
+                    return False, None, "we generating please wait"
 
             # Check if trip vacancy is full
             if trip_vacancy.people_joined < trip_vacancy.people_needed:
+                logger.info(
+                    "Generate plan blocked: trip not full, trip_vacancy_id=%s user_id=%s joined=%s needed=%s",
+                    trip_vacancy_id,
+                    user_id,
+                    trip_vacancy.people_joined,
+                    trip_vacancy.people_needed,
+                )
                 return (
                     False,
                     None,
@@ -303,12 +354,8 @@ class TripVacancyService:
                     "from_city": profile.city,
                     "from_country": profile.country,
                     "bio": profile.bio,
-                    "languages": [
-                        ul.language.name for ul in profile.languages
-                    ],
-                    "interests": [
-                        ui.interest.name for ui in profile.interests
-                    ],
+                    "languages": [ul.language.name for ul in profile.languages],
+                    "interests": [ui.interest.name for ui in profile.interests],
                     "travel_styles": [
                         ts.travel_style.name for ts in profile.travel_styles
                     ],
@@ -329,12 +376,80 @@ class TripVacancyService:
                     entry["user_label"] = f"user-{idx}"
                     users_data.append(entry)
 
-            output_file = await self._save_users_data_to_json(trip_vacancy, users_data)
+            await self.generated_plan_repo.mark_generation_requested(trip_vacancy.id)
 
-            return True, f"User information saved to {output_file}", None
+            payload = self._build_generate_plan_payload(trip_vacancy, users_data)
+            print("payload to send planner service", payload)
+            planner_response = await self._call_plan_service(payload)
+            await self.generated_plan_repo.upsert_plan_response(
+                trip_vacancy_id=trip_vacancy.id,
+                planner_response=planner_response,
+            )
+            plan: GeneratedTripPlan = await self.generated_plan_repo.get_by_trip_vacancy_id_with_places(
+                trip_vacancy_id
+            )
+
+            print("plan received from planner service", plan.recommended_places[0].name if plan.recommended_places else "no places")
+            
+
+            await enrich_with_unsplash_images(plan.recommended_places)
+
+
+            logger.info(
+                "Generate plan completed in service: trip_vacancy_id=%s user_id=%s participants=%s",
+                trip_vacancy_id,
+                user_id,
+                len(users_data),
+            )
+
+            return True, planner_response, None
 
         except Exception as e:
+            logger.exception(
+                "Generate plan failed with exception: trip_vacancy_id=%s user_id=%s error=%s",
+                trip_vacancy_id,
+                user_id,
+                str(e),
+            )
             return False, None, f"Failed to generate plan: {str(e)}"
+
+    async def get_trip_plan(
+        self, trip_vacancy_id: int, user_id: int
+    ) -> Tuple[bool, Optional[GeneratedTripPlan], Optional[str]]:
+        """Return generated trip plan for trip members only."""
+        try:
+            trip_vacancy = await self.trip_vacancy_repo.get_by_id(trip_vacancy_id)
+            if not trip_vacancy:
+                return False, None, "Trip vacancy not found"
+
+            if not await self._is_user_trip_member(trip_vacancy, user_id):
+                return (
+                    False,
+                    None,
+                    "You don't have permission to view this trip plan",
+                )
+
+            plan = await self.generated_plan_repo.get_by_trip_vacancy_id_with_places(
+                trip_vacancy_id
+            )
+            if not plan:
+                return False, None, "Trip plan not found"
+
+            if not plan.generated_at:
+                return False, None, "we generating please wait"
+
+            return True, plan, None
+        except Exception as e:
+            return False, None, f"Failed to get trip plan: {str(e)}"
+
+    async def _is_user_trip_member(
+        self, trip_vacancy: TripVacancy, user_id: int
+    ) -> bool:
+        if trip_vacancy.requester_id == user_id:
+            return True
+
+        offer = await self.offer_repo.check_existing_offer(trip_vacancy.id, user_id)
+        return bool(offer and offer.status == "accepted")
 
     def _calculate_age(self, date_of_birth: date) -> int:
         """Calculate age from date of birth."""
@@ -347,40 +462,65 @@ class TripVacancyService:
             - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
         )
 
-    async def _save_users_data_to_json(
+    def _build_generate_plan_payload(
         self, trip_vacancy: TripVacancy, users_data: List[dict]
-    ) -> str:
-        """Save tripmates information to a local JSON file without external calls."""
-        payload = {
-            "trip_vacancy_id": trip_vacancy.id,
-            "destination_city": trip_vacancy.destination_city,
-            "destination_country": trip_vacancy.destination_country,
-            "start_date": trip_vacancy.start_date.isoformat()
-            if trip_vacancy.start_date
-            else None,
-            "end_date": trip_vacancy.end_date.isoformat()
-            if trip_vacancy.end_date
-            else None,
-            "description": trip_vacancy.description,
-            "planned_activities": trip_vacancy.planned_activities,
-            "planned_destinations": trip_vacancy.planned_destinations,
-            "transportation_preference": trip_vacancy.transportation_preference,
-            "accommodation_preference": trip_vacancy.accommodation_preference,
-            "min_budget": float(trip_vacancy.min_budget)
-            if trip_vacancy.min_budget is not None
-            else None,
-            "max_budget": float(trip_vacancy.max_budget)
-            if trip_vacancy.max_budget is not None
-            else None,
-            "users": users_data,
-        }
+    ) -> Dict[str, Any]:
+        """Build payload for external plan generation service."""
+        return {
+                    "trip_vacancy_id": trip_vacancy.id,
+                    "destination_city": trip_vacancy.destination_city or "",
+                    "destination_country": trip_vacancy.destination_country or "",
+                    "start_date": (
+                        trip_vacancy.start_date.isoformat() if trip_vacancy.start_date else ""
+                    ),
+                    "end_date": (
+                        trip_vacancy.end_date.isoformat() if trip_vacancy.end_date else ""
+                    ),
+                    "description": trip_vacancy.description or "",
+                    "planned_activities": trip_vacancy.planned_activities or "",
+                    "planned_destinations": trip_vacancy.planned_destinations or "",
+                    "transportation_preference": trip_vacancy.transportation_preference or "",
+                    "accommodation_preference": trip_vacancy.accommodation_preference or "",
+                    "min_budget": (
+                        float(trip_vacancy.min_budget)
+                        if trip_vacancy.min_budget is not None
+                        else 0.0
+                    ),
+                    "max_budget": (
+                        float(trip_vacancy.max_budget)
+                        if trip_vacancy.max_budget is not None
+                        else 0.0
+                    ),
+                    "users": users_data,
+                }
 
-        project_root = Path(__file__).resolve().parents[2]
-        output_dir = project_root / "generated_plans"
-        output_dir.mkdir(parents=True, exist_ok=True)
+    async def _call_plan_service(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """Call external AI planner service and return parsed response body."""
+        from app.repositories.generated_trip_plan_repository import GeneratedTripPlanRepository
+        trip_vacancy_id = payload.get("trip_vacancy_id")
+        try:
+            print("Calling planner service with payload")
+            async with httpx.AsyncClient(timeout=5 * 60.0) as client:
+                response = await client.post(config.PLAN_SERVICE_URL, json=payload)
+                print("Planner service responded with status code", response.status_code)
+            response.raise_for_status()
+        except (httpx.HTTPStatusError, httpx.RequestError) as exc:
+            # Set generation_requested_at to None if request fails
+            if trip_vacancy_id is not None:
+                await self.generated_plan_repo.mark_generation_requested(trip_vacancy_id, delete=True)
+            if isinstance(exc, httpx.HTTPStatusError):
+                raise Exception(
+                    f"Planner service returned {exc.response.status_code}: {exc.response.text}"
+                ) from exc
+            else:
+                raise Exception(
+                    f"Failed to connect to planner service at {config.PLAN_SERVICE_URL}: {str(exc)}"
+                ) from exc
 
-        output_file = output_dir / f"trip_{trip_vacancy.id}_users.json"
-        with output_file.open("w", encoding="utf-8") as f:
-            json.dump(payload, f, ensure_ascii=False, indent=2)
-
-        return str(output_file)
+        try:
+            return response.json()
+        except ValueError as exc:
+            # Set generation_requested_at to None if response is not valid JSON
+            if trip_vacancy_id is not None:
+                await self.generated_plan_repo.mark_generation_requested(trip_vacancy_id, delete=True)
+            raise Exception("Planner service response is not valid JSON") from exc

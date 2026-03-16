@@ -8,3 +8,5 @@ from app.models.offer import Offer, OfferStatus
 from app.models.chat_group import ChatGroup
 from app.models.chat_member import ChatMember
 from app.models.message import Message
+from app.models.generated_trip_plan import GeneratedTripPlan
+from app.models.recommended_place import RecommendedPlace

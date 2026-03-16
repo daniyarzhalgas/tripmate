@@ -88,3 +88,9 @@ class TripVacancy(Base):
     # Relationships
     requester = relationship("User", back_populates="trip_vacancies")
     chat_group = relationship("ChatGroup", uselist=False, back_populates="trip_vacancy", cascade="all, delete-orphan")
+    generated_plan = relationship(
+        "GeneratedTripPlan",
+        uselist=False,
+        back_populates="trip_vacancy",
+        cascade="all, delete-orphan",
+    )

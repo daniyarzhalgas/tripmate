@@ -1,6 +1,6 @@
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from pydantic import BaseModel, Field
 
@@ -76,8 +76,7 @@ class MessageResponse(BaseModel):
 
 
 class GeneratePlanResponse(BaseModel):
-    trip_vacancy_id: int
-    generated_plan: str
+    response: Dict[str, Any]
     
     class Config:
         from_attributes = True
