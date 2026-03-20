@@ -59,6 +59,7 @@ class RecommendedPlace(Base):
 
     raw_payload = Column(JSON, nullable=False)
     created_at = Column(DateTime, default=func.now(), nullable=False)
+    query_to_search = Column(String(255), nullable=True)
 
     generated_plan = relationship(
         "GeneratedTripPlan", back_populates="recommended_places"

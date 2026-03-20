@@ -23,6 +23,8 @@ class Settings(BaseSettings):
     REDIS_PORT: int = 6379
     REDIS_DB: int = 0
     GEMINI_API_KEY: str = ""
+    GEMINI_MODEL: str = "gemini-2.0-flash"
+    GEMINI_TIMEOUT_SECONDS: int = 60 * 5
     PLAN_SERVICE_URL: str = "http://localhost:8001/generate"
     UNPLASH_ACCESS_KEY: str = ""
     UNPLASH_SECRET_KEY: str = ""

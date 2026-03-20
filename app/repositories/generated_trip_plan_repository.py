@@ -8,6 +8,8 @@ from sqlalchemy.orm import selectinload
 
 from app.models.generated_trip_plan import GeneratedTripPlan
 from app.models.recommended_place import RecommendedPlace
+from app.schemas.recommendation import (PlaceRecommendationsSchema,
+                                        RecommendedPlaceSchema)
 
 
 class GeneratedTripPlanRepository:
@@ -35,46 +37,46 @@ class GeneratedTripPlanRepository:
         return result.scalar_one_or_none()
 
     async def upsert_plan_response(
-        self, trip_vacancy_id: int, planner_response: Dict[str, Any]
+        self, trip_vacancy_id: int, planner_response: PlaceRecommendationsSchema
     ) -> GeneratedTripPlan:
         plan = await self.get_by_trip_vacancy_id(trip_vacancy_id)
+        now = datetime.utcnow()
+        raw = planner_response.model_dump()
 
         if not plan:
             plan = GeneratedTripPlan(
                 trip_vacancy_id=trip_vacancy_id,
-                raw_response=planner_response,
-                generation_requested_at=datetime.utcnow(),
-                generated_at=datetime.utcnow(),
+                raw_response=raw,
+                generation_requested_at=now,
+                generated_at=now,
             )
             self.db.add(plan)
             await self.db.flush()
         else:
-            plan.raw_response = planner_response
+            plan.raw_response = raw
             if not plan.generation_requested_at:
-                plan.generation_requested_at = datetime.utcnow()
-            plan.generated_at = datetime.utcnow()
+                plan.generation_requested_at = now
+            plan.generated_at = now
             await self.db.execute(
                 delete(RecommendedPlace).where(
                     RecommendedPlace.generated_plan_id == plan.id
                 )
             )
 
-        recommended_places = planner_response.get("recommended_places", [])
-        if isinstance(recommended_places, list):
-            places_to_add = [
-                self._build_place(plan.id, place)
-                for place in recommended_places
-                if isinstance(place, dict)
-            ]
-            if places_to_add:
-                self.db.add_all(places_to_add)
+        places_to_add = [
+            self._build_place(plan.id, place)
+            for place in planner_response.recommended_places
+        ]
+        if places_to_add:
+            self.db.add_all(places_to_add)
 
         await self.db.commit()
         await self.db.refresh(plan)
         return plan
 
-    async def mark_generation_requested(self, trip_vacancy_id: int, delete: bool = False) -> GeneratedTripPlan:
-
+    async def mark_generation_requested(
+        self, trip_vacancy_id: int, delete: bool = False
+    ) -> GeneratedTripPlan:
 
         plan = await self.get_by_trip_vacancy_id(trip_vacancy_id)
 
@@ -98,62 +100,37 @@ class GeneratedTripPlanRepository:
         return plan
 
     def _build_place(
-        self, generated_plan_id: int, place: Dict[str, Any]
+        self, generated_plan_id: int, place: RecommendedPlaceSchema
     ) -> RecommendedPlace:
-        coordinates = place.get("coordinates") or {}
-
         return RecommendedPlace(
             generated_plan_id=generated_plan_id,
-            place_id=str(place.get("place_id") or ""),
-            name=str(place.get("name") or "Unknown place"),
-            category=self._to_optional_str(place.get("category")),
-            latitude=self._to_decimal(coordinates.get("latitude")),
-            longitude=self._to_decimal(coordinates.get("longitude")),
-            address=self._to_optional_str(place.get("address")),
-            city=self._to_optional_str(place.get("city")),
-            country=self._to_optional_str(place.get("country")),
-            short_description=self._to_optional_str(place.get("short_description")),
-            why_people_go=self._to_optional_str(place.get("why_people_go")),
-            why_recommended=self._to_optional_str(place.get("why_recommended")),
-            highlights=(
-                place.get("highlights")
-                if isinstance(place.get("highlights"), list)
-                else None
-            ),
-            tags=place.get("tags") if isinstance(place.get("tags"), list) else None,
-            best_season=(
-                place.get("best_season")
-                if isinstance(place.get("best_season"), list)
-                else None
-            ),
-            audience=(
-                place.get("audience")
-                if isinstance(place.get("audience"), list)
-                else None
-            ),
-            estimated_cost=self._to_decimal(place.get("estimated_cost")),
-            ticket_price=self._to_decimal(place.get("ticket_price")),
-            visit_duration_minutes=self._to_int(place.get("visit_duration_minutes")),
-            best_time_of_day=self._to_optional_str(place.get("best_time_of_day")),
-            rating=self._to_decimal(place.get("rating")),
-            reviews_count=self._to_int(place.get("reviews_count")),
-            image_url=self._to_optional_str(place.get("image_url")),
-            opening_hours=(
-                place.get("opening_hours")
-                if isinstance(place.get("opening_hours"), dict)
-                else None
-            ),
-            contact_information=(
-                place.get("contact_information")
-                if isinstance(place.get("contact_information"), dict)
-                else None
-            ),
-            age_range=(
-                place.get("age_range")
-                if isinstance(place.get("age_range"), dict)
-                else None
-            ),
-            raw_payload=place,
+            place_id=place.place_id,
+            name=place.name,
+            category=place.category,
+            latitude=Decimal(str(place.coordinates.latitude)),
+            longitude=Decimal(str(place.coordinates.longitude)),
+            address=place.address,
+            city=place.city,
+            country=place.country,
+            short_description=place.short_description,
+            why_people_go=place.why_people_go,
+            why_recommended=place.why_recommended,
+            highlights=place.highlights,
+            tags=place.tags,
+            best_season=place.best_season,
+            audience=place.audience,
+            estimated_cost=Decimal(str(place.estimated_cost)),
+            ticket_price=Decimal(str(place.ticket_price)),
+            visit_duration_minutes=place.visit_duration_minutes,
+            best_time_of_day=place.best_time_of_day,
+            rating=Decimal(str(place.rating)),
+            reviews_count=place.reviews_count,
+            image_url=place.image_url,
+            opening_hours=place.opening_hours.model_dump(),
+            contact_information=place.contact_information.model_dump(),
+            age_range=place.age_range.model_dump(),
+            raw_payload=place.model_dump(),
+            query_to_search=place.query_to_search,
         )
 
     def _to_optional_str(self, value: Any) -> Optional[str]:

@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.dependencies import get_current_user
 from app.core.database import get_db
 from app.models.user import User
+from app.schemas.recommendation import PlaceRecommendationsSchema
 from app.schemas.trip_vacancy import (
     MessageResponse,
     TripVacancyCreateRequest,
@@ -193,7 +194,7 @@ async def delete_trip_vacancy(
     return {"message": "Trip vacancy deleted successfully"}
 
 
-@router.post("/{trip_vacancy_id}/generate-plan", response_model=Dict[str, Any])
+@router.post("/{trip_vacancy_id}/generate-plan", response_model=PlaceRecommendationsSchema)
 async def generate_plan(
     trip_vacancy_id: int,
     current_user: User = Depends(get_current_user),
@@ -206,7 +207,7 @@ async def generate_plan(
     """
     trip_vacancy_service = TripVacancyService(db)
     
-
+    print("Generating plan for trip vacancy ID:", trip_vacancy_id) 
     success, plan, error = await trip_vacancy_service.generate_plan(
         trip_vacancy_id=trip_vacancy_id, user_id=current_user.id
     )

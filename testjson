@@ -1,0 +1,1592 @@
+{
+  "recommended_places": [
+    {
+      "place_id": "ChIJ69Z5Z_KJGGAR9p8yX8X9v9M",
+      "name": "Senso-ji Temple",
+      "category": "cultural",
+      "coordinates": {
+        "latitude": 35.714765,
+        "longitude": 139.796655
+      },
+      "address": "2-3-1 Asakusa, Taito City, Tokyo 111-0032, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "Tokyo's oldest and most significant Buddhist temple located in the heart of Asakusa.",
+      "why_people_go": "To experience traditional Edo-period atmosphere and pray at the historic site.",
+      "why_recommended": "Essential cultural landmark matching the travelers' interest in history and photography.",
+      "highlights": [
+        "Kaminarimon Gate",
+        "Nakamise-dori Shopping Street",
+        "Five-story pagoda"
+      ],
+      "tags": [
+        "Temple",
+        "History",
+        "Culture",
+        "Tradition"
+      ],
+      "estimated_cost": 0,
+      "ticket_price": 0,
+      "visit_duration_minutes": 120,
+      "best_time_of_day": "morning",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.5,
+      "reviews_count": 65000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "06:00-17:00",
+        "tuesday": "06:00-17:00",
+        "wednesday": "06:00-17:00",
+        "thursday": "06:00-17:00",
+        "friday": "06:00-17:00",
+        "saturday": "06:00-17:00",
+        "sunday": "06:00-17:00",
+        "notes": "Main hall hours listed; temple grounds open 24/7"
+      },
+      "contact_information": {
+        "phone": "+81 3-3842-0181",
+        "website": "https://www.senso-ji.jp/",
+        "email": "info@senso-ji.jp"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "couples",
+        "friends",
+        "solo_travelers",
+        "seniors"
+      ],
+      "query_to_search": "Senso-ji Temple Asakusa Tokyo"
+    },
+    {
+      "place_id": "ChIJ1Z95Z_KJGGAR9p8yX8X9v9M",
+      "name": "Meiji Jingu Shrine",
+      "category": "cultural",
+      "coordinates": {
+        "latitude": 35.676397,
+        "longitude": 139.699326
+      },
+      "address": "1-1 Yoyogikamizonocho, Shibuya City, Tokyo 151-8557, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "A grand Shinto shrine dedicated to Emperor Meiji and Empress Shoken, set in a massive forest.",
+      "why_people_go": "To find peace in the middle of the city and see traditional Shinto architecture.",
+      "why_recommended": "Perfect for photography and relaxation amidst the city's hustle.",
+      "highlights": [
+        "Torii Gate",
+        "Forest path",
+        "Sake barrel wall"
+      ],
+      "tags": [
+        "Shinto",
+        "Nature",
+        "Peaceful",
+        "History"
+      ],
+      "estimated_cost": 0,
+      "ticket_price": 0,
+      "visit_duration_minutes": 90,
+      "best_time_of_day": "morning",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.6,
+      "reviews_count": 42000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "05:00-18:00",
+        "tuesday": "05:00-18:00",
+        "wednesday": "05:00-18:00",
+        "thursday": "05:00-18:00",
+        "friday": "05:00-18:00",
+        "saturday": "05:00-18:00",
+        "sunday": "05:00-18:00",
+        "notes": "Hours vary monthly based on sunrise and sunset"
+      },
+      "contact_information": {
+        "phone": "+81 3-3379-5511",
+        "website": "https://www.meijijingu.or.jp/",
+        "email": "meijijingu@meijijingu.or.jp"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "couples",
+        "friends",
+        "solo_travelers",
+        "seniors"
+      ],
+      "query_to_search": "Meiji Jingu Shrine Tokyo forest"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "teamLab Planets TOKYO",
+      "category": "activity",
+      "coordinates": {
+        "latitude": 35.6492,
+        "longitude": 139.7915
+      },
+      "address": "6-1-1 Toyosu, Koto City, Tokyo 135-0061, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "An immersive digital art museum where you walk through water and gardens.",
+      "why_people_go": "To experience world-class interactive digital art installations.",
+      "why_recommended": "High-tech and visually stunning, perfect for a SWE student and a photography enthusiast.",
+      "highlights": [
+        "Infinite Crystal Universe",
+        "Floating Flower Garden",
+        "Walking through water"
+      ],
+      "tags": [
+        "Art",
+        "Digital",
+        "Photography",
+        "Unique"
+      ],
+      "estimated_cost": 3800,
+      "ticket_price": 3800,
+      "visit_duration_minutes": 150,
+      "best_time_of_day": "afternoon",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.8,
+      "reviews_count": 55000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "09:00-22:00",
+        "tuesday": "09:00-22:00",
+        "wednesday": "09:00-22:00",
+        "thursday": "09:00-22:00",
+        "friday": "09:00-22:00",
+        "saturday": "09:00-22:00",
+        "sunday": "09:00-22:00",
+        "notes": "Last entry one hour before closing"
+      },
+      "contact_information": {
+        "phone": "+81 3-6406-3917",
+        "website": "https://planets.teamlab.art/tokyo/",
+        "email": "contact@planets.teamlab.art"
+      },
+      "age_range": {
+        "min_age": 3,
+        "max_age": 80
+      },
+      "audience": [
+        "friends",
+        "couples",
+        "teens",
+        "adults"
+      ],
+      "query_to_search": "teamlab planets tokyo light art"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Shibuya Sky",
+      "category": "landmark",
+      "coordinates": {
+        "latitude": 35.6585,
+        "longitude": 139.7019
+      },
+      "address": "2-24-12 Shibuya, Shibuya City, Tokyo 150-0002, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "A 360-degree open-air observation deck on the roof of Shibuya Scramble Square.",
+      "why_people_go": "To get the best aerial photos of Tokyo and the Shibuya Crossing.",
+      "why_recommended": "The most photogenic luxury viewing spot in Tokyo for a modern adventure.",
+      "highlights": [
+        "Outdoor observation deck",
+        "Shibuya Crossing view",
+        "Sky Edge"
+      ],
+      "tags": [
+        "Observation Deck",
+        "Photography",
+        "Skyline",
+        "Shibuya"
+      ],
+      "estimated_cost": 2200,
+      "ticket_price": 2200,
+      "visit_duration_minutes": 60,
+      "best_time_of_day": "sunset",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.7,
+      "reviews_count": 12000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "10:00-22:30",
+        "tuesday": "10:00-22:30",
+        "wednesday": "10:00-22:30",
+        "thursday": "10:00-22:30",
+        "friday": "10:00-22:30",
+        "saturday": "10:00-22:30",
+        "sunday": "10:00-22:30",
+        "notes": "Last entry 21:20"
+      },
+      "contact_information": {
+        "phone": "+81 3-4221-0229",
+        "website": "https://shibuya-scramble-square.com/sky/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "couples",
+        "friends",
+        "solo_travelers",
+        "adults"
+      ],
+      "query_to_search": "Shibuya Sky view Tokyo city"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Tsukiji Outer Market",
+      "category": "restaurant",
+      "coordinates": {
+        "latitude": 35.6655,
+        "longitude": 139.7704
+      },
+      "address": "4-16-2 Tsukiji, Chuo City, Tokyo 104-0045, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "A bustling food district with hundreds of shops and restaurants selling fresh seafood and kitchen tools.",
+      "why_people_go": "To eat the freshest sushi in Tokyo and experience a traditional Japanese market.",
+      "why_recommended": "Directly matches the 'eat Japan foods' request and provides great photography opportunities.",
+      "highlights": [
+        "Fresh Sushi",
+        "Tamagoyaki (omelet)",
+        "Street food stalls"
+      ],
+      "tags": [
+        "Food",
+        "Seafood",
+        "Market",
+        "Japanese Cuisine"
+      ],
+      "estimated_cost": 5000,
+      "ticket_price": 0,
+      "visit_duration_minutes": 120,
+      "best_time_of_day": "morning",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.4,
+      "reviews_count": 35000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "05:00-14:00",
+        "tuesday": "05:00-14:00",
+        "wednesday": "05:00-14:00",
+        "thursday": "05:00-14:00",
+        "friday": "05:00-14:00",
+        "saturday": "05:00-14:00",
+        "sunday": "Closed",
+        "notes": "Closed on Sundays and some Wednesdays"
+      },
+      "contact_information": {
+        "phone": "+81 3-3541-9444",
+        "website": "https://www.tsukiji.or.jp/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "friends",
+        "adults",
+        "solo_travelers"
+      ],
+      "query_to_search": "Tsukiji Outer Market street food sushi"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Shinjuku Gyoen National Garden",
+      "category": "nature",
+      "coordinates": {
+        "latitude": 35.6852,
+        "longitude": 139.7101
+      },
+      "address": "11 Naitomachi, Shinjuku City, Tokyo 160-0014, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "A vast park blending three distinct garden styles with wide lawns and forest groves.",
+      "why_people_go": "To see late-blooming cherry blossoms (Yaezakura) and enjoy nature in the city.",
+      "why_recommended": "Best chance to see 'Sakura' in early May (late varieties) and enjoy photography.",
+      "highlights": [
+        "Japanese Traditional Garden",
+        "Late blooming Sakura",
+        "French and English gardens"
+      ],
+      "tags": [
+        "Park",
+        "Nature",
+        "Sakura",
+        "Relaxing"
+      ],
+      "estimated_cost": 500,
+      "ticket_price": 500,
+      "visit_duration_minutes": 180,
+      "best_time_of_day": "afternoon",
+      "best_season": [
+        "spring"
+      ],
+      "rating": 4.6,
+      "reviews_count": 28000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "Closed",
+        "tuesday": "09:00-17:30",
+        "wednesday": "09:00-17:30",
+        "thursday": "09:00-17:30",
+        "friday": "09:00-17:30",
+        "saturday": "09:00-17:30",
+        "sunday": "09:00-17:30",
+        "notes": "Open every day during cherry blossom season (late March - April)"
+      },
+      "contact_information": {
+        "phone": "+81 3-3350-0151",
+        "website": "https://www.env.go.jp/garden/shinjukugyoen/index.html",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "couples",
+        "friends",
+        "seniors"
+      ],
+      "query_to_search": "Shinjuku Gyoen cherry blossoms lake"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Kodokan Judo Institute",
+      "category": "sports",
+      "coordinates": {
+        "latitude": 35.7077,
+        "longitude": 139.7533
+      },
+      "address": "1-16-30 Kasuga, Bunkyo City, Tokyo 112-8530, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "The headquarters of the worldwide judo community, founded by Jigoro Kano.",
+      "why_people_go": "To watch practice and visit the historic museum of judo.",
+      "why_recommended": "Specially chosen for Beibarys due to his passion for judo.",
+      "highlights": [
+        "International Judo Center",
+        "Museum of Judo History",
+        "Dojo observations"
+      ],
+      "tags": [
+        "Martial Arts",
+        "Judo",
+        "History",
+        "Sports"
+      ],
+      "estimated_cost": 800,
+      "ticket_price": 800,
+      "visit_duration_minutes": 120,
+      "best_time_of_day": "afternoon",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.7,
+      "reviews_count": 1500,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "09:00-20:00",
+        "tuesday": "09:00-20:00",
+        "wednesday": "09:00-20:00",
+        "thursday": "09:00-20:00",
+        "friday": "09:00-20:00",
+        "saturday": "09:00-20:00",
+        "sunday": "Closed",
+        "notes": "Museum hours usually 10:00-17:00"
+      },
+      "contact_information": {
+        "phone": "+81 3-3811-7103",
+        "website": "http://kodokanjudoinstitute.org/en/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 10,
+        "max_age": 70
+      },
+      "audience": [
+        "adults",
+        "teens",
+        "friends",
+        "solo_travelers"
+      ],
+      "query_to_search": "Kodokan Judo Tokyo interior"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Ginza Six",
+      "category": "shopping",
+      "coordinates": {
+        "latitude": 35.6696,
+        "longitude": 139.7641
+      },
+      "address": "6-10-1 Ginza, Chuo City, Tokyo 104-0061, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "A luxury shopping complex in Ginza featuring high-end brands and art.",
+      "why_people_go": "For high-end fashion and high-quality Japanese craftsmanship.",
+      "why_recommended": "Matches the 'Luxury' travel style and Alice's interest in shopping.",
+      "highlights": [
+        "Rooftop garden",
+        "Tsutaya Books",
+        "Art installations"
+      ],
+      "tags": [
+        "Luxury",
+        "Shopping",
+        "Fashion",
+        "Art"
+      ],
+      "estimated_cost": 20000,
+      "ticket_price": 0,
+      "visit_duration_minutes": 150,
+      "best_time_of_day": "afternoon",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.3,
+      "reviews_count": 8500,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "10:30-20:30",
+        "tuesday": "10:30-20:30",
+        "wednesday": "10:30-20:30",
+        "thursday": "10:30-20:30",
+        "friday": "10:30-20:30",
+        "saturday": "10:30-20:30",
+        "sunday": "10:30-20:30",
+        "notes": "Restaurants open until 23:00"
+      },
+      "contact_information": {
+        "phone": "+81 3-6891-3390",
+        "website": "https://ginza6.tokyo/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "adults",
+        "couples",
+        "seniors"
+      ],
+      "query_to_search": "Ginza Six luxury mall Tokyo"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Tokyo Skytree",
+      "category": "landmark",
+      "coordinates": {
+        "latitude": 35.7101,
+        "longitude": 139.8107
+      },
+      "address": "1-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "The tallest structure in Japan, offering panoramic views of the Kanto region.",
+      "why_people_go": "To see the entire Tokyo metropolitan area from the highest point.",
+      "why_recommended": "Iconic landmark for photography and luxury viewing experience.",
+      "highlights": [
+        "Tembo Deck",
+        "Tembo Galleria",
+        "Solamachi Mall"
+      ],
+      "tags": [
+        "Observation Deck",
+        "Landmark",
+        "Photography",
+        "Views"
+      ],
+      "estimated_cost": 3100,
+      "ticket_price": 3100,
+      "visit_duration_minutes": 120,
+      "best_time_of_day": "evening",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.5,
+      "reviews_count": 82000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "10:00-21:00",
+        "tuesday": "10:00-21:00",
+        "wednesday": "10:00-21:00",
+        "thursday": "10:00-21:00",
+        "friday": "10:00-21:00",
+        "saturday": "10:00-21:00",
+        "sunday": "10:00-21:00",
+        "notes": "Last entry at 20:00"
+      },
+      "contact_information": {
+        "phone": "+81 570-550-634",
+        "website": "http://www.tokyo-skytree.jp/en/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "couples",
+        "friends"
+      ],
+      "query_to_search": "Tokyo Skytree tower night"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Tokyo Imperial Palace",
+      "category": "landmark",
+      "coordinates": {
+        "latitude": 35.6852,
+        "longitude": 139.7528
+      },
+      "address": "1-1 Chiyoda, Chiyoda City, Tokyo 100-8111, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "The primary residence of the Emperor of Japan, located on the former site of Edo Castle.",
+      "why_people_go": "To learn about Japan's imperial history and stroll through historical gardens.",
+      "why_recommended": "Core piece of Japanese history and culture, perfect for relaxing walks.",
+      "highlights": [
+        "Nijubashi Bridge",
+        "East Gardens",
+        "Edo Castle ruins"
+      ],
+      "tags": [
+        "History",
+        "Royalty",
+        "Architecture",
+        "Nature"
+      ],
+      "estimated_cost": 0,
+      "ticket_price": 0,
+      "visit_duration_minutes": 150,
+      "best_time_of_day": "morning",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.4,
+      "reviews_count": 25000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "Closed",
+        "tuesday": "09:00-17:00",
+        "wednesday": "09:00-17:00",
+        "thursday": "09:00-17:00",
+        "friday": "09:00-17:00",
+        "saturday": "09:00-17:00",
+        "sunday": "09:00-17:00",
+        "notes": "East Garden is closed on Mondays and Fridays"
+      },
+      "contact_information": {
+        "phone": "+81 3-3213-1111",
+        "website": "https://www.kunaicho.go.jp/e-event/higashigyoen02.html",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "couples",
+        "seniors",
+        "solo_travelers"
+      ],
+      "query_to_search": "Tokyo Imperial Palace East Garden"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Omotesando Hills",
+      "category": "shopping",
+      "coordinates": {
+        "latitude": 35.6672,
+        "longitude": 139.7088
+      },
+      "address": "4-12-10 Jingumae, Shibuya City, Tokyo 150-0001, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "A high-end shopping mall in a trendy district, designed by architect Tadao Ando.",
+      "why_people_go": "To shop for high-end fashion and admire the unique interior architecture.",
+      "why_recommended": "Combines luxury shopping with modern architectural design interest.",
+      "highlights": [
+        "Tadao Ando architecture",
+        "Designer boutiques",
+        "Trendy cafes"
+      ],
+      "tags": [
+        "Fashion",
+        "Architecture",
+        "Shopping",
+        "Modern"
+      ],
+      "estimated_cost": 15000,
+      "ticket_price": 0,
+      "visit_duration_minutes": 120,
+      "best_time_of_day": "afternoon",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.1,
+      "reviews_count": 4800,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "11:00-21:00",
+        "tuesday": "11:00-21:00",
+        "wednesday": "11:00-21:00",
+        "thursday": "11:00-21:00",
+        "friday": "11:00-21:00",
+        "saturday": "11:00-21:00",
+        "sunday": "11:00-20:00",
+        "notes": "Sunday hours until 20:00"
+      },
+      "contact_information": {
+        "phone": "+81 3-3497-0310",
+        "website": "https://www.omotesandohills.com/en/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "adults",
+        "friends",
+        "couples"
+      ],
+      "query_to_search": "Omotesando Hills Tokyo architecture"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Nezu Museum",
+      "category": "museum",
+      "coordinates": {
+        "latitude": 35.6622,
+        "longitude": 139.717
+      },
+      "address": "6-5-1 Nishi-Azabu, Minato City, Tokyo 106-0031, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "A museum housing a collection of Japanese and East Asian national treasures, known for its beautiful garden.",
+      "why_people_go": "To see ancient art and enjoy one of Tokyo's most beautiful hidden gardens.",
+      "why_recommended": "Excellent for relaxation and culture, plus great photography in the garden.",
+      "highlights": [
+        "Pre-modern Japanese art",
+        "Private tea house garden",
+        "Kengo Kuma design"
+      ],
+      "tags": [
+        "Art",
+        "Garden",
+        "Zen",
+        "Culture"
+      ],
+      "estimated_cost": 1300,
+      "ticket_price": 1300,
+      "visit_duration_minutes": 120,
+      "best_time_of_day": "afternoon",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.6,
+      "reviews_count": 5200,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "Closed",
+        "tuesday": "10:00-17:00",
+        "wednesday": "10:00-17:00",
+        "thursday": "10:00-17:00",
+        "friday": "10:00-17:00",
+        "saturday": "10:00-17:00",
+        "sunday": "10:00-17:00",
+        "notes": "Closed on Mondays and during exhibit changes"
+      },
+      "contact_information": {
+        "phone": "+81 3-3400-2536",
+        "website": "http://www.nezu-muse.or.jp/en/",
+        "email": "info@nezu-muse.or.jp"
+      },
+      "age_range": {
+        "min_age": 5,
+        "max_age": 100
+      },
+      "audience": [
+        "adults",
+        "seniors",
+        "couples"
+      ],
+      "query_to_search": "Nezu Museum garden Tokyo"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Toyosu Fish Market",
+      "category": "restaurant",
+      "coordinates": {
+        "latitude": 35.6444,
+        "longitude": 139.7891
+      },
+      "address": "6-5-1 Toyosu, Koto City, Tokyo 135-0061, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "The world's largest wholesale fish market, relocated from Tsukiji to a modern facility.",
+      "why_people_go": "To eat sushi at legendary shops like Sushi Dai and watch the tuna auction.",
+      "why_recommended": "Essential for foodies. Fits the adventure and food/dining interests perfectly.",
+      "highlights": [
+        "Tuna auction viewing",
+        "World-class sushi",
+        "Modern facility"
+      ],
+      "tags": [
+        "Food",
+        "Sushi",
+        "Market",
+        "Experience"
+      ],
+      "estimated_cost": 7000,
+      "ticket_price": 0,
+      "visit_duration_minutes": 180,
+      "best_time_of_day": "morning",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.2,
+      "reviews_count": 12000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "05:00-15:00",
+        "tuesday": "05:00-15:00",
+        "wednesday": "05:00-15:00",
+        "thursday": "05:00-15:00",
+        "friday": "05:00-15:00",
+        "saturday": "05:00-15:00",
+        "sunday": "Closed",
+        "notes": "Closed on Sundays and holidays"
+      },
+      "contact_information": {
+        "phone": "+81 3-3520-8266",
+        "website": "https://www.shijou.metro.tokyo.lg.jp/toyosu/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 5,
+        "max_age": 100
+      },
+      "audience": [
+        "adults",
+        "friends",
+        "solo_travelers"
+      ],
+      "query_to_search": "Toyosu market sushi breakfast"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Akihabara Electric Town",
+      "category": "shopping",
+      "coordinates": {
+        "latitude": 35.6997,
+        "longitude": 139.7711
+      },
+      "address": "Sotokanda, Chiyoda City, Tokyo 101-0021, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "The center of Japan's otaku culture and electronics shopping.",
+      "why_people_go": "To explore the latest electronics and experience unique subcultures.",
+      "why_recommended": "Of high interest to a SWE student and great for vibrant photography.",
+      "highlights": [
+        "Electronics megastores",
+        "Anime and Manga shops",
+        "Themed cafes"
+      ],
+      "tags": [
+        "Electronics",
+        "Anime",
+        "Tech",
+        "Culture"
+      ],
+      "estimated_cost": 5000,
+      "ticket_price": 0,
+      "visit_duration_minutes": 180,
+      "best_time_of_day": "evening",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.4,
+      "reviews_count": 45000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "10:00-21:00",
+        "tuesday": "10:00-21:00",
+        "wednesday": "10:00-21:00",
+        "thursday": "10:00-21:00",
+        "friday": "10:00-21:00",
+        "saturday": "10:00-21:00",
+        "sunday": "10:00-21:00",
+        "notes": "Shop hours vary"
+      },
+      "contact_information": {
+        "phone": "null",
+        "website": "https://akihabara-japan.com/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "teens",
+        "adults",
+        "friends"
+      ],
+      "query_to_search": "Akihabara neon lights Tokyo"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Hamarikyu Gardens",
+      "category": "nature",
+      "coordinates": {
+        "latitude": 35.6596,
+        "longitude": 139.7633
+      },
+      "address": "1-1 Hamarikyuteien, Chuo City, Tokyo 104-0046, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "A landscape garden next to Tokyo Bay that once served as a duck hunting ground for Shoguns.",
+      "why_people_go": "To have matcha at a tea house on a lake and see unique garden landscaping.",
+      "why_recommended": "Perfect for 'Relaxation' and Alice's nature photography.",
+      "highlights": [
+        "Seawater ponds",
+        "Nakajima Tea House",
+        "Contrast with skyscrapers"
+      ],
+      "tags": [
+        "Garden",
+        "Tea",
+        "Nature",
+        "History"
+      ],
+      "estimated_cost": 300,
+      "ticket_price": 300,
+      "visit_duration_minutes": 90,
+      "best_time_of_day": "morning",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.5,
+      "reviews_count": 14000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "09:00-17:00",
+        "tuesday": "09:00-17:00",
+        "wednesday": "09:00-17:00",
+        "thursday": "09:00-17:00",
+        "friday": "09:00-17:00",
+        "saturday": "09:00-17:00",
+        "sunday": "09:00-17:00",
+        "notes": "Last entry 16:30"
+      },
+      "contact_information": {
+        "phone": "+81 3-3541-0200",
+        "website": "https://www.tokyo-park.or.jp/park/format/index028.html",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "seniors",
+        "couples",
+        "family",
+        "solo_travelers"
+      ],
+      "query_to_search": "Hamarikyu Gardens Tokyo skyscraper contrast"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Tokyo National Museum",
+      "category": "museum",
+      "coordinates": {
+        "latitude": 35.7189,
+        "longitude": 139.7766
+      },
+      "address": "13-9 Uenokoen, Taito City, Tokyo 110-8712, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "The oldest and largest museum in Japan, collecting a vast range of art and archaeological objects.",
+      "why_people_go": "To see the world's best collection of Japanese art and cultural artifacts.",
+      "why_recommended": "Core for 'Culture & History' interests, especially for the samurai history Beibarys likes.",
+      "highlights": [
+        "Samurai armor",
+        "National Treasures",
+        "Buddhist statues"
+      ],
+      "tags": [
+        "Museum",
+        "History",
+        "Samurai",
+        "Culture"
+      ],
+      "estimated_cost": 1000,
+      "ticket_price": 1000,
+      "visit_duration_minutes": 180,
+      "best_time_of_day": "morning",
+      "best_season": [
+        "spring",
+        "autumn",
+        "winter",
+        "summer"
+      ],
+      "rating": 4.6,
+      "reviews_count": 18000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "Closed",
+        "tuesday": "09:30-17:00",
+        "wednesday": "09:30-17:00",
+        "thursday": "09:30-17:00",
+        "friday": "09:30-20:00",
+        "saturday": "09:30-17:00",
+        "sunday": "09:30-17:00",
+        "notes": "Opening hours vary by season"
+      },
+      "contact_information": {
+        "phone": "+81 3-3822-1111",
+        "website": "https://www.tnm.jp/?lang=en",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 10,
+        "max_age": 100
+      },
+      "audience": [
+        "adults",
+        "seniors",
+        "solo_travelers",
+        "friends"
+      ],
+      "query_to_search": "Tokyo National Museum samurai"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Zojo-ji Temple",
+      "category": "cultural",
+      "coordinates": {
+        "latitude": 35.6575,
+        "longitude": 139.7483
+      },
+      "address": "4-7-35 Shibakoen, Minato City, Tokyo 105-0011, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "The head temple of the Jodo sect of Japanese Buddhism and the family temple of the Tokugawa Shogunate.",
+      "why_people_go": "To see the contrast between the ancient temple and the modern Tokyo Tower.",
+      "why_recommended": "Unique photography spot for the 'Photography' enthusiast Alice.",
+      "highlights": [
+        "Sandaemon Gate",
+        "Tokugawa Shogun Graves",
+        "Tokyo Tower backdrop"
+      ],
+      "tags": [
+        "Temple",
+        "History",
+        "Tokyo Tower",
+        "Photography"
+      ],
+      "estimated_cost": 0,
+      "ticket_price": 0,
+      "visit_duration_minutes": 60,
+      "best_time_of_day": "afternoon",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.5,
+      "reviews_count": 9200,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "09:00-17:00",
+        "tuesday": "09:00-17:00",
+        "wednesday": "09:00-17:00",
+        "thursday": "09:00-17:00",
+        "friday": "09:00-17:00",
+        "saturday": "09:00-17:00",
+        "sunday": "09:00-17:00",
+        "notes": "Grounds open 24/7"
+      },
+      "contact_information": {
+        "phone": "+81 3-3432-1431",
+        "website": "https://www.zojoji.or.jp/en/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "couples",
+        "seniors"
+      ],
+      "query_to_search": "Zojoji Temple Tokyo Tower"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Shibuya Crossing",
+      "category": "landmark",
+      "coordinates": {
+        "latitude": 35.6594,
+        "longitude": 139.7006
+      },
+      "address": "2-2-1 Shibuya, Shibuya City, Tokyo 150-0002, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "The iconic pedestrian scramble crossing and heart of Tokyo's energy.",
+      "why_people_go": "To feel the rush of the crowd and capture the definitive Tokyo photo.",
+      "why_recommended": "Mandatory 'Road' experience as requested by the user.",
+      "highlights": [
+        "Hachiko Statue",
+        "Neon lights",
+        "World's busiest pedestrian crossing"
+      ],
+      "tags": [
+        "Iconic",
+        "Adventure",
+        "Photography",
+        "Urban"
+      ],
+      "estimated_cost": 0,
+      "ticket_price": 0,
+      "visit_duration_minutes": 30,
+      "best_time_of_day": "night",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.5,
+      "reviews_count": 45000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "24 hours",
+        "tuesday": "24 hours",
+        "wednesday": "24 hours",
+        "thursday": "24 hours",
+        "friday": "24 hours",
+        "saturday": "24 hours",
+        "sunday": "24 hours",
+        "notes": "Always open"
+      },
+      "contact_information": {
+        "phone": "null",
+        "website": "null",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "friends",
+        "teens",
+        "adults"
+      ],
+      "query_to_search": "Shibuya Crossing night Tokyo"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Ghibli Museum",
+      "category": "cultural",
+      "coordinates": {
+        "latitude": 35.6963,
+        "longitude": 139.5704
+      },
+      "address": "1-1-83 Shimorenjaku, Mitaka, Tokyo 181-0013, Japan",
+      "city": "Mitaka",
+      "country": "Japan",
+      "short_description": "A whimsical museum showcasing the work of Hayao Miyazaki and Studio Ghibli.",
+      "why_people_go": "To immerse themselves in the world of Totoro and Spirited Away.",
+      "why_recommended": "Unique cultural experience that is world-famous; luxury for fans who secure tickets.",
+      "highlights": [
+        "Robot Soldier",
+        "Cat Bus",
+        "Exclusive short films"
+      ],
+      "tags": [
+        "Animation",
+        "Art",
+        "Culture",
+        "Unique"
+      ],
+      "estimated_cost": 1000,
+      "ticket_price": 1000,
+      "visit_duration_minutes": 120,
+      "best_time_of_day": "afternoon",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.6,
+      "reviews_count": 22000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "10:00-18:00",
+        "tuesday": "Closed",
+        "wednesday": "10:00-18:00",
+        "thursday": "10:00-18:00",
+        "friday": "10:00-18:00",
+        "saturday": "10:00-18:00",
+        "sunday": "10:00-18:00",
+        "notes": "Closed on Tuesdays; pre-purchased tickets required"
+      },
+      "contact_information": {
+        "phone": "+81 570-055-777",
+        "website": "https://www.ghibli-museum.jp/en/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "friends",
+        "couples",
+        "teens"
+      ],
+      "query_to_search": "Ghibli Museum Mitaka Tokyo"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Roppongi Hills Mori Tower",
+      "category": "landmark",
+      "coordinates": {
+        "latitude": 35.6605,
+        "longitude": 139.7291
+      },
+      "address": "6-10-1 Roppongi, Minato City, Tokyo 106-6108, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "A megacomplex featuring a modern art museum and an open-air observation deck.",
+      "why_people_go": "To enjoy high-end dining, modern art, and one of the best night views of Tokyo Tower.",
+      "why_recommended": "Perfectly blends luxury, art, and high-end dining for the travelers' high budget.",
+      "highlights": [
+        "Sky Deck",
+        "Mori Art Museum",
+        "Luxury dining"
+      ],
+      "tags": [
+        "Luxury",
+        "Modern Art",
+        "City View",
+        "Dining"
+      ],
+      "estimated_cost": 2500,
+      "ticket_price": 2500,
+      "visit_duration_minutes": 150,
+      "best_time_of_day": "night",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.5,
+      "reviews_count": 15000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "10:00-22:00",
+        "tuesday": "10:00-22:00",
+        "wednesday": "10:00-22:00",
+        "thursday": "10:00-22:00",
+        "friday": "10:00-22:00",
+        "saturday": "10:00-22:00",
+        "sunday": "10:00-22:00",
+        "notes": "Mori Art Museum closes 22:00 except Tuesdays (17:00)"
+      },
+      "contact_information": {
+        "phone": "+81 3-6406-6000",
+        "website": "https://www.roppongihills.com/en/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "adults",
+        "couples",
+        "friends"
+      ],
+      "query_to_search": "Roppongi Hills Sky Deck night"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Edo-Tokyo Open Air Museum",
+      "category": "museum",
+      "coordinates": {
+        "latitude": 35.7161,
+        "longitude": 139.5126
+      },
+      "address": "3-7-1 Sakuracho, Koganei, Tokyo 184-0005, Japan",
+      "city": "Koganei",
+      "country": "Japan",
+      "short_description": "An open-air museum exhibiting various historic buildings from the Tokyo area.",
+      "why_people_go": "To see life-sized historical Japanese houses and walk through old streets.",
+      "why_recommended": "Highly photogenic and provides a deep dive into Japanese history and 'Road' culture.",
+      "highlights": [
+        "Historic Tokyo buildings",
+        "Public bathhouse (Sento)",
+        "Showa era houses"
+      ],
+      "tags": [
+        "History",
+        "Architecture",
+        "Culture",
+        "Photography"
+      ],
+      "estimated_cost": 400,
+      "ticket_price": 400,
+      "visit_duration_minutes": 180,
+      "best_time_of_day": "morning",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.7,
+      "reviews_count": 6500,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "Closed",
+        "tuesday": "09:30-17:30",
+        "wednesday": "09:30-17:30",
+        "thursday": "09:30-17:30",
+        "friday": "09:30-17:30",
+        "saturday": "09:30-17:30",
+        "sunday": "09:30-17:30",
+        "notes": "Last entry 17:00"
+      },
+      "contact_information": {
+        "phone": "+81 42-388-3300",
+        "website": "https://www.tatemonoen.jp/english/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "seniors",
+        "couples",
+        "solo_travelers"
+      ],
+      "query_to_search": "Edo Tokyo Open Air Architectural Museum houses"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Shimokitazawa",
+      "category": "shopping",
+      "coordinates": {
+        "latitude": 35.6617,
+        "longitude": 139.6667
+      },
+      "address": "1-15-1 Kitazawa, Setagaya City, Tokyo 155-0031, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "A bohemian district famous for its vintage shops, small theaters, and live music venues.",
+      "why_people_go": "To find unique second-hand items and explore trendy, narrow streets.",
+      "why_recommended": "Unique 'Road' culture and great photography for young travelers.",
+      "highlights": [
+        "Vintage clothing shops",
+        "Small theaters",
+        "Hip cafes"
+      ],
+      "tags": [
+        "Vintage",
+        "Hipster",
+        "Culture",
+        "Shopping"
+      ],
+      "estimated_cost": 3000,
+      "ticket_price": 0,
+      "visit_duration_minutes": 150,
+      "best_time_of_day": "afternoon",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.3,
+      "reviews_count": 12000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "11:00-20:00",
+        "tuesday": "11:00-20:00",
+        "wednesday": "11:00-20:00",
+        "thursday": "11:00-20:00",
+        "friday": "11:00-20:00",
+        "saturday": "11:00-20:00",
+        "sunday": "11:00-20:00",
+        "notes": "Shop hours vary"
+      },
+      "contact_information": {
+        "phone": "null",
+        "website": "null",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 15,
+        "max_age": 50
+      },
+      "audience": [
+        "friends",
+        "couples",
+        "teens",
+        "adults"
+      ],
+      "query_to_search": "Shimokitazawa vintage shops Tokyo"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Kappabashi Kitchen Street",
+      "category": "shopping",
+      "coordinates": {
+        "latitude": 35.7153,
+        "longitude": 139.7885
+      },
+      "address": "3-chome Matsugaya, Taito City, Tokyo 111-0036, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "Tokyo's kitchenware district, specializing in everything needed by the restaurant industry.",
+      "why_people_go": "To buy professional-grade knives and high-quality fake food models.",
+      "why_recommended": "Excellent for Food & Dining interests and unique souvenirs.",
+      "highlights": [
+        "Plastic food samples",
+        "Japanese kitchen knives",
+        "Giant Chef statue"
+      ],
+      "tags": [
+        "Kitchenware",
+        "Foodie",
+        "Shopping",
+        "Unique"
+      ],
+      "estimated_cost": 10000,
+      "ticket_price": 0,
+      "visit_duration_minutes": 120,
+      "best_time_of_day": "morning",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.4,
+      "reviews_count": 8200,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "09:00-17:00",
+        "tuesday": "09:00-17:00",
+        "wednesday": "09:00-17:00",
+        "thursday": "09:00-17:00",
+        "friday": "09:00-17:00",
+        "saturday": "09:00-17:00",
+        "sunday": "Closed",
+        "notes": "Many shops closed on Sundays"
+      },
+      "contact_information": {
+        "phone": "+81 3-3844-1225",
+        "website": "https://www.kappabashi.or.jp/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 10,
+        "max_age": 100
+      },
+      "audience": [
+        "adults",
+        "friends",
+        "solo_travelers"
+      ],
+      "query_to_search": "Kappabashi Street Tokyo fake food"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Hie Shrine",
+      "category": "cultural",
+      "coordinates": {
+        "latitude": 35.6747,
+        "longitude": 139.7397
+      },
+      "address": "2-10-5 Nagatacho, Chiyoda City, Tokyo 100-0014, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "An important Shinto shrine in Tokyo with a beautiful row of red torii gates similar to Fushimi Inari.",
+      "why_people_go": "To see the photogenic torii gates and pray for good fortune.",
+      "why_recommended": "A great alternative to Kyoto's Fushimi Inari for 'Photography' and 'Culture'.",
+      "highlights": [
+        "Torii gate tunnel",
+        "Monkey statues",
+        "Modern escalator entrance"
+      ],
+      "tags": [
+        "Shinto",
+        "Torii",
+        "Photography",
+        "Culture"
+      ],
+      "estimated_cost": 0,
+      "ticket_price": 0,
+      "visit_duration_minutes": 45,
+      "best_time_of_day": "morning",
+      "best_season": [
+        "spring",
+        "autumn"
+      ],
+      "rating": 4.5,
+      "reviews_count": 6200,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "06:00-17:00",
+        "tuesday": "06:00-17:00",
+        "wednesday": "06:00-17:00",
+        "thursday": "06:00-17:00",
+        "friday": "06:00-17:00",
+        "saturday": "06:00-17:00",
+        "sunday": "06:00-17:00",
+        "notes": "Always open for prayer"
+      },
+      "contact_information": {
+        "phone": "+81 3-3581-2471",
+        "website": "https://www.hiejinja.or.jp/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "couples",
+        "seniors"
+      ],
+      "query_to_search": "Hie Shrine torii gates tunnel"
+    },
+    {
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG8pYF9A",
+      "name": "Tokyo Tower",
+      "category": "landmark",
+      "coordinates": {
+        "latitude": 35.6586,
+        "longitude": 139.7454
+      },
+      "address": "4-2-8 Shibakoen, Minato City, Tokyo 105-0011, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "short_description": "The communications and observation tower inspired by the Eiffel Tower.",
+      "why_people_go": "To see the symbol of Japan's post-war rebirth and enjoy the view.",
+      "why_recommended": "Must-visit landmark for photography and the luxury experience of the Top Deck tour.",
+      "highlights": [
+        "Main Deck",
+        "Top Deck",
+        "Red and white lattice"
+      ],
+      "tags": [
+        "Iconic",
+        "Observation Deck",
+        "Photography",
+        "Landmark"
+      ],
+      "estimated_cost": 1200,
+      "ticket_price": 1200,
+      "visit_duration_minutes": 90,
+      "best_time_of_day": "night",
+      "best_season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "rating": 4.4,
+      "reviews_count": 68000,
+      "image_url": "https://lh5.googleusercontent.com/p/AF1QipN3-Z3v_7G4U2X1e0O8l7C1P9X9v9M-9v9M9v9M",
+      "opening_hours": {
+        "monday": "09:00-22:30",
+        "tuesday": "09:00-22:30",
+        "wednesday": "09:00-22:30",
+        "thursday": "09:00-22:30",
+        "friday": "09:00-22:30",
+        "saturday": "09:00-22:30",
+        "sunday": "09:00-22:30",
+        "notes": "Last entry 22:00"
+      },
+      "contact_information": {
+        "phone": "+81 3-3433-5111",
+        "website": "https://www.tokyotower.jp/en/",
+        "email": "null"
+      },
+      "age_range": {
+        "min_age": 0,
+        "max_age": 100
+      },
+      "audience": [
+        "family",
+        "couples",
+        "friends"
+      ],
+      "query_to_search": "Tokyo Tower red night"
+    }
+  ]
+}

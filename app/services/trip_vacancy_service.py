@@ -8,15 +8,19 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import config
 from app.models.generated_trip_plan import GeneratedTripPlan
 from app.models.trip_vacancy import TripVacancy
-from app.repositories.trip_vacancy_repository import TripVacancyRepository
 from app.repositories.chat_group_repository import ChatGroupRepository
 from app.repositories.chat_member_repository import ChatMemberRepository
+from app.repositories.generated_trip_plan_repository import GeneratedTripPlanRepository
 from app.repositories.offer_repository import OfferRepository
 from app.repositories.profile_repository import ProfileRepository
-from app.repositories.generated_trip_plan_repository import GeneratedTripPlanRepository
+from app.repositories.trip_vacancy_repository import TripVacancyRepository
+from app.schemas.recommendation import (
+    GenerateRecommendationsRequest,
+    PlaceRecommendationsSchema,
+    RecommendationUserPayload,
+)
+from app.services.ai import generate_recommendations
 from app.services.image_recommendation import enrich_with_unsplash_images
-
-logger = logging.getLogger(__name__)
 
 
 class TripVacancyService:
@@ -258,32 +262,19 @@ class TripVacancyService:
     # ============= GENERATE PLAN =============
     async def generate_plan(
         self, trip_vacancy_id: int, user_id: int
-    ) -> Tuple[bool, Optional[Dict[str, Any]], Optional[str]]:
+    ) -> Tuple[bool, PlaceRecommendationsSchema, Optional[str]]:
         """Collect tripmates data, send it to planner service, and return planner response."""
         try:
-            logger.info(
-                "Generate plan started in service: trip_vacancy_id=%s user_id=%s",
-                trip_vacancy_id,
-                user_id,
-            )
-
+            print("started to planning")
             # Get trip vacancy
             trip_vacancy = await self.trip_vacancy_repo.get_by_id(trip_vacancy_id)
             if not trip_vacancy:
-                logger.warning(
-                    "Generate plan aborted: trip_vacancy not found, trip_vacancy_id=%s user_id=%s",
-                    trip_vacancy_id,
-                    user_id,
-                )
+                print("Trip vacancy not found")
                 return False, None, "Trip vacancy not found"
 
             # Check if user has access (must be requester or accepted offerer)
             if not await self._is_user_trip_member(trip_vacancy, user_id):
-                logger.warning(
-                    "Generate plan denied: non-member access, trip_vacancy_id=%s user_id=%s",
-                    trip_vacancy_id,
-                    user_id,
-                )
+                print("Generate plan denied: non-member access")
                 return (
                     False,
                     None,
@@ -295,11 +286,7 @@ class TripVacancyService:
             )
             if existing_plan:
                 if existing_plan.generated_at:
-                    logger.info(
-                        "Generate plan skipped: already generated, trip_vacancy_id=%s user_id=%s",
-                        trip_vacancy_id,
-                        user_id,
-                    )
+                    print("Generate plan denied: already generated")
                     return False, None, "Trip plan has already been generated"
 
                 if (
@@ -307,22 +294,12 @@ class TripVacancyService:
                     and datetime.utcnow() - existing_plan.generation_requested_at
                     < timedelta(minutes=self.PLAN_GENERATION_WAIT_MINUTES)
                 ):
-                    logger.info(
-                        "Generate plan throttled: generation in progress, trip_vacancy_id=%s user_id=%s",
-                        trip_vacancy_id,
-                        user_id,
-                    )
+                    print("Generate plan denied: generation in progress")
                     return False, None, "we generating please wait"
 
             # Check if trip vacancy is full
             if trip_vacancy.people_joined < trip_vacancy.people_needed:
-                logger.info(
-                    "Generate plan blocked: trip not full, trip_vacancy_id=%s user_id=%s joined=%s needed=%s",
-                    trip_vacancy_id,
-                    user_id,
-                    trip_vacancy.people_joined,
-                    trip_vacancy.people_needed,
-                )
+                print("Generate plan denied: trip not full")
                 return (
                     False,
                     None,
@@ -346,26 +323,27 @@ class TripVacancyService:
             # Collect all user data
             users_data = []
 
-            def _profile_dict(profile) -> dict:
-                return {
-                    "name": profile.first_name + " " + profile.last_name,
-                    "age": self._calculate_age(profile.date_of_birth),
-                    "gender": profile.gender,
-                    "from_city": profile.city,
-                    "from_country": profile.country,
-                    "bio": profile.bio,
-                    "languages": [ul.language.name for ul in profile.languages],
-                    "interests": [ui.interest.name for ui in profile.interests],
-                    "travel_styles": [
+            def _profile_dict(profile) -> RecommendationUserPayload:
+                return RecommendationUserPayload(
+                    name=f"{profile.first_name} {profile.last_name}",
+                    age=self._calculate_age(profile.date_of_birth),
+                    gender=profile.gender,
+                    from_city=profile.city,
+                    from_country=profile.country,
+                    bio=profile.bio or "",
+                    languages=[ul.language.name for ul in profile.languages],
+                    interests=[ui.interest.name for ui in profile.interests],
+                    travel_styles=[
                         ts.travel_style.name for ts in profile.travel_styles
                     ],
-                }
+                    user_label="",
+                )
 
             # Add requester as user-1
             requester_profile = profiles_by_user_id.get(trip_vacancy.requester_id)
             if requester_profile:
                 entry = _profile_dict(requester_profile)
-                entry["user_label"] = "user-1"
+                entry.user_label = "user-1"
                 users_data.append(entry)
 
             # Add accepted offerers as user-2, user-3, etc.
@@ -373,7 +351,7 @@ class TripVacancyService:
                 offerer_profile = profiles_by_user_id.get(offer.offerer_id)
                 if offerer_profile:
                     entry = _profile_dict(offerer_profile)
-                    entry["user_label"] = f"user-{idx}"
+                    entry.user_label = f"user-{idx}"
                     users_data.append(entry)
 
             await self.generated_plan_repo.mark_generation_requested(trip_vacancy.id)
@@ -385,32 +363,26 @@ class TripVacancyService:
                 trip_vacancy_id=trip_vacancy.id,
                 planner_response=planner_response,
             )
-            plan: GeneratedTripPlan = await self.generated_plan_repo.get_by_trip_vacancy_id_with_places(
-                trip_vacancy_id
+            plan: GeneratedTripPlan = (
+                await self.generated_plan_repo.get_by_trip_vacancy_id_with_places(
+                    trip_vacancy_id
+                )
             )
 
-            print("plan received from planner service", plan.recommended_places[0].name if plan.recommended_places else "no places")
-            
+            print(
+                "plan received from planner service",
+                (
+                    plan.recommended_places[0].name
+                    if plan.recommended_places
+                    else "no places"
+                ),
+            )
 
             await enrich_with_unsplash_images(plan.recommended_places)
-
-
-            logger.info(
-                "Generate plan completed in service: trip_vacancy_id=%s user_id=%s participants=%s",
-                trip_vacancy_id,
-                user_id,
-                len(users_data),
-            )
 
             return True, planner_response, None
 
         except Exception as e:
-            logger.exception(
-                "Generate plan failed with exception: trip_vacancy_id=%s user_id=%s error=%s",
-                trip_vacancy_id,
-                user_id,
-                str(e),
-            )
             return False, None, f"Failed to generate plan: {str(e)}"
 
     async def get_trip_plan(
@@ -463,64 +435,41 @@ class TripVacancyService:
         )
 
     def _build_generate_plan_payload(
-        self, trip_vacancy: TripVacancy, users_data: List[dict]
-    ) -> Dict[str, Any]:
-        """Build payload for external plan generation service."""
-        return {
-                    "trip_vacancy_id": trip_vacancy.id,
-                    "destination_city": trip_vacancy.destination_city or "",
-                    "destination_country": trip_vacancy.destination_country or "",
-                    "start_date": (
-                        trip_vacancy.start_date.isoformat() if trip_vacancy.start_date else ""
-                    ),
-                    "end_date": (
-                        trip_vacancy.end_date.isoformat() if trip_vacancy.end_date else ""
-                    ),
-                    "description": trip_vacancy.description or "",
-                    "planned_activities": trip_vacancy.planned_activities or "",
-                    "planned_destinations": trip_vacancy.planned_destinations or "",
-                    "transportation_preference": trip_vacancy.transportation_preference or "",
-                    "accommodation_preference": trip_vacancy.accommodation_preference or "",
-                    "min_budget": (
-                        float(trip_vacancy.min_budget)
-                        if trip_vacancy.min_budget is not None
-                        else 0.0
-                    ),
-                    "max_budget": (
-                        float(trip_vacancy.max_budget)
-                        if trip_vacancy.max_budget is not None
-                        else 0.0
-                    ),
-                    "users": users_data,
-                }
+        self, trip_vacancy: TripVacancy, users_data: List[RecommendationUserPayload]
+    ) -> GenerateRecommendationsRequest:
+        return GenerateRecommendationsRequest(
+            trip_vacancy_id=trip_vacancy.id,
+            destination_city=trip_vacancy.destination_city or "",
+            destination_country=trip_vacancy.destination_country or "",
+            start_date=trip_vacancy.start_date or None,
+            end_date=trip_vacancy.end_date or None,
+            description=trip_vacancy.description or "",
+            planned_activities=trip_vacancy.planned_activities or "",
+            planned_destinations=trip_vacancy.planned_destinations or "",
+            transportation_preference=trip_vacancy.transportation_preference or "",
+            accommodation_preference=trip_vacancy.accommodation_preference or "",
+            min_budget=(
+                float(trip_vacancy.min_budget)
+                if trip_vacancy.min_budget is not None
+                else 0.0
+            ),
+            max_budget=(
+                float(trip_vacancy.max_budget)
+                if trip_vacancy.max_budget is not None
+                else 0.0
+            ),
+            users=users_data,
+        )
 
-    async def _call_plan_service(self, payload: Dict[str, Any]) -> Dict[str, Any]:
-        """Call external AI planner service and return parsed response body."""
-        from app.repositories.generated_trip_plan_repository import GeneratedTripPlanRepository
-        trip_vacancy_id = payload.get("trip_vacancy_id")
+    async def _call_plan_service(
+        self, payload: GenerateRecommendationsRequest
+    ) -> PlaceRecommendationsSchema:
+        """Call Gemini-based recommendation service."""
         try:
-            print("Calling planner service with payload")
-            async with httpx.AsyncClient(timeout=5 * 60.0) as client:
-                response = await client.post(config.PLAN_SERVICE_URL, json=payload)
-                print("Planner service responded with status code", response.status_code)
-            response.raise_for_status()
-        except (httpx.HTTPStatusError, httpx.RequestError) as exc:
-            # Set generation_requested_at to None if request fails
-            if trip_vacancy_id is not None:
-                await self.generated_plan_repo.mark_generation_requested(trip_vacancy_id, delete=True)
-            if isinstance(exc, httpx.HTTPStatusError):
-                raise Exception(
-                    f"Planner service returned {exc.response.status_code}: {exc.response.text}"
-                ) from exc
-            else:
-                raise Exception(
-                    f"Failed to connect to planner service at {config.PLAN_SERVICE_URL}: {str(exc)}"
-                ) from exc
-
-        try:
-            return response.json()
-        except ValueError as exc:
-            # Set generation_requested_at to None if response is not valid JSON
-            if trip_vacancy_id is not None:
-                await self.generated_plan_repo.mark_generation_requested(trip_vacancy_id, delete=True)
-            raise Exception("Planner service response is not valid JSON") from exc
+            return await generate_recommendations(payload)
+        except Exception as exc:
+            trip_vacancy_id = payload.trip_vacancy_id
+            await self.generated_plan_repo.mark_generation_requested(
+                trip_vacancy_id, delete=True
+            )
+            raise Exception(f"Recommendation service failed") from exc
