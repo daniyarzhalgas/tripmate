@@ -1,12 +1,9 @@
 from sqlalchemy import (
     Column,
-    DateTime,
     ForeignKey,
     Integer,
     String,
-    Text,
     UniqueConstraint,
-    func,
 )
 from sqlalchemy.orm import relationship
 

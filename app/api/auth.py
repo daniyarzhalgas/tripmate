@@ -1,28 +1,32 @@
+from datetime import timedelta
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.database import get_db
-from app.core.config import config
-from app.services.auth_service import AuthService
-from app.schemas.auth import (
-    EmailVerificationRequest,
-    ResendVerificationRequest,
-    UserRegisterRequest,
-    UserLoginRequest,
-    PasswordResetRequest,
-    PasswordResetConfirm,
-    PasswordChange,
-    AuthResponse,
-    MessageResponse,
-    UserResponse,
-    TokenResponse,
-    RegisterResponse,
-)
 from app.api.dependencies import get_current_user, security
+from app.core.config import config
+from app.core.database import get_db
+from app.core.security import create_access_token
 from app.models.user import User
+from app.schemas.auth import (
+    AuthResponse,
+    EmailVerificationRequest,
+    MessageResponse,
+    PasswordChange,
+    PasswordResetConfirm,
+    PasswordResetRequest,
+    RegisterResponse,
+    ResendVerificationRequest,
+    TokenResponse,
+    UserLoginRequest,
+    UserRegisterRequest,
+    UserResponse,
+)
+from app.services.auth_service import AuthService
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
+
 
 @router.post("/register", response_model=RegisterResponse, status_code=status.HTTP_201_CREATED)
 async def register(
@@ -41,13 +45,10 @@ async def register(
             detail=error,
         )
 
-    # Return user with verification message
     return {
         "user": user,
         "message": "Registration successful! Please check your email for verification code.",
-        # "verification_code": verification_code if config.DEBUG else None  # Only return in debug mode
     }
-
 
 
 @router.post("/login", response_model=AuthResponse)
@@ -85,15 +86,14 @@ async def logout(
     token = credentials.credentials
     auth_service = AuthService(db)
     success, error = await auth_service.logout(token)
-    
+
     if not success:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=error,
         )
-    
-    return {"message": "Logged out successfully"}
 
+    return {"message": "Logged out successfully"}
 
 
 @router.post("/forgot-password", response_model=MessageResponse)
@@ -102,12 +102,10 @@ async def forgot_password(
     db: AsyncSession = Depends(get_db),
 ):
     auth_service = AuthService(db)
-    success, reset_token, error = await auth_service.request_password_reset(request.email)
+    await auth_service.request_password_reset(request.email)
 
     # Always return success to prevent email enumeration
-    return {
-        "message": "If the email exists, a password reset link has been sent"
-    }
+    return {"message": "If the email exists, a password reset link has been sent"}
 
 
 @router.post("/reset-password", response_model=MessageResponse)
@@ -128,7 +126,6 @@ async def reset_password(
         )
 
     return {"message": "Password has been reset successfully"}
-
 
 
 @router.post("/change-password", response_model=MessageResponse)
@@ -152,18 +149,14 @@ async def change_password(
 
     return {"message": "Password changed successfully"}
 
+
 @router.get("/me", response_model=UserResponse)
 async def get_me(current_user: User = Depends(get_current_user)):
     return current_user
 
 
-
 @router.post("/refresh", response_model=TokenResponse)
 async def refresh_token(current_user: User = Depends(get_current_user)):
-    from app.core.security import create_access_token
-    from datetime import timedelta
-    from app.core.config import config
-
     access_token = create_access_token(
         data={"sub": str(current_user.id), "email": current_user.email, "role": current_user.role},
         expires_delta=timedelta(minutes=config.ACCESS_TOKEN_EXPIRE_MINUTES),
@@ -175,20 +168,16 @@ async def refresh_token(current_user: User = Depends(get_current_user)):
     }
 
 
-
 @router.post("/verify-email", response_model=MessageResponse)
 async def verify_email(
     request: EmailVerificationRequest,
     db: AsyncSession = Depends(get_db),
 ):
-    print(f"Verifying email for user_id={request.user_id}, code={request.verification_code}")
     auth_service = AuthService(db)
     success, error = await auth_service.verify_email(
         user_id=request.user_id,
         verification_code=request.verification_code,
     )
-    
-    print(f"Verification result: success={success}, error={error}")
     if not success:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -204,7 +193,7 @@ async def resend_verification_code(
     db: AsyncSession = Depends(get_db),
 ):
     auth_service = AuthService(db)
-    success, verification_code, error = await auth_service.resend_verification_code(
+    success, _, error = await auth_service.resend_verification_code(
         user_id=request.user_id
     )
 
@@ -213,6 +202,5 @@ async def resend_verification_code(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=error,
         )
-    return {
-        "message": "Verification code sent successfully"
-    }
+
+    return {"message": "Verification code sent successfully"}

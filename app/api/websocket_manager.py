@@ -1,7 +1,7 @@
+from datetime import datetime, timezone
 from typing import Dict, List, Set
+
 from fastapi import WebSocket
-import json
-from datetime import datetime
 
 
 class ConnectionManager:
@@ -30,7 +30,7 @@ class ConnectionManager:
                 "type": "connection",
                 "status": "connected",
                 "chat_group_id": chat_group_id,
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
             }
         )
 
@@ -81,7 +81,7 @@ class ConnectionManager:
             "type": "typing",
             "user_id": user_id,
             "is_typing": is_typing,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
         await self.broadcast_to_chat_group(chat_group_id, message)
 

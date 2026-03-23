@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional, Tuple
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -214,7 +214,7 @@ class OfferService:
 
             # Update offer status
             updated_offer = await self.offer_repo.update_status(
-                offer, new_status, reviewed_at=datetime.utcnow()
+                offer, new_status, reviewed_at=datetime.now(timezone.utc)
             )
             return True, updated_offer, None
 
@@ -240,7 +240,7 @@ class OfferService:
 
             # Cancel the offer
             updated_offer = await self.offer_repo.update_status(
-                offer, "cancelled", reviewed_at=datetime.utcnow()
+                offer, "cancelled", reviewed_at=datetime.now(timezone.utc)
             )
             return True, updated_offer, None
 

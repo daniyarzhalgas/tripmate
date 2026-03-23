@@ -80,7 +80,7 @@ class TripVacancy(Base):
     @property
     def is_accepting_offers(self) -> bool:
         return (
-            self.status == "active"
+            self.status == "open"
             and self.people_joined < self.people_needed
             and self.end_date >= date.today()
         )

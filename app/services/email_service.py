@@ -256,7 +256,7 @@ class EmailService:
             f"{plain_kk}\n\n{'='*50}\n\n{plain_en}\n\n{'='*50}\n\n{plain_ru}"
         )
 
-        print(f"Sending verification email to {to_email} with code {verification_code}")
+        logger.info("Sending verification email to %s", to_email)
         return True
         # return await self.send_email(to_email, subject, html_content, plain_content)
 
@@ -307,8 +307,7 @@ class EmailService:
             f"{plain_kk}\n\n{'='*50}\n\n{plain_en}\n\n{'='*50}\n\n{plain_ru}"
         )
 
-        print(f"Sending password reset email to {to_email}")
-        print(f"Reset URL: {reset_url}")
+        logger.info("Sending password reset email to %s", to_email)
         return True
         # return await self.send_email(to_email, subject, html_content, plain_content)
 
@@ -358,7 +357,7 @@ class EmailService:
             f"{plain_kk}\n\n{'='*50}\n\n{plain_en}\n\n{'='*50}\n\n{plain_ru}"
         )
 
-        print(f"Sending welcome email to {to_email}")
+        logger.info("Sending welcome email to %s", to_email)
         return True
         # return await self.send_email(to_email, subject, html_content, plain_content)
 

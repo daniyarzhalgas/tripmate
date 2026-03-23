@@ -1,7 +1,9 @@
-from datetime import date, datetime
+from datetime import date
 from typing import List, Optional
 
 from pydantic import BaseModel, Field
+
+from app.schemas.common import MessageResponse  # noqa: F401
 
 
 # ============= Request Schemas =============
@@ -126,7 +128,3 @@ class ProfileDetailResponse(ProfileResponse):
 
     class Config:
         from_attributes = True
-
-
-class MessageResponse(BaseModel):
-    message: str

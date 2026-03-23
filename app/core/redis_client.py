@@ -1,8 +1,13 @@
 import json
+import logging
 from typing import Any, Optional
+
 from redis.asyncio import Redis
 from redis.exceptions import RedisError
+
 from app.core.config import config
+
+logger = logging.getLogger(__name__)
 
 class RedisClient:
     """Async Redis client wrapper for the application."""
@@ -34,7 +39,7 @@ class RedisClient:
                 return json.loads(value)
             return None
         except (RedisError, json.JSONDecodeError) as e:
-            print(f"Redis GET error for key {key}: {e}")
+            logger.error("Redis GET error for key %s: %s", key, e)
             return None
     
     async def set(self, key: str, value: Any, expire: Optional[int] = None) -> bool:
@@ -47,7 +52,7 @@ class RedisClient:
                 await self._client.set(key, json_value)
             return True
         except (RedisError, TypeError) as e:
-            print(f"Redis SET error for key {key}: {e}")
+            logger.error("Redis SET error for key %s: %s", key, e)
             return False
     
     async def delete(self, key: str) -> bool:
@@ -56,7 +61,7 @@ class RedisClient:
             await self._client.delete(key)
             return True
         except RedisError as e:
-            print(f"Redis DELETE error for key {key}: {e}")
+            logger.error("Redis DELETE error for key %s: %s", key, e)
             return False
     
     async def exists(self, key: str) -> bool:
@@ -64,7 +69,7 @@ class RedisClient:
         try:
             return await self._client.exists(key) > 0
         except RedisError as e:
-            print(f"Redis EXISTS error for key {key}: {e}")
+            logger.error("Redis EXISTS error for key %s: %s", key, e)
             return False
     
     async def incr(self, key: str) -> Optional[int]:
@@ -72,7 +77,7 @@ class RedisClient:
         try:
             return await self._client.incr(key)
         except RedisError as e:
-            print(f"Redis INCR error for key {key}: {e}")
+            logger.error("Redis INCR error for key %s: %s", key, e)
             return None
     
     async def expire(self, key: str, seconds: int) -> bool:
@@ -81,7 +86,7 @@ class RedisClient:
             await self._client.expire(key, seconds)
             return True
         except RedisError as e:
-            print(f"Redis EXPIRE error for key {key}: {e}")
+            logger.error("Redis EXPIRE error for key %s: %s", key, e)
             return False
 
 

@@ -1,4 +1,5 @@
 import json
+import logging
 
 from fastapi import HTTPException, status
 from google.generativeai import GenerativeModel, configure
@@ -8,6 +9,8 @@ from pydantic import ValidationError as PydanticValidationError
 from app.core.config import config
 from app.schemas.recommendation import (GenerateRecommendationsRequest,
                                         PlaceRecommendationsSchema)
+
+logger = logging.getLogger(__name__)
 
 
 def create_prompt(trip_data: GenerateRecommendationsRequest) -> str:
@@ -55,7 +58,7 @@ Rules:
 8. For every place include age_range with min_age and max_age.
 9. For every place include audience using only: kids, teens, adults, seniors, family, couples, friends, solo_travelers.
 10. Return JSON only.
-11. Query to search place from unsplash this is image API, I must search it with very clear word, also if youdon't have idea give query to search similar place.
+11. Query to search place from unsplash this is image API, I must search it with very clear word, also if you don't have idea give query to search similar place.
 """.strip()
 
 
@@ -108,24 +111,24 @@ async def generate_recommendations(
             response_schema=PlaceRecommendationsSchema,
         ),
     )
-    print("We configured Gemini model with name:", config.GEMINI_MODEL)
+    logger.info("Configured Gemini model: %s", config.GEMINI_MODEL)
 
     prompt = create_prompt(trip_data)
 
     try:
-        print("We sending request to Gemini with prompt:")
+        logger.info("Sending request to Gemini")
         response = await model.generate_content_async(
             prompt,
             request_options={"timeout": config.GEMINI_TIMEOUT_SECONDS},
         )
     except Exception as e:
-        print("Error while calling Gemini API:", str(e))
+        logger.error("Error while calling Gemini API: %s", e)
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,
             detail="Error while calling Gemini API",
         )
     if not response.candidates:
-        print("Gemini returned no candidates")
+        logger.warning("Gemini returned no candidates")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Gemini returned no candidates",
@@ -133,7 +136,7 @@ async def generate_recommendations(
 
     raw_text = response.text.strip()
     if not raw_text:
-        print("Gemini returned an empty response")
+        logger.warning("Gemini returned an empty response")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Gemini returned an empty response",

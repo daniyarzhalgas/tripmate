@@ -1,6 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from decimal import Decimal
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -40,7 +40,7 @@ class GeneratedTripPlanRepository:
         self, trip_vacancy_id: int, planner_response: PlaceRecommendationsSchema
     ) -> GeneratedTripPlan:
         plan = await self.get_by_trip_vacancy_id(trip_vacancy_id)
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         raw = planner_response.model_dump()
 
         if not plan:
@@ -88,12 +88,12 @@ class GeneratedTripPlanRepository:
             plan = GeneratedTripPlan(
                 trip_vacancy_id=trip_vacancy_id,
                 raw_response={},
-                generation_requested_at=datetime.utcnow(),
+                generation_requested_at=datetime.now(timezone.utc),
                 generated_at=None,
             )
             self.db.add(plan)
         else:
-            plan.generation_requested_at = datetime.utcnow()
+            plan.generation_requested_at = datetime.now(timezone.utc)
 
         await self.db.commit()
         await self.db.refresh(plan)

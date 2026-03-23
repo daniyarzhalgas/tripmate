@@ -1,33 +1,37 @@
+import logging
+from contextlib import asynccontextmanager
+from pathlib import Path
+
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from pathlib import Path
-from app.api import auth, profile, trip_vacancy, offer, chat, trip_plan
+
+from app.api import auth, chat, offer, profile, trip_plan, trip_vacancy
 from app.api.dependencies import get_current_user
-from app.models.user import User
 from app.core.config import config
+from app.core.logging import setup_logging
+from app.core.redis_client import init_redis
+from app.models.user import User
 
-from contextlib import asynccontextmanager
+setup_logging(level="DEBUG" if config.DEBUG else "INFO")
 
-
-from app.core.redis_client import init_redis, get_redis_client
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     redis = init_redis(config.REDIS_URL)
     await redis.connect()
-    print(f"✓ Connected to Redis at {config.REDIS_URL}")
+    logger.info("Connected to Redis at %s", config.REDIS_URL)
 
     yield
 
     await redis.disconnect()
-    print("✓ Redis connection closed")
+    logger.info("Redis connection closed")
 
 
 app = FastAPI(title=config.APPLICATION_NAME, lifespan=lifespan)
 
-# Configure CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # In production, replace with specific origins
@@ -35,7 +39,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(profile.router, prefix="/api/v1")

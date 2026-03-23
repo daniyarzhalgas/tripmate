@@ -1,8 +1,7 @@
-import logging
 from datetime import date
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.dependencies import get_current_user
@@ -94,7 +93,7 @@ async def get_all_trip_vacancies(
     max_age: Optional[int] = Query(None, ge=0, le=150),
     min_budget: Optional[float] = Query(None, ge=0),
     max_budget: Optional[float] = Query(None, ge=0),
-    gender_preference: Optional[str] = Query(None, regex="^(male|female|any)$"),
+    gender_preference: Optional[str] = Query(None, pattern="^(male|female|any)$"),
     from_city: Optional[str] = None,
     from_country: Optional[str] = None,
     db: AsyncSession = Depends(get_db),
@@ -206,8 +205,7 @@ async def generate_plan(
     Only the requester or accepted participants can generate a plan.
     """
     trip_vacancy_service = TripVacancyService(db)
-    
-    print("Generating plan for trip vacancy ID:", trip_vacancy_id) 
+
     success, plan, error = await trip_vacancy_service.generate_plan(
         trip_vacancy_id=trip_vacancy_id, user_id=current_user.id
     )

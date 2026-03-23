@@ -1,6 +1,9 @@
-from pydantic import BaseModel, EmailStr, Field
-from typing import Optional
 from datetime import datetime
+from typing import Optional
+
+from pydantic import BaseModel, EmailStr, Field
+
+from app.schemas.common import MessageResponse  # noqa: F401
 
 
 class UserRegisterRequest(BaseModel):
@@ -72,5 +75,3 @@ class RegisterResponse(BaseModel):
     verification_code: Optional[str] = None 
 
 
-class MessageResponse(BaseModel):
-    message: str

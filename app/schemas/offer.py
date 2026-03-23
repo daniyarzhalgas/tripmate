@@ -4,6 +4,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
+from app.schemas.common import MessageResponse  # noqa: F401
+
 
 # ============= Request Schemas =============
 class OfferCreateRequest(BaseModel):
@@ -35,8 +37,3 @@ class OfferResponse(BaseModel):
 
     class Config:
         from_attributes = True
-
-
-# ============= Message Response =============
-class MessageResponse(BaseModel):
-    message: str

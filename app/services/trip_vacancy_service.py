@@ -1,8 +1,7 @@
 import logging
-from datetime import date, datetime, timedelta
-from typing import Any, Dict, List, Optional, Tuple
+from datetime import date, datetime, timedelta, timezone
+from typing import List, Optional, Tuple
 
-import httpx
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import config
@@ -21,6 +20,8 @@ from app.schemas.recommendation import (
 )
 from app.services.ai import generate_recommendations
 from app.services.image_recommendation import enrich_with_unsplash_images
+
+logger = logging.getLogger(__name__)
 
 
 class TripVacancyService:
@@ -265,16 +266,13 @@ class TripVacancyService:
     ) -> Tuple[bool, PlaceRecommendationsSchema, Optional[str]]:
         """Collect tripmates data, send it to planner service, and return planner response."""
         try:
-            print("started to planning")
-            # Get trip vacancy
+            logger.info("Starting plan generation for trip vacancy %d", trip_vacancy_id)
             trip_vacancy = await self.trip_vacancy_repo.get_by_id(trip_vacancy_id)
             if not trip_vacancy:
-                print("Trip vacancy not found")
                 return False, None, "Trip vacancy not found"
 
-            # Check if user has access (must be requester or accepted offerer)
             if not await self._is_user_trip_member(trip_vacancy, user_id):
-                print("Generate plan denied: non-member access")
+                logger.warning("Generate plan denied: user %d is not a member", user_id)
                 return (
                     False,
                     None,
@@ -286,20 +284,16 @@ class TripVacancyService:
             )
             if existing_plan:
                 if existing_plan.generated_at:
-                    print("Generate plan denied: already generated")
                     return False, None, "Trip plan has already been generated"
 
                 if (
                     existing_plan.generation_requested_at
-                    and datetime.utcnow() - existing_plan.generation_requested_at
+                    and datetime.now(timezone.utc) - existing_plan.generation_requested_at.replace(tzinfo=timezone.utc)
                     < timedelta(minutes=self.PLAN_GENERATION_WAIT_MINUTES)
                 ):
-                    print("Generate plan denied: generation in progress")
                     return False, None, "we generating please wait"
 
-            # Check if trip vacancy is full
             if trip_vacancy.people_joined < trip_vacancy.people_needed:
-                print("Generate plan denied: trip not full")
                 return (
                     False,
                     None,
@@ -357,7 +351,7 @@ class TripVacancyService:
             await self.generated_plan_repo.mark_generation_requested(trip_vacancy.id)
 
             payload = self._build_generate_plan_payload(trip_vacancy, users_data)
-            print("payload to send planner service", payload)
+            logger.info("Sending plan request for trip vacancy %d", trip_vacancy.id)
             planner_response = await self._call_plan_service(payload)
             await self.generated_plan_repo.upsert_plan_response(
                 trip_vacancy_id=trip_vacancy.id,
@@ -369,13 +363,9 @@ class TripVacancyService:
                 )
             )
 
-            print(
-                "plan received from planner service",
-                (
-                    plan.recommended_places[0].name
-                    if plan.recommended_places
-                    else "no places"
-                ),
+            logger.info(
+                "Plan received with %d places",
+                len(plan.recommended_places) if plan.recommended_places else 0,
             )
 
             await enrich_with_unsplash_images(plan.recommended_places)

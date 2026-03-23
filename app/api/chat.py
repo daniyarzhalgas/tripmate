@@ -1,3 +1,5 @@
+import json
+from datetime import datetime, timezone
 from typing import List
 
 from fastapi import (
@@ -5,14 +7,15 @@ from fastapi import (
     Depends,
     HTTPException,
     Query,
-    status,
     WebSocket,
     WebSocketDisconnect,
+    status,
 )
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.dependencies import get_current_user, get_user_from_websocket_token
-from app.core.database import get_db, AsyncSessionLocal
+from app.api.websocket_manager import manager
+from app.core.database import AsyncSessionLocal, get_db
 from app.models.user import User
 from app.schemas.chat import (
     ApiMessageResponse,
@@ -22,9 +25,6 @@ from app.schemas.chat import (
     MessageSendRequest,
 )
 from app.services.chat_service import ChatService
-from app.api.websocket_manager import manager
-import json
-from datetime import datetime
 
 router = APIRouter(prefix="/chats", tags=["Chats"])
 
@@ -273,7 +273,7 @@ async def websocket_chat_endpoint(
             {
                 "type": "user_joined",
                 "user_id": user_id,
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
             },
             exclude=websocket,
         )
@@ -343,7 +343,7 @@ async def websocket_chat_endpoint(
                 {
                     "type": "user_left",
                     "user_id": authenticated_user.id,
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
                 },
             )
 
@@ -353,7 +353,7 @@ async def websocket_chat_endpoint(
             manager.disconnect(websocket, chat_group_id)
             try:
                 await websocket.close(code=status.WS_1011_INTERNAL_ERROR, reason=str(e))
-            except:
+            except Exception:
                 pass
 
 

@@ -58,7 +58,7 @@ async def get_my_offers(
 async def get_offers_for_trip_vacancy(
     trip_vacancy_id: int,
     status: Optional[str] = Query(
-        None, regex="^(pending|accepted|rejected|cancelled)$"
+        None, pattern="^(pending|accepted|rejected|cancelled)$"
     ),
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=100),
@@ -166,16 +166,15 @@ async def update_offer_status(
     )
 
     if not success:
-        if error == "Offer not found" or error == "Trip vacancy not found":
+        if error in ("Offer not found", "Trip vacancy not found"):
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=error,
             )
-        else:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail=error,
-            )
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=error,
+        )
 
     return offer
 

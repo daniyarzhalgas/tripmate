@@ -28,12 +28,9 @@ async def _fetch_unsplash_photo(
                 "query": query,
                 "per_page": 1,
             },
-            headers={"Authorization": f"Client-ID {config.UNPLASH_ACCESS_KEY}"},
+            headers={"Authorization": f"Client-ID {config.UNSPLASH_ACCESS_KEY}"},
             timeout=10.0,
         )
-        print("*"*40)
-        print(response.json())
-        print("*"*40)
         logger.debug("[Unsplash] Status %s for query: %r", response.status_code, query)
         response.raise_for_status()
 

@@ -4,6 +4,8 @@ from typing import Any, Dict, Optional
 
 from pydantic import BaseModel, Field
 
+from app.schemas.common import MessageResponse  # noqa: F401
+
 
 # ============= Request Schemas =============
 class TripVacancyCreateRequest(BaseModel):
@@ -69,10 +71,6 @@ class TripVacancyResponse(BaseModel):
 
     class Config:
         from_attributes = True
-
-
-class MessageResponse(BaseModel):
-    message: str
 
 
 class GeneratePlanResponse(BaseModel):

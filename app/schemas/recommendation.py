@@ -1,12 +1,7 @@
-
-from pydantic import BaseModel, Field, model_validator
 from datetime import date
-from typing import Optional
-
-
 from typing import Literal, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, model_validator
 
 
 class CoordinatesSchema(BaseModel):

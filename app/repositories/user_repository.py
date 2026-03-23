@@ -1,11 +1,10 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
 
-from sqlalchemy import and_, or_, select, func
+from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
-from app.models.profile import Profile
 from app.models.user import User
 
 
@@ -166,7 +165,7 @@ class UserRepository:
         if not user:
             return False
 
-        user.deleted_at = datetime.utcnow()
+        user.deleted_at = datetime.now(timezone.utc)
         user.is_active = False
         await self.db.commit()
         return True

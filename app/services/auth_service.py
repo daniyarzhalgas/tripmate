@@ -1,16 +1,19 @@
+import logging
 import random
 import secrets
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Tuple
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import config
+from app.core.redis_client import get_redis_client
 from app.core.security import create_access_token, get_password_hash, verify_password
 from app.models.user import User
 from app.repositories.user_repository import UserRepository
 from app.services.email_service import email_service
-from app.core.redis_client import get_redis_client
+
+logger = logging.getLogger(__name__)
 
 
 class AuthService:
@@ -84,7 +87,7 @@ class AuthService:
         try:
             await email_service.send_password_reset_email(email, reset_token)
         except Exception as e:
-            print(f"Failed to send password reset email: {e}")
+            logger.error("Failed to send password reset email: %s", e)
 
         return True, reset_token, None
 
@@ -114,17 +117,17 @@ class AuthService:
 
     async def _generate_verification_code(self, user_id: int, email: str) -> str:
         """Generate a 4-digit verification code."""
-        # code = str(random.randint(1000, 9999))
-        code = "1111"
+        code = "1111" if config.DEBUG else str(random.randint(1000, 9999))
 
+        now = datetime.now(timezone.utc)
         # Store verification code in Redis with 60 minutes expiration
         await self.redis.set(
             f"verification_code:{user_id}",
             {
                 "code": code,
                 "email": email,
-                "created_at": datetime.utcnow().isoformat(),
-                "expires_at": (datetime.utcnow() + timedelta(minutes=60)).isoformat(),
+                "created_at": now.isoformat(),
+                "expires_at": (now + timedelta(minutes=60)).isoformat(),
                 "attempts": 0,
                 "max_attempts": 5,
             },
@@ -140,7 +143,7 @@ class AuthService:
             await email_service.send_verification_email(email, code, user_id)
             return True
         except Exception as e:
-            print(f"Failed to send verification email: {e}")
+            logger.error("Failed to send verification email: %s", e)
             return False
 
     async def resend_verification_code(
@@ -157,7 +160,7 @@ class AuthService:
         existing_code = await self.redis.get(f"verification_code:{user_id}")
         if existing_code:
             created_at = datetime.fromisoformat(existing_code["created_at"])
-            time_since_last = datetime.utcnow() - created_at
+            time_since_last = datetime.now(timezone.utc) - created_at.replace(tzinfo=timezone.utc)
             if time_since_last < timedelta(minutes=1):
                 return False, None, "Please wait before requesting a new code"
 
@@ -175,14 +178,11 @@ class AuthService:
         # Get verification data from Redis
         verification_data = await self.redis.get(f"verification_code:{user_id}")
         
-        print(f"DEBUG: user_id={user_id}, verification_code={verification_code!r}")
-        print(f"DEBUG: verification_data={verification_data}")
-
         if not verification_data:
             return False, "No verification code found. Please request a new one"
 
-        expires_at = datetime.fromisoformat(verification_data["expires_at"])
-        if datetime.utcnow() > expires_at:
+        expires_at = datetime.fromisoformat(verification_data["expires_at"]).replace(tzinfo=timezone.utc)
+        if datetime.now(timezone.utc) > expires_at:
             await self.redis.delete(f"verification_code:{user_id}")
             return False, "Verification code has expired. Please request a new one"
 
@@ -195,8 +195,6 @@ class AuthService:
 
         verification_data["attempts"] += 1
 
-        print(f"DEBUG: Comparing codes: stored={verification_data['code']!r} (type={type(verification_data['code'])}), received={verification_code!r} (type={type(verification_code)})")
-        
         if verification_data["code"] != verification_code:
             # Update attempts in Redis
             await self.redis.set(
@@ -222,7 +220,7 @@ class AuthService:
         try:
             await email_service.send_welcome_email(user.email)
         except Exception as e:
-            print(f"Failed to send welcome email: {e}")
+            logger.error("Failed to send welcome email: %s", e)
 
         return True, None
 
@@ -259,9 +257,8 @@ class AuthService:
         Returns:
             Tuple of (success, error_message)
         """
-        from app.core.security import decode_access_token
+        from app.core.security import decode_access_token  # avoid circular import
 
-        # Decode token to get expiration
         payload = decode_access_token(token)
         if not payload:
             return False, "Invalid token"
@@ -271,8 +268,7 @@ class AuthService:
         if not exp:
             return False, "Token has no expiration"
 
-        # Calculate remaining TTL
-        now = datetime.utcnow().timestamp()
+        now = datetime.now(timezone.utc).timestamp()
         ttl = int(exp - now)
 
         if ttl <= 0:
@@ -282,7 +278,7 @@ class AuthService:
         # Blacklist the token in Redis
         await self.redis.set(
             f"blacklist:{token}",
-            {"logged_out_at": datetime.utcnow().isoformat()},
+            {"logged_out_at": datetime.now(timezone.utc).isoformat()},
             expire=ttl,
         )
 
