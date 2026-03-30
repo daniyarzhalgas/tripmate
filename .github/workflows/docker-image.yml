@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
 
           script: |
-            cd /home/ubuntu/projects/fastapi-app
+            cd /root/projects/tripmate-back/tripmate
             git pull origin main
             docker compose down
             docker compose up -d --build
