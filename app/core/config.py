@@ -33,8 +33,8 @@ class Settings(BaseSettings):
     GOOGLE_CLIENT_ID: str = ""
 
     # Gemini AI
-    GEMINI_API_KEY: str = ""
-    GEMINI_MODEL: str = "gemini-2.0-flash"
+    GEMINI_API_KEY: str = "AIzaSyA7-gjRzdyPnrk_B_wvb2sj3yviHmSJ3QM"
+    GEMINI_MODEL: str = "gemini-3.0-flash-preview"
     GEMINI_TIMEOUT_SECONDS: int = 60 * 5
     PLAN_SERVICE_URL: str = "http://localhost:8001/generate"
 
