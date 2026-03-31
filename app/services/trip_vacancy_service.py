@@ -304,12 +304,17 @@ class TripVacancyService:
     ) -> Tuple[bool, PlaceRecommendationsSchema, Optional[str]]:
         """Collect tripmates data, send it to planner service, and return planner response."""
         try:
+            print(f"[generate-plan-service] Starting plan generation for trip_vacancy_id={trip_vacancy_id}, user_id={user_id}")
             logger.info("Starting plan generation for trip vacancy %d", trip_vacancy_id)
             trip_vacancy = await self.trip_vacancy_repo.get_by_id(trip_vacancy_id)
             if not trip_vacancy:
+                print(f"[generate-plan-service] Trip vacancy {trip_vacancy_id} not found")
                 return False, None, "Trip vacancy not found"
 
+            print(f"[generate-plan-service] Trip vacancy found: status={trip_vacancy.status}, people_joined={trip_vacancy.people_joined}/{trip_vacancy.people_needed}")
+
             if not await self._is_user_trip_member(trip_vacancy, user_id):
+                print(f"[generate-plan-service] User {user_id} is NOT a member of trip {trip_vacancy_id}")
                 logger.warning("Generate plan denied: user %d is not a member", user_id)
                 return (
                     False,
@@ -321,7 +326,9 @@ class TripVacancyService:
                 trip_vacancy_id
             )
             if existing_plan:
+                print(f"[generate-plan-service] Existing plan found: generated_at={existing_plan.generated_at}, requested_at={existing_plan.generation_requested_at}")
                 if existing_plan.generated_at:
+                    print(f"[generate-plan-service] Plan already generated, returning early")
                     return False, None, "Trip plan has already been generated"
 
                 if (
@@ -329,7 +336,10 @@ class TripVacancyService:
                     and datetime.now(timezone.utc) - existing_plan.generation_requested_at.replace(tzinfo=timezone.utc)
                     < timedelta(minutes=self.PLAN_GENERATION_WAIT_MINUTES)
                 ):
+                    print(f"[generate-plan-service] Generation in progress, please wait")
                     return False, None, "we generating please wait"
+            else:
+                print(f"[generate-plan-service] No existing plan found, will generate new one")
 
             if trip_vacancy.people_joined < trip_vacancy.people_needed:
                 return (
@@ -386,11 +396,17 @@ class TripVacancyService:
                     entry.user_label = f"user-{idx}"
                     users_data.append(entry)
 
+            print(f"[generate-plan-service] Collected {len(users_data)} user profiles")
+            for u in users_data:
+                print(f"[generate-plan-service]   {u.user_label}: {u.name}, age={u.age}, interests={u.interests}")
+
             await self.generated_plan_repo.mark_generation_requested(trip_vacancy.id)
 
             payload = self._build_generate_plan_payload(trip_vacancy, users_data)
+            print(f"[generate-plan-service] Payload built, calling AI plan service...")
             logger.info("Sending plan request for trip vacancy %d", trip_vacancy.id)
             planner_response = await self._call_plan_service(payload)
+            print(f"[generate-plan-service] AI plan service responded successfully")
             await self.generated_plan_repo.upsert_plan_response(
                 trip_vacancy_id=trip_vacancy.id,
                 planner_response=planner_response,
@@ -401,16 +417,21 @@ class TripVacancyService:
                 )
             )
 
+            num_places = len(plan.recommended_places) if plan.recommended_places else 0
+            print(f"[generate-plan-service] Plan saved with {num_places} recommended places")
             logger.info(
                 "Plan received with %d places",
-                len(plan.recommended_places) if plan.recommended_places else 0,
+                num_places,
             )
 
+            print(f"[generate-plan-service] Enriching places with Unsplash images...")
             await enrich_with_unsplash_images(plan.recommended_places)
+            print(f"[generate-plan-service] Image enrichment done, returning plan")
 
             return True, planner_response, None
 
         except Exception as e:
+            print(f"[generate-plan-service] EXCEPTION: {str(e)}")
             return False, None, f"Failed to generate plan: {str(e)}"
 
     async def get_trip_plan(

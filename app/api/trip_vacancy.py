@@ -204,6 +204,7 @@ async def generate_plan(
     The trip vacancy must be full (all needed people have joined) before a plan can be generated.
     Only the requester or accepted participants can generate a plan.
     """
+    print(f"[generate-plan] Received request: trip_vacancy_id={trip_vacancy_id}, user_id={current_user.id}")
     trip_vacancy_service = TripVacancyService(db)
 
     success, plan, error = await trip_vacancy_service.generate_plan(
@@ -211,9 +212,11 @@ async def generate_plan(
     )
 
     if not success:
+        print(f"[generate-plan] Failed: {error}")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=error,
         )
 
+    print(f"[generate-plan] Success: plan generated for trip_vacancy_id={trip_vacancy_id}")
     return plan
