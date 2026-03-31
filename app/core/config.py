@@ -38,6 +38,7 @@ class Settings(BaseSettings):
     GEMINI_TIMEOUT_SECONDS: int = 60 * 5
     PLAN_SERVICE_URL: str = "http://localhost:8001/generate"
 
+
     # Unsplash API
     UNSPLASH_ACCESS_KEY: str = ""
     UNSPLASH_SECRET_KEY: str = ""
