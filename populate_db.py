@@ -136,7 +136,7 @@ async def populate_countries_and_cities():
             return
 
         countries_with_cities = {
-            "Kazakhstan": ["Qulsary","Almaty", "Astana", "Shymkent", "Aktobe", "Karaganda", "Atyrau", "Mangystau"],
+            "Kazakhstan": ["Qulsary","Kyzylorda","Almaty", "Astana", "Shymkent", "Aktobe", "Karaganda", "Atyrau", "Mangystau"],
             "Turkey": ["Istanbul", "Ankara", "Antalya", "Izmir", "Bodrum", "Cappadocia", "Trabzon"],
             "United Arab Emirates": ["Dubai", "Abu Dhabi", "Sharjah", "Ajman"],
             "United States": ["New York", "Los Angeles", "San Francisco", "Miami", "Las Vegas", "Chicago", "Houston"],

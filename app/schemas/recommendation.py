@@ -71,16 +71,16 @@ class PlaceRecommendationsSchema(BaseModel):
 
 
 class RecommendationUserPayload(BaseModel):
-    name: str = Field(min_length=1, max_length=255)
-    age: int = Field(ge=0, le=120)
-    gender: str = Field(min_length=1, max_length=20)
-    from_city: str = Field(min_length=1, max_length=120)
-    from_country: str = Field(min_length=1, max_length=120)
+    name: str = Field(default="", max_length=255)
+    age: int = Field(default=0, ge=0, le=120)
+    gender: str = Field(default="", max_length=20)
+    from_city: str = Field(default="", max_length=120)
+    from_country: str = Field(default="", max_length=120)
     bio: str = Field(default="", max_length=2000)
     languages: list[str] = Field(default_factory=list)
     interests: list[str] = Field(default_factory=list)
     travel_styles: list[str] = Field(default_factory=list)
-    user_label: str | None
+    user_label: str | None = None
 
 
 
