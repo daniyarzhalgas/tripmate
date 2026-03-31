@@ -48,13 +48,11 @@ class Settings(BaseSettings):
 
     @property
     def DATABASE_URL(self) -> str:
-        # SQLite for local development; switch to PostgreSQL for production
-        return "sqlite+aiosqlite:///./data/tripmate.db"
+        return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
 
     @property
     def SYNC_DATABASE_URL(self) -> str:
-        # SQLite for Alembic migrations; switch to PostgreSQL for production
-        return "sqlite:///./data/tripmate.db"
+        return f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
 
     model_config = SettingsConfigDict(env_file=".env")
 

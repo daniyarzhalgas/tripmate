@@ -1,5 +1,5 @@
 import logging
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta
 from typing import List, Optional, Tuple
 
 from sqlalchemy import select
@@ -333,7 +333,7 @@ class TripVacancyService:
 
                 if (
                     existing_plan.generation_requested_at
-                    and datetime.now(timezone.utc) - existing_plan.generation_requested_at.replace(tzinfo=timezone.utc)
+                    and datetime.utcnow() - existing_plan.generation_requested_at
                     < timedelta(minutes=self.PLAN_GENERATION_WAIT_MINUTES)
                 ):
                     print(f"[generate-plan-service] Generation in progress, please wait")

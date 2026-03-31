@@ -1,31 +1,28 @@
 services:
-  # PostgreSQL Database (Commented out - using SQLite)
-  # db:
-  #   image: postgres:15-alpine
-  #   container_name: tripmate_db
-  #   restart: unless-stopped
-  #   environment:
-  #     POSTGRES_USER: ${DB_USER:-tripmate}
-  #     POSTGRES_PASSWORD: ${DB_PASSWORD:-tripmate_password}
-  #     POSTGRES_DB: ${DB_NAME:-tripmate_db}
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
-  #   ports:
-  #     - "5432:5432"
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-tripmate}"]
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 5
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: tripmate_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-tripmate}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-tripmate_password}
+      POSTGRES_DB: ${DB_NAME:-tripmate_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-tripmate}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # Redis Cache
   redis:
     image: redis:7-alpine
     container_name: tripmate_redis
     restart: unless-stopped
-    # Expose port only if needed for external access
-    # ports:
-    #   - "6379:6379"
     volumes:
       - redis_data:/data
     healthcheck:
@@ -43,13 +40,12 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    # Alternative: If .env doesn't exist, defaults will be used from config.py
     environment:
-      # DB_HOST: db  # Commented out - using SQLite
-      # DB_PORT: 5432
-      # DB_USER: ${DB_USER:-tripmate}
-      # DB_PASSWORD: ${DB_PASSWORD:-tripmate_password}
-      # DB_NAME: ${DB_NAME:-tripmate_db}
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: ${DB_USER:-tripmate}
+      DB_PASSWORD: ${DB_PASSWORD:-tripmate_password}
+      DB_NAME: ${DB_NAME:-tripmate_db}
       REDIS_HOST: redis
       REDIS_PORT: 6379
     ports:
@@ -57,17 +53,15 @@ services:
     volumes:
       - ./app:/app/app
       - ./alembic:/app/alembic
-      - sqlite_data:/app/data
       - uploads_data:/app/uploads
     depends_on:
-      # db:  # Commented out - using SQLite
-      #   condition: service_healthy
+      db:
+        condition: service_healthy
       redis:
         condition: service_healthy
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 volumes:
-  # postgres_data:  # Commented out - using SQLite
+  postgres_data:
   redis_data:
-  sqlite_data:
   uploads_data:

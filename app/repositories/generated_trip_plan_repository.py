@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime
 from decimal import Decimal
 from typing import Any, Optional
 
@@ -40,7 +40,7 @@ class GeneratedTripPlanRepository:
         self, trip_vacancy_id: int, planner_response: PlaceRecommendationsSchema
     ) -> GeneratedTripPlan:
         plan = await self.get_by_trip_vacancy_id(trip_vacancy_id)
-        now = datetime.now(timezone.utc)
+        now = datetime.utcnow()
         raw = planner_response.model_dump()
 
         if not plan:
@@ -88,12 +88,12 @@ class GeneratedTripPlanRepository:
             plan = GeneratedTripPlan(
                 trip_vacancy_id=trip_vacancy_id,
                 raw_response={},
-                generation_requested_at=datetime.now(timezone.utc),
+                generation_requested_at=datetime.utcnow(),
                 generated_at=None,
             )
             self.db.add(plan)
         else:
-            plan.generation_requested_at = datetime.now(timezone.utc)
+            plan.generation_requested_at = datetime.utcnow()
 
         await self.db.commit()
         await self.db.refresh(plan)
