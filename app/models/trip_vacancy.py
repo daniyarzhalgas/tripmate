@@ -27,8 +27,12 @@ class TripVacancy(Base):
     requester_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
 
     # Destination Fields
-    destination_city = Column(String(100), nullable=False)
-    destination_country = Column(String(100), nullable=False)
+    destination_country_id = Column(
+        Integer, ForeignKey("countries.id"), nullable=False, index=True
+    )
+    destination_city_id = Column(
+        Integer, ForeignKey("cities.id"), nullable=False, index=True
+    )
 
     # Date Fields
     start_date = Column(Date, nullable=False)
@@ -86,6 +90,8 @@ class TripVacancy(Base):
         )
 
     # Relationships
+    destination_country = relationship("Country", lazy="joined")
+    destination_city = relationship("City", lazy="joined")
     requester = relationship("User", back_populates="trip_vacancies")
     chat_group = relationship("ChatGroup", uselist=False, back_populates="trip_vacancy", cascade="all, delete-orphan")
     generated_plan = relationship(

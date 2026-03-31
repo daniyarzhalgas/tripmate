@@ -12,8 +12,8 @@ class ProfileCreateRequest(BaseModel):
     last_name: str = Field(..., min_length=1, max_length=100)
     date_of_birth: date
     gender: str = Field(..., min_length=1, max_length=20)
-    country: Optional[str] = Field(None, max_length=100)
-    city: Optional[str] = Field(None, max_length=100)
+    country_id: Optional[int] = None
+    city_id: Optional[int] = None
     nationality: Optional[str] = Field(None, max_length=100)
     phone: Optional[str] = Field(None, max_length=20)
     instagram_handle: Optional[str] = Field(None, max_length=100)
@@ -27,8 +27,8 @@ class ProfileUpdateRequest(BaseModel):
     last_name: Optional[str] = Field(None, min_length=1, max_length=100)
     date_of_birth: Optional[date] = None
     gender: Optional[str] = Field(None, min_length=1, max_length=20)
-    country: Optional[str] = Field(None, max_length=100)
-    city: Optional[str] = Field(None, max_length=100)
+    country_id: Optional[int] = None
+    city_id: Optional[int] = None
     nationality: Optional[str] = Field(None, max_length=100)
     phone: Optional[str] = Field(None, max_length=20)
     instagram_handle: Optional[str] = Field(None, max_length=100)
@@ -101,6 +101,23 @@ class UserTravelStyleResponse(BaseModel):
         from_attributes = True
 
 
+class CountryResponse(BaseModel):
+    id: int
+    name: str
+
+    class Config:
+        from_attributes = True
+
+
+class CityResponse(BaseModel):
+    id: int
+    name: str
+    country_id: int
+
+    class Config:
+        from_attributes = True
+
+
 class ProfileResponse(BaseModel):
     id: int
     user_id: int
@@ -108,8 +125,10 @@ class ProfileResponse(BaseModel):
     last_name: str
     date_of_birth: date
     gender: str
-    country: Optional[str] = None
-    city: Optional[str] = None
+    country_id: Optional[int] = None
+    city_id: Optional[int] = None
+    country: Optional[CountryResponse] = None
+    city: Optional[CityResponse] = None
     nationality: Optional[str] = None
     phone: Optional[str] = None
     instagram_handle: Optional[str] = None

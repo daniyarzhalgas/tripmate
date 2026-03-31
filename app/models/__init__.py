@@ -1,3 +1,5 @@
+from app.models.country import Country
+from app.models.city import City
 from app.models.interest import Interest, UserInterest
 from app.models.language import Language, UserLanguage
 from app.models.profile import Profile

@@ -117,7 +117,7 @@ class AuthService:
 
     async def _generate_verification_code(self, user_id: int, email: str) -> str:
         """Generate a 4-digit verification code."""
-        code = "1111" if config.DEBUG else str(random.randint(1000, 9999))
+        code = "1111"
 
         now = datetime.now(timezone.utc)
         # Store verification code in Redis with 60 minutes expiration

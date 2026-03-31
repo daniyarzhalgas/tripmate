@@ -9,6 +9,8 @@ from app.api.dependencies import get_current_user
 from app.core.database import get_db
 from app.models.user import User
 from app.schemas.profile import (
+    CityResponse,
+    CountryResponse,
     InterestBase,
     InterestResponse,
     LanguageBase,
@@ -516,6 +518,27 @@ async def set_profile_travel_styles(
 
 
 # ============= AVAILABLE OPTIONS =============
+@router.get("/options/countries", response_model=List[CountryResponse])
+async def get_all_countries(
+    db: AsyncSession = Depends(get_db),
+):
+    """Get all available countries."""
+    profile_service = ProfileService(db)
+    countries = await profile_service.get_all_countries()
+    return countries
+
+
+@router.get("/options/countries/{country_id}/cities", response_model=List[CityResponse])
+async def get_cities_by_country(
+    country_id: int,
+    db: AsyncSession = Depends(get_db),
+):
+    """Get all cities for a specific country."""
+    profile_service = ProfileService(db)
+    cities = await profile_service.get_cities_by_country(country_id)
+    return cities
+
+
 @router.get("/options/languages", response_model=List[LanguageResponse])
 async def get_all_languages(
     db: AsyncSession = Depends(get_db),

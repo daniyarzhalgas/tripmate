@@ -4,6 +4,8 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
+from app.models.city import City
+from app.models.country import Country
 from app.models.profile import Profile
 from app.models.interest import UserInterest, Interest
 from app.models.language import UserLanguage, Language
@@ -100,10 +102,12 @@ class ProfileRepository:
 
         # Apply filters
         if country:
-            query = query.filter(Profile.country == country)
+            query = query.join(Country, Profile.country_id == Country.id)
+            query = query.filter(Country.name == country)
 
         if city:
-            query = query.filter(Profile.city == city)
+            query = query.join(City, Profile.city_id == City.id)
+            query = query.filter(City.name == city)
 
         if gender:
             query = query.filter(Profile.gender == gender)
@@ -347,6 +351,19 @@ class ProfileRepository:
 
         await self.db.commit()
         return True
+
+    # ============= COUNTRY/CITY HELPERS =============
+    async def get_all_countries(self) -> List[Country]:
+        """Get all available countries."""
+        query = select(Country).order_by(Country.name)
+        result = await self.db.execute(query)
+        return list(result.scalars().all())
+
+    async def get_cities_by_country(self, country_id: int) -> List[City]:
+        """Get all cities for a specific country."""
+        query = select(City).filter(City.country_id == country_id).order_by(City.name)
+        result = await self.db.execute(query)
+        return list(result.scalars().all())
 
     # ============= LANGUAGE/INTEREST/TRAVEL STYLE HELPERS =============
     async def get_all_languages(self) -> List[Language]:

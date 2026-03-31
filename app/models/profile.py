@@ -22,8 +22,12 @@ class Profile(Base):
     gender = Column(String(20), nullable=False)
 
     # Location Fields
-    country = Column(String(100), nullable=True)
-    city = Column(String(100), nullable=True)
+    country_id = Column(
+        Integer, ForeignKey("countries.id"), nullable=True, index=True
+    )
+    city_id = Column(
+        Integer, ForeignKey("cities.id"), nullable=True, index=True
+    )
     nationality = Column(String(100), nullable=True)
 
     # Contact Fields
@@ -37,6 +41,8 @@ class Profile(Base):
 
     # Relationships
     user = relationship("User", back_populates="profile")
+    country = relationship("Country", lazy="joined")
+    city = relationship("City", lazy="joined")
     languages = relationship(
         "UserLanguage", back_populates="profile", cascade="all, delete-orphan"
     )

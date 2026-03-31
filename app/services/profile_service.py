@@ -1,7 +1,9 @@
 from typing import List, Optional, Tuple
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.models.city import City
 from app.models.profile import Profile
 from app.repositories.profile_repository import ProfileRepository
 
@@ -10,6 +12,23 @@ class ProfileService:
     def __init__(self, db: AsyncSession):
         self.db = db
         self.profile_repo = ProfileRepository(db)
+
+    async def _validate_city_country(
+        self, city_id: Optional[int], country_id: Optional[int]
+    ) -> Optional[str]:
+        """Validate that city belongs to the specified country."""
+        if city_id is not None and country_id is not None:
+            result = await self.db.execute(
+                select(City).filter(City.id == city_id)
+            )
+            city = result.scalar_one_or_none()
+            if not city:
+                return "City not found"
+            if city.country_id != country_id:
+                return "City does not belong to the specified country"
+        elif city_id is not None and country_id is None:
+            return "Country is required when city is specified"
+        return None
 
     # ============= CREATE =============
     async def create_profile(
@@ -20,6 +39,13 @@ class ProfileService:
             # Check if profile already exists for this user
             if await self.profile_repo.exists_by_user_id(user_id):
                 return False, None, "Profile already exists for this user"
+
+            # Validate city-country relationship
+            error = await self._validate_city_country(
+                profile_data.get("city_id"), profile_data.get("country_id")
+            )
+            if error:
+                return False, None, error
 
             profile = await self.profile_repo.create(user_id=user_id, **profile_data)
             return True, profile, None
@@ -72,6 +98,20 @@ class ProfileService:
             if not update_data:
                 profile = await self.profile_repo.get_by_id(profile_id)
                 return True, profile, None
+
+            # Validate city-country relationship if either is being updated
+            city_id = update_data.get("city_id")
+            country_id = update_data.get("country_id")
+            if city_id is not None or country_id is not None:
+                # Get existing profile to fill in missing values
+                existing = await self.profile_repo.get_by_id(profile_id)
+                if not existing:
+                    return False, None, "Profile not found"
+                effective_city_id = city_id if city_id is not None else existing.city_id
+                effective_country_id = country_id if country_id is not None else existing.country_id
+                error = await self._validate_city_country(effective_city_id, effective_country_id)
+                if error:
+                    return False, None, error
 
             profile = await self.profile_repo.update(profile_id, **update_data)
 
@@ -249,6 +289,15 @@ class ProfileService:
     async def get_profile_travel_styles(self, profile_id: int):
         """Get all travel styles for a profile."""
         return await self.profile_repo.get_profile_travel_styles(profile_id)
+
+    # ============= COUNTRIES/CITIES =============
+    async def get_all_countries(self):
+        """Get all available countries."""
+        return await self.profile_repo.get_all_countries()
+
+    async def get_cities_by_country(self, country_id: int):
+        """Get all cities for a specific country."""
+        return await self.profile_repo.get_cities_by_country(country_id)
 
     # ============= HELPERS =============
     async def get_all_languages(self):

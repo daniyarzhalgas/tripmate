@@ -5,12 +5,13 @@ from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field
 
 from app.schemas.common import MessageResponse  # noqa: F401
+from app.schemas.profile import CountryResponse, CityResponse
 
 
 # ============= Request Schemas =============
 class TripVacancyCreateRequest(BaseModel):
-    destination_city: str = Field(..., min_length=1, max_length=100)
-    destination_country: str = Field(..., min_length=1, max_length=100)
+    destination_country_id: int
+    destination_city_id: int
     start_date: date
     end_date: date
     min_budget: Optional[Decimal] = Field(None, ge=0)
@@ -27,8 +28,8 @@ class TripVacancyCreateRequest(BaseModel):
 
 
 class TripVacancyUpdateRequest(BaseModel):
-    destination_city: Optional[str] = Field(None, min_length=1, max_length=100)
-    destination_country: Optional[str] = Field(None, min_length=1, max_length=100)
+    destination_country_id: Optional[int] = None
+    destination_city_id: Optional[int] = None
     start_date: Optional[date] = None
     end_date: Optional[date] = None
     min_budget: Optional[Decimal] = Field(None, ge=0)
@@ -49,8 +50,10 @@ class TripVacancyUpdateRequest(BaseModel):
 class TripVacancyResponse(BaseModel):
     id: int
     requester_id: int
-    destination_city: str
-    destination_country: str
+    destination_country_id: int
+    destination_city_id: int
+    destination_country: Optional[CountryResponse] = None
+    destination_city: Optional[CityResponse] = None
     start_date: date
     end_date: date
     min_budget: Optional[Decimal] = None

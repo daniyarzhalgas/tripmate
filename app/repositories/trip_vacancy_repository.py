@@ -5,6 +5,8 @@ from sqlalchemy import select, func as sql_func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
+from app.models.city import City
+from app.models.country import Country
 from app.models.trip_vacancy import TripVacancy
 from app.models.user import User
 from app.models.profile import Profile
@@ -69,12 +71,16 @@ class TripVacancyRepository:
             query = query.join(User, TripVacancy.requester_id == User.id)
             query = query.join(Profile, User.id == Profile.user_id)
 
-        # Apply filters
-        if destination_city:
-            query = query.filter(TripVacancy.destination_city == destination_city)
-
-        if destination_country:
-            query = query.filter(TripVacancy.destination_country == destination_country)
+        # Join with City/Country tables for destination filtering
+        if destination_city or destination_country:
+            if destination_city:
+                dest_city = City.__table__.alias("dest_city")
+                query = query.join(dest_city, TripVacancy.destination_city_id == dest_city.c.id)
+                query = query.filter(dest_city.c.name == destination_city)
+            if destination_country:
+                dest_country = Country.__table__.alias("dest_country")
+                query = query.join(dest_country, TripVacancy.destination_country_id == dest_country.c.id)
+                query = query.filter(dest_country.c.name == destination_country)
 
         if status:
             query = query.filter(TripVacancy.status == status)
@@ -113,10 +119,14 @@ class TripVacancyRepository:
                 (sql_func.lower(TripVacancy.gender_preference) == gender_lower)
             )
         if from_city:
-            query = query.filter(Profile.city == from_city)
+            profile_city = City.__table__.alias("profile_city")
+            query = query.join(profile_city, Profile.city_id == profile_city.c.id)
+            query = query.filter(profile_city.c.name == from_city)
 
         if from_country:
-            query = query.filter(Profile.country == from_country)
+            profile_country = Country.__table__.alias("profile_country")
+            query = query.join(profile_country, Profile.country_id == profile_country.c.id)
+            query = query.filter(profile_country.c.name == from_country)
 
         query = query.offset(skip).limit(limit).order_by(TripVacancy.created_at.desc())
         result = await self.db.execute(query)
@@ -132,10 +142,14 @@ class TripVacancyRepository:
         query = select(TripVacancy)
 
         if destination_city:
-            query = query.filter(TripVacancy.destination_city == destination_city)
+            dest_city = City.__table__.alias("cnt_city")
+            query = query.join(dest_city, TripVacancy.destination_city_id == dest_city.c.id)
+            query = query.filter(dest_city.c.name == destination_city)
 
         if destination_country:
-            query = query.filter(TripVacancy.destination_country == destination_country)
+            dest_country = Country.__table__.alias("cnt_country")
+            query = query.join(dest_country, TripVacancy.destination_country_id == dest_country.c.id)
+            query = query.filter(dest_country.c.name == destination_country)
 
         if status:
             query = query.filter(TripVacancy.status == status)

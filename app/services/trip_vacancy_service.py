@@ -2,9 +2,11 @@ import logging
 from datetime import date, datetime, timedelta, timezone
 from typing import List, Optional, Tuple
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import config
+from app.models.city import City
 from app.models.generated_trip_plan import GeneratedTripPlan
 from app.models.trip_vacancy import TripVacancy
 from app.repositories.chat_group_repository import ChatGroupRepository
@@ -36,12 +38,34 @@ class TripVacancyService:
         self.profile_repo = ProfileRepository(db)
         self.generated_plan_repo = GeneratedTripPlanRepository(db)
 
+    async def _validate_city_country(
+        self, city_id: int, country_id: int
+    ) -> Optional[str]:
+        """Validate that city belongs to the specified country."""
+        result = await self.db.execute(
+            select(City).filter(City.id == city_id)
+        )
+        city = result.scalar_one_or_none()
+        if not city:
+            return "City not found"
+        if city.country_id != country_id:
+            return "City does not belong to the specified country"
+        return None
+
     # ============= CREATE =============
     async def create_trip_vacancy(
         self, requester_id: int, **trip_vacancy_data
     ) -> Tuple[bool, Optional[TripVacancy], Optional[str]]:
         """Create a new trip vacancy."""
         try:
+            # Validate city-country relationship
+            error = await self._validate_city_country(
+                trip_vacancy_data["destination_city_id"],
+                trip_vacancy_data["destination_country_id"],
+            )
+            if error:
+                return False, None, error
+
             # Validate dates
             start_date = trip_vacancy_data.get("start_date")
             end_date = trip_vacancy_data.get("end_date")
@@ -75,9 +99,13 @@ class TripVacancyService:
                 requester_id=requester_id, **trip_vacancy_data
             )
 
-            # Create chat group for the trip vacancy
-            destination_city = trip_vacancy_data.get("destination_city", "Trip")
-            chat_group_name = f"Trip to {destination_city}"
+            # Get the city name for chat group naming
+            result = await self.db.execute(
+                select(City).filter(City.id == trip_vacancy_data["destination_city_id"])
+            )
+            city = result.scalar_one_or_none()
+            city_name = city.name if city else "Trip"
+            chat_group_name = f"Trip to {city_name}"
             chat_group = await self.chat_group_repo.create(
                 trip_vacancy.id, chat_group_name
             )
@@ -167,6 +195,16 @@ class TripVacancyService:
 
             if not update_data:
                 return True, trip_vacancy, None
+
+            # Validate city-country relationship if either is being updated
+            city_id = update_data.get("destination_city_id")
+            country_id = update_data.get("destination_country_id")
+            if city_id is not None or country_id is not None:
+                effective_city_id = city_id if city_id is not None else trip_vacancy.destination_city_id
+                effective_country_id = country_id if country_id is not None else trip_vacancy.destination_country_id
+                error = await self._validate_city_country(effective_city_id, effective_country_id)
+                if error:
+                    return False, None, error
 
             # Validate dates if being updated
             start_date = update_data.get("start_date", trip_vacancy.start_date)
@@ -322,8 +360,8 @@ class TripVacancyService:
                     name=f"{profile.first_name} {profile.last_name}",
                     age=self._calculate_age(profile.date_of_birth),
                     gender=profile.gender,
-                    from_city=profile.city,
-                    from_country=profile.country,
+                    from_city=profile.city.name if profile.city else "",
+                    from_country=profile.country.name if profile.country else "",
                     bio=profile.bio or "",
                     languages=[ul.language.name for ul in profile.languages],
                     interests=[ui.interest.name for ui in profile.interests],
@@ -429,8 +467,8 @@ class TripVacancyService:
     ) -> GenerateRecommendationsRequest:
         return GenerateRecommendationsRequest(
             trip_vacancy_id=trip_vacancy.id,
-            destination_city=trip_vacancy.destination_city or "",
-            destination_country=trip_vacancy.destination_country or "",
+            destination_city=trip_vacancy.destination_city.name if trip_vacancy.destination_city else "",
+            destination_country=trip_vacancy.destination_country.name if trip_vacancy.destination_country else "",
             start_date=trip_vacancy.start_date or None,
             end_date=trip_vacancy.end_date or None,
             description=trip_vacancy.description or "",
