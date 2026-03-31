@@ -57,7 +57,8 @@ services:
     volumes:
       - ./app:/app/app
       - ./alembic:/app/alembic
-      - sqlite_data:/app/volumes/sqlite_data # SQLite database directory
+      - sqlite_data:/app/data
+      - uploads_data:/app/uploads
     depends_on:
       # db:  # Commented out - using SQLite
       #   condition: service_healthy
@@ -68,4 +69,5 @@ services:
 volumes:
   # postgres_data:  # Commented out - using SQLite
   redis_data:
-  sqlite_data: # Persistent storage for SQLite database
+  sqlite_data:
+  uploads_data:

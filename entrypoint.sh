@@ -10,8 +10,8 @@ set -e
 # echo "PostgreSQL is up - executing command"
 
 # Create SQLite database directory if it doesn't exist
-echo "Creating database directory..."
-mkdir -p /app/volumes/sqlite_data
+echo "Creating database and uploads directories..."
+mkdir -p /app/data /app/uploads
 
 # Run database migrations
 echo "Running database migrations..."
